@@ -1,10 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
-import PlaceCard from "../components/place-card";
+import propTypes from "prop-types";
+import PlaceCard from "./place-card";
+import Cities from "./cities";
+import {nanoid} from "nanoid";
 
 
 const Page = (props) => {
-  const {hotels} = props;
+  const {hotels, offerNum, userAuth, cities} = props;
+
   return (
     <React.Fragment>
       <header className="header">
@@ -21,7 +24,7 @@ const Page = (props) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{userAuth}</span>
                   </a>
                 </li>
               </ul>
@@ -34,36 +37,7 @@ const Page = (props) => {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {cities.map((city) => <Cities key={nanoid()} city={city} />)}
             </ul>
           </section>
         </div>
@@ -71,7 +45,7 @@ const Page = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offerNum} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -88,7 +62,9 @@ const Page = (props) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {hotels.map((hotel) => <PlaceCard key={} />)}
+
+                {hotels.map((hotel) => <PlaceCard key={nanoid()} hotel={hotel}/>)}
+
               </div>
             </section>
             <div className="cities__right-section">
@@ -99,6 +75,15 @@ const Page = (props) => {
       </main>
     </React.Fragment>
   );
+};
+
+Page.propTypes = {
+  hotels: propTypes.arrayOf(
+      propTypes.shape({})
+  ),
+  offerNum: propTypes.number.isRequired,
+  userAuth: propTypes.string,
+  cities: propTypes.arrayOf(),
 };
 
 export default Page;
