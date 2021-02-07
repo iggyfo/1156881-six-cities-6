@@ -2,10 +2,14 @@ import React from "react";
 import propTypes from "prop-types";
 import Page from "./page";
 
-const App = (props) => {
-  const {hotels, offerNum, userAuth, cities} = props;
+const App = ({hotels, offerNum, userAuth, cities}) => {
   return (
-    <Page hotels={hotels} offerNum={offerNum} userAuth={userAuth} cities={cities}/>
+    <Page
+      hotels={hotels}
+      offerNum={offerNum}
+      userAuth={userAuth}
+      cities={cities}
+    />
   );
 };
 
@@ -15,7 +19,7 @@ App.propTypes = {
   ),
   offerNum: propTypes.number.isRequired,
   userAuth: propTypes.string,
-  cities: propTypes.arrayOf(),
+  cities: propTypes.arrayOf(propTypes.string),
 };
 
 export default App;

@@ -5,9 +5,7 @@ import Cities from "./cities";
 import {nanoid} from "nanoid";
 
 
-const Page = (props) => {
-  const {hotels, offerNum, userAuth, cities} = props;
-
+const Page = ({hotels, offerNum, userAuth, cities}) => {
   return (
     <React.Fragment>
       <header className="header">
@@ -83,7 +81,7 @@ Page.propTypes = {
   ),
   offerNum: propTypes.number.isRequired,
   userAuth: propTypes.string,
-  cities: propTypes.arrayOf(),
+  cities: propTypes.arrayOf(propTypes.string),
 };
 
 export default Page;
