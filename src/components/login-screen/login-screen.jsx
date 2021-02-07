@@ -3,7 +3,7 @@ import React from "react";
 
 const LoginScreen = () => {
   return (
-    <React.Fragment>
+    <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -51,7 +51,7 @@ const LoginScreen = () => {
           </section>
         </div>
       </main>
-    </React.Fragment>
+    </div>
   );
 };
 

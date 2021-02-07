@@ -3,7 +3,7 @@ import React from "react";
 
 const PropertyScreen = () => {
   return (
-    <React.Fragment>
+    <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -68,7 +68,7 @@ const PropertyScreen = () => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}} />
+                  <span style={{width: `80%`}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">4.8</span>
@@ -89,7 +89,7 @@ const PropertyScreen = () => {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
-                <h2 className="property__inside-title">What's inside</h2>
+                <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   <li className="property__inside-item">
                     Wi-Fi
@@ -157,7 +157,7 @@ const PropertyScreen = () => {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}} />
+                          <span style={{width: `80%`}} />
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -202,7 +202,7 @@ const PropertyScreen = () => {
                       </svg>
                     </label>
                   </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={""} />
+                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={``} />
                   <div className="reviews__button-wrapper">
                     <p className="reviews__help">
                       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -240,7 +240,7 @@ const PropertyScreen = () => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}} />
+                      <span style={{width: `80%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -271,7 +271,7 @@ const PropertyScreen = () => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}} />
+                      <span style={{width: `80%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -302,7 +302,7 @@ const PropertyScreen = () => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}} />
+                      <span style={{width: `100%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -316,7 +316,7 @@ const PropertyScreen = () => {
           </section>
         </div>
       </main>
-    </React.Fragment>
+    </div>
   );
 };
 
