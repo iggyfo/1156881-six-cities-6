@@ -5,7 +5,7 @@ import Cities from "./cities";
 import {nanoid} from "nanoid";
 
 
-const Page = ({hotels, offerNum, userAuth, cities}) => {
+const MainScreen = ({hotels, offerNum, userAuth, cities}) => {
   return (
     <React.Fragment>
       <header className="header">
@@ -75,7 +75,7 @@ const Page = ({hotels, offerNum, userAuth, cities}) => {
   );
 };
 
-Page.propTypes = {
+MainScreen.propTypes = {
   hotels: propTypes.arrayOf(
       propTypes.shape({})
   ),
@@ -84,4 +84,4 @@ Page.propTypes = {
   cities: propTypes.arrayOf(propTypes.string),
 };
 
-export default Page;
+export default MainScreen;

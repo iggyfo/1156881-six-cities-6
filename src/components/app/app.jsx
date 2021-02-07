@@ -1,10 +1,10 @@
 import React from "react";
 import propTypes from "prop-types";
-import Page from "./page";
+import MainScreen from "../main-screen/main-screen";
 
 const App = ({hotels, offerNum, userAuth, cities}) => {
   return (
-    <Page
+    <MainScreen
       hotels={hotels}
       offerNum={offerNum}
       userAuth={userAuth}
