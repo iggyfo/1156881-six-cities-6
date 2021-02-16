@@ -10,14 +10,14 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({hotels, offerNum, userAuth, cities}) => {
+const App = ({offers, offerNum, userAuth, cities}) => {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainScreen
-            hotels={hotels}
+            offers={offers}
             offerNum={offerNum}
             userAuth={userAuth}
             cities={cities}
@@ -47,7 +47,7 @@ const App = ({hotels, offerNum, userAuth, cities}) => {
 };
 
 App.propTypes = {
-  hotels: propTypes.arrayOf(
+  offers: propTypes.arrayOf(
       propTypes.shape({})
   ),
   offerNum: propTypes.number.isRequired,

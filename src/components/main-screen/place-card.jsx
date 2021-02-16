@@ -1,7 +1,8 @@
 import React from "react";
+import propTypes from "prop-types";
 
 
-const PlaceCard = () => {
+const PlaceCard = ({previewImage, title, type, price, rating, isFavorite, isPremium}) => {
   return (
     <article className="cities__place-card place-card">
       <div className="place-card__mark">
@@ -9,7 +10,7 @@ const PlaceCard = () => {
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -38,6 +39,10 @@ const PlaceCard = () => {
       </div>
     </article>
   );
+};
+
+PlaceCard.propTypes = {
+  previewImage: propTypes.string,
 };
 
 export default PlaceCard;
