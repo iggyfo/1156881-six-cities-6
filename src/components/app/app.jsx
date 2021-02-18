@@ -35,7 +35,9 @@ const App = ({offers, offerNum, userAuth, cities}) => {
           <FavoritesEmptyScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <PropertyScreen />
+          <PropertyScreen
+            offers={offers}
+          />
         </Route>
         <Route exact path="/dev-property-not-logged">
           <PropertyNotLoggedScreen />
