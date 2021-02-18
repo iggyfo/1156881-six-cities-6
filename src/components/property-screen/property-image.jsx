@@ -9,7 +9,7 @@ const PropertyImage = ({image}) => {
   );
 };
 
-PropertyImage.prototype = {
+PropertyImage.propTypes = {
   image: propTypes.string,
 };
 
