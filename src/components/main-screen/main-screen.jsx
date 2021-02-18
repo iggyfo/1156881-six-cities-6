@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import Cities from "./cities";
 import {nanoid} from "nanoid";
-import CitiesPlaces from "./cities-places";
+import OfferList from "./offer-list";
 
 
 const MainScreen = ({offers, offerNum, userAuth, cities}) => {
@@ -35,13 +35,17 @@ const MainScreen = ({offers, offerNum, userAuth, cities}) => {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {cities.map((city) => <Cities key={nanoid()} city={city} />)}
+              {cities.map((city) =>
+                <Cities
+                  key={nanoid()}
+                  city={city}
+                />)}
             </ul>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CitiesPlaces
+            <OfferList
               offerNum={offerNum}
               offers={offers}
             />

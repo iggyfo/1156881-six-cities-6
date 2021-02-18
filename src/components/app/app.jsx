@@ -27,7 +27,9 @@ const App = ({offers, offerNum, userAuth, cities}) => {
           <LoginScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen />
+          <FavoritesScreen
+            offers={offers}
+          />
         </Route>
         <Route exact path="/dev-favorites-empty">
           <FavoritesEmptyScreen />

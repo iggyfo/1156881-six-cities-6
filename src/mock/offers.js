@@ -26,7 +26,7 @@ export const offers = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`
     ],
     "title": `Waterfront with extraordinary view`,
-    "isFavorite": false,
+    "isFavorite": true,
     "isPremium": false,
     "rating": 3.4,
     "type": `apartment`,
@@ -48,8 +48,8 @@ export const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
-      "avatar_url": `img/avatar-angelina.jpg`
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
     },
     "description": `I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.`,
     "location": {
@@ -86,7 +86,7 @@ export const offers = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`
     ],
     "title": `Wood and stone place`,
-    "isFavorite": false,
+    "isFavorite": true,
     "isPremium": false,
     "rating": 3.9,
     "type": `house`,
@@ -100,8 +100,8 @@ export const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
-      "avatar_url": `img/avatar-angelina.jpg`
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
     },
     "description": `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
     "location": {
@@ -154,8 +154,8 @@ export const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
-      "avatar_url": `img/avatar-angelina.jpg`
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
     },
     "description": `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
     "location": {
@@ -208,8 +208,8 @@ export const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
-      "avatar_url": `img/avatar-angelina.jpg`
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
     },
     "description": `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
     "location": {
@@ -260,8 +260,8 @@ export const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
-      "avatar_url": `img/avatar-angelina.jpg`
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
     },
     "description": `I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.`,
     "location": {
