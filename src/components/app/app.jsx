@@ -34,11 +34,12 @@ const App = ({offers, offerNum, userAuth, cities}) => {
         <Route exact path="/dev-favorites-empty">
           <FavoritesEmptyScreen />
         </Route>
-        <Route exact path="/offer/:id">
-          <PropertyScreen
-            offers={offers}
-          />
-        </Route>
+        <Route exact path="/offer/:id"
+          render={({match}) => {
+            const currentOffer = offers[match.params.id];
+            return <PropertyScreen offer={currentOffer}/>;
+          }}
+        />
         <Route exact path="/dev-property-not-logged">
           <PropertyNotLoggedScreen />
         </Route>

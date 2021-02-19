@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import propTypes from "prop-types";
-import OfferCard from "./offer-card";
+import {offerPropsTypes} from "../../props-types";
+import OfferCard from "../offer-card/offer-card";
 import {nanoid} from "nanoid";
 
 
@@ -55,7 +56,7 @@ class OfferList extends Component {
 
 OfferList.propTypes = {
   offers: propTypes.arrayOf(
-      propTypes.shape({})
+      propTypes.shape(offerPropsTypes)
   ),
   offerNum: propTypes.number.isRequired,
 };

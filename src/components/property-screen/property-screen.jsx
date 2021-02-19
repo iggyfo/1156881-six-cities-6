@@ -1,21 +1,21 @@
-import PropertyImage from "./property-image";
-import PropertyNewComment from "./property-new-comment";
-import PropertyGoods from "./property-goods";
+import PropertyImage from "../property-image/property-image";
+import PropertyNewComment from "../property-new-comment/property-new-comment";
+import PropertyGoods from "../property-goods/property-goods";
 import React, {Component} from "react";
 import propTypes from "prop-types";
 import {nanoid} from "nanoid";
+import {offerPropsTypes} from "../../props-types";
+import PropertyHost from "../property-host/property-host";
 
+const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
 class PropertyScreen extends Component {
   constructor(props) {
     super(props);
-    // временное определение id
-    this.id = window.location.pathname.replace(`/offer/`, ``);
-    this.offer = this.props.offers[this.id];
   }
 
   render() {
-    const {images, title, rating, type, bedrooms, maxAdults, price, goods} = this.offer;
+    const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = this.props.offer;
     return (
       <div className="page">
         <header className="header">
@@ -44,7 +44,7 @@ class PropertyScreen extends Component {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.slice(0, 6).map((image) =>
+                {images.slice(0, MAX_OFFER_PHOTO_IN_GALLERY).map((image) =>
                   <PropertyImage
                     key={nanoid()}
                     image={image}
@@ -99,25 +99,10 @@ class PropertyScreen extends Component {
                       />)}
                   </ul>
                 </div>
-                <div className="property__host">
-                  <h2 className="property__host-title">Meet the host</h2>
-                  <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width={74} height={74} alt="Host avatar" />
-                    </div>
-                    <span className="property__user-name">
-                    Angelina
-                    </span>
-                  </div>
-                  <div className="property__description">
-                    <p className="property__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                      An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                    </p>
-                  </div>
-                </div>
+                <PropertyHost
+                  host={host}
+                  description={description}
+                />
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
                   <ul className="reviews__list">
@@ -257,10 +242,7 @@ class PropertyScreen extends Component {
 }
 
 PropertyScreen.propTypes = {
-  offers: propTypes.array,
-  offer: propTypes.shape({
-    images: propTypes.string,
-  }),
+  offer: propTypes.shape(offerPropsTypes),
 };
 
 export default PropertyScreen;

@@ -1,5 +1,5 @@
 import React from "react";
-import FavoriteCard from "./favorite-card";
+import FavoriteCard from "../favorite-card/favorite-card";
 import {nanoid} from "nanoid";
 import propTypes from "prop-types";
 

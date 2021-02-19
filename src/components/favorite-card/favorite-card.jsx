@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {offerPropsTypes} from "../../props-types";
 import propTypes from "prop-types";
 
 
@@ -46,13 +47,7 @@ class FavoriteCard extends Component {
 }
 
 FavoriteCard.propTypes = {
-  offer: propTypes.shape({
-    previewImage: propTypes.string,
-    title: propTypes.string,
-    price: propTypes.number,
-    type: propTypes.string,
-    id: propTypes.number,
-  }),
+  offer: propTypes.shape(offerPropsTypes),
   onMouseEnter: propTypes.func,
 };
 

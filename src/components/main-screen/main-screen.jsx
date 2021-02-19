@@ -1,8 +1,8 @@
 import React from "react";
 import propTypes from "prop-types";
-import Cities from "./cities";
+import Cities from "../cities/cities";
 import {nanoid} from "nanoid";
-import OfferList from "./offer-list";
+import OfferList from "../offer-list/offer-list";
 
 
 const MainScreen = ({offers, offerNum, userAuth, cities}) => {
