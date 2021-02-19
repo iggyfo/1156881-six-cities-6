@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";
-import {nanoid} from "nanoid";
 
 
 const OfferList = (props) => {
@@ -31,7 +30,7 @@ const OfferList = (props) => {
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) =>
           <OfferCard
-            key={nanoid()}
+            key={offer.id}
             offer={offer}
             onMouseEnter={setActiveOfferId}
           />)}
