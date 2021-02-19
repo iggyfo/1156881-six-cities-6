@@ -1,11 +1,11 @@
 import React from "react";
 import FavoriteCard from "../favorite-card/favorite-card";
-import {nanoid} from "nanoid";
 import propTypes from "prop-types";
+import {offerPropsTypes} from "../../props-types";
 
 
 const FavoritesScreen = ({offers}) => {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
   return (
     <div className="page">
       <header className="header">
@@ -44,9 +44,9 @@ const FavoritesScreen = ({offers}) => {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {favoriteOffers.map((offer) =>
+                  {offers.map((offer) =>
                     <FavoriteCard
-                      key={nanoid()}
+                      key={offer.id}
                       offer={offer}
                     />)}
                 </div>
@@ -66,7 +66,7 @@ const FavoritesScreen = ({offers}) => {
 
 FavoritesScreen.propTypes = {
   offers: propTypes.arrayOf(
-      propTypes.shape({})
+      propTypes.shape(offerPropsTypes).isRequired
   ),
 };
 

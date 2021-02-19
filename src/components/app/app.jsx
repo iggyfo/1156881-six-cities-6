@@ -11,6 +11,7 @@ import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-scre
 
 
 const App = ({offers, offerNum, userAuth, cities}) => {
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <BrowserRouter>
@@ -28,7 +29,7 @@ const App = ({offers, offerNum, userAuth, cities}) => {
         </Route>
         <Route exact path="/favorites">
           <FavoritesScreen
-            offers={offers}
+            offers={favoriteOffers}
           />
         </Route>
         <Route exact path="/dev-favorites-empty">
