@@ -3,7 +3,6 @@ import PropertyNewComment from "../property-new-comment/property-new-comment";
 import PropertyGoods from "../property-goods/property-goods";
 import React from "react";
 import propTypes from "prop-types";
-import {nanoid} from "nanoid";
 import {offerPropsTypes} from "../../props-types";
 import PropertyHost from "../property-host/property-host";
 
@@ -40,9 +39,9 @@ const PropertyScreen = ({offer}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.slice(0, MAX_OFFER_PHOTO_IN_GALLERY).map((image) =>
+              {images.slice(0, MAX_OFFER_PHOTO_IN_GALLERY).map((image, index) =>
                 <PropertyImage
-                  key={nanoid()}
+                  key={index}
                   image={image}
                 />)}
             </div>
@@ -88,9 +87,9 @@ const PropertyScreen = ({offer}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((item) =>
+                  {goods.map((item, index) =>
                     <PropertyGoods
-                      key={nanoid()}
+                      key={index}
                       item={item}
                     />)}
                 </ul>
@@ -237,7 +236,7 @@ const PropertyScreen = ({offer}) => {
 };
 
 PropertyScreen.propTypes = {
-  offer: propTypes.shape(offerPropsTypes),
+  offer: propTypes.shape(offerPropsTypes).isRequired,
 };
 
 export default PropertyScreen;

@@ -4,13 +4,13 @@ import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
 
 
-const OfferCard = (props) => {
+const OfferCard = ({offer, onMouseEnter}) => {
 
   const handleActiveOffer = () => {
-    props.onMouseEnter(props.offer.id);
+    onMouseEnter(offer.id);
   };
 
-  const {previewImage, title, type, price, isFavorite, id} = props.offer;
+  const {previewImage, title, type, price, isFavorite, id} = offer;
   return (
     <article className="cities__place-card place-card" onMouseEnter={handleActiveOffer}>
       <div className="place-card__mark">

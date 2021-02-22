@@ -57,7 +57,7 @@ App.propTypes = {
       propTypes.shape({})
   ),
   offerNum: propTypes.number.isRequired,
-  userAuth: propTypes.string,
+  userAuth: propTypes.string.isRequired,
   cities: propTypes.arrayOf(propTypes.string),
 };
 

@@ -10,7 +10,7 @@ const PropertyGoods = ({item}) => {
 };
 
 PropertyGoods.propTypes = {
-  item: propTypes.string,
+  item: propTypes.string.isRequired,
 };
 
 export default PropertyGoods;

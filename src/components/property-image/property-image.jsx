@@ -10,7 +10,7 @@ const PropertyImage = ({image}) => {
 };
 
 PropertyImage.propTypes = {
-  image: propTypes.string,
+  image: propTypes.string.isRequired,
 };
 
 export default PropertyImage;

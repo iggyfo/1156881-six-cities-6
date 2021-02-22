@@ -4,10 +4,9 @@ import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";
 
 
-const OfferList = (props) => {
-
+const OfferList = ({offers, offerNum}) => {
   const [, setActiveOfferId] = useState(null);
-  const {offers, offerNum} = props;
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -41,7 +40,7 @@ const OfferList = (props) => {
 
 OfferList.propTypes = {
   offers: propTypes.arrayOf(
-      propTypes.shape(offerPropsTypes)
+      propTypes.shape(offerPropsTypes).isRequired
   ),
   offerNum: propTypes.number.isRequired,
 };

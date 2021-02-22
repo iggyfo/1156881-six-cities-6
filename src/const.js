@@ -3,26 +3,31 @@ export const Offer = {
   MAX_OFFERS: 478,
 };
 
-export const Rating = {
-  one: {
-    id: `1-star`,
-    title: `terribly`
+export const Rating = [
+  {
+    id: `5-star`,
+    defaultValue: 5,
+    title: `perfect`
   },
-  two: {
-    id: `2-star`,
-    title: `badly`
-  },
-  three: {
-    id: `3-star`,
-    title: `not bad`
-  },
-  four: {
+  {
     id: `4-star`,
+    defaultValue: 4,
     title: `good`
   },
-  five: {
-    id: `5-star`,
-    title: `perfect`
-  }
-};
+  {
+    id: `3-star`,
+    defaultValue: 3,
+    title: `not bad`
+  },
+  {
+    id: `2-star`,
+    defaultValue: 2,
+    title: `badly`
+  },
+  {
+    id: `1-star`,
+    defaultValue: 1,
+    title: `terribly`
+  },
+];
 

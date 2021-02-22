@@ -2,8 +2,9 @@ import React from "react";
 import propTypes from "prop-types";
 import {hostPropsTypes} from "../../props-types";
 
-const PropertyHost = (props) => {
-  const {name, isPro, avatarUrl} = props.host;
+const PropertyHost = ({host, description}) => {
+  const {name, isPro, avatarUrl} = host;
+
   return (
     <div className="property__host">
       <h2 className="property__host-title">Meet the host</h2>
@@ -16,7 +17,7 @@ const PropertyHost = (props) => {
         <span className="property__user-name">{name}</span>
       </div>
       <div className="property__description">
-        <p className="property__text">{props.description}</p>
+        <p className="property__text">{description}</p>
       </div>
     </div>
   );
@@ -24,7 +25,7 @@ const PropertyHost = (props) => {
 
 PropertyHost.propTypes = {
   host: propTypes.shape(hostPropsTypes).isRequired,
-  description: propTypes.string,
+  description: propTypes.string.isRequired,
 };
 
 export default PropertyHost;
