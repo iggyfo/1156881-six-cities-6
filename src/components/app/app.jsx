@@ -10,14 +10,15 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({hotels, offerNum, userAuth, cities}) => {
+const App = ({offers, offerNum, userAuth, cities}) => {
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainScreen
-            hotels={hotels}
+            offers={offers}
             offerNum={offerNum}
             userAuth={userAuth}
             cities={cities}
@@ -27,14 +28,19 @@ const App = ({hotels, offerNum, userAuth, cities}) => {
           <LoginScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen />
+          <FavoritesScreen
+            offers={favoriteOffers}
+          />
         </Route>
         <Route exact path="/dev-favorites-empty">
           <FavoritesEmptyScreen />
         </Route>
-        <Route exact path="/offer/:id">
-          <PropertyScreen />
-        </Route>
+        <Route exact path="/offer/:id"
+          render={({match}) => {
+            const currentOffer = offers[match.params.id];
+            return <PropertyScreen offer={currentOffer}/>;
+          }}
+        />
         <Route exact path="/dev-property-not-logged">
           <PropertyNotLoggedScreen />
         </Route>
@@ -47,11 +53,11 @@ const App = ({hotels, offerNum, userAuth, cities}) => {
 };
 
 App.propTypes = {
-  hotels: propTypes.arrayOf(
+  offers: propTypes.arrayOf(
       propTypes.shape({})
   ),
   offerNum: propTypes.number.isRequired,
-  userAuth: propTypes.string,
+  userAuth: propTypes.string.isRequired,
   cities: propTypes.arrayOf(propTypes.string),
 };
 
