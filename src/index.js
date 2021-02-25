@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {getOfferNum} from "./utils";
 import {offers} from "./mock/offers";
+import {nearby} from "./mock/nerby";
 import {reviews} from "./mock/reviews";
 
 
@@ -25,6 +26,7 @@ ReactDOM.render(
       userAuth={Setting.USER_AUTH}
       cities={Setting.CITIES}
       offers={offers}
+      nearby={nearby}
       reviews={reviews}
     />,
     document.querySelector(`#root`)

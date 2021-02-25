@@ -8,7 +8,7 @@ import PropertyHost from "../property-host/property-host";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer}) => {
+const PropertyScreen = ({offer, nearby}) => {
 
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   return (
