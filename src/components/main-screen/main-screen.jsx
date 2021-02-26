@@ -8,10 +8,7 @@ import OfferList from "../offer-list/offer-list";
 
 const MainScreen = ({offers, offerNum, userAuth, cities}) => {
 
-  const offersLocation = [];
-  offers.map((offer) => {
-    offersLocation.push(offer.location);
-  });
+  const offersLocation = offers.map(({location}) => location);
 
   return (
     <React.Fragment>

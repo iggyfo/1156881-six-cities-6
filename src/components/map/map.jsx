@@ -2,14 +2,10 @@ import React, {useRef, useEffect} from "react";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import propTypes from "prop-types";
+import {cityLocation} from "../../const";
 
 
 const Map = ({offersLocation}) => {
-  const cityLocation = {
-    "latitude": 52.37454,
-    "longitude": 4.897976,
-    "zoom": 12
-  };
 
   const cityCoords = [cityLocation.latitude, cityLocation.longitude];
 

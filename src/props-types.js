@@ -8,6 +8,7 @@ export const offerPropsTypes = {
   type: propTypes.string.isRequired,
   id: propTypes.number.isRequired,
   images: propTypes.array.isRequired,
+  rating: propTypes.number.isRequired
 };
 
 export const reviewsPropsTypes = {

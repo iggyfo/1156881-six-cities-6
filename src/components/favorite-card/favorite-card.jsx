@@ -1,11 +1,13 @@
 import React from "react";
 import {offerPropsTypes} from "../../props-types";
 import propTypes from "prop-types";
+import {ratingTypes} from "../../const";
+import Rating from "../rating/rating";
 
 
 const FavoriteCard = ({offer}) => {
 
-  const {previewImage, title, type, price} = offer;
+  const {previewImage, title, type, price, rating} = offer;
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -26,12 +28,10 @@ const FavoriteCard = ({offer}) => {
             <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: `100%`}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          className={ratingTypes.placeCard}
+        />
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>

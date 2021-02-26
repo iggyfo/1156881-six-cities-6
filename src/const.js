@@ -33,5 +33,13 @@ export const Rating = [
 
 export const ratingTypes = {
   reviews: `reviews`,
+  placeCard: `place-card`,
+  property: `property`,
+};
+
+export const cityLocation = {
+  latitude: 52.37454,
+  longitude: 4.897976,
+  zoom: 12
 };
 

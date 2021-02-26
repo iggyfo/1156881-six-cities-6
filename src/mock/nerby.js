@@ -8,7 +8,7 @@ export const nearby = [
         "zoom": 13
       }
     },
-    "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
     "images": [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
@@ -26,12 +26,12 @@ export const nearby = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`
     ],
     "title": `Loft Studio in the Central Area`,
-    "is_favorite": false,
-    "is_premium": false,
+    "isFavorite": false,
+    "isPremium": false,
     "rating": 2.9,
     "type": `hotel`,
     "bedrooms": 4,
-    "max_adults": 7,
+    "maxAdults": 7,
     "price": 311,
     "goods": [
       `Fridge`,
@@ -48,7 +48,7 @@ export const nearby = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
+      "isPro": true,
       "avatar_url": `img/avatar-angelina.jpg`
     },
     "description": `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
@@ -68,7 +68,7 @@ export const nearby = [
         "zoom": 13
       }
     },
-    "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
     "images": [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
@@ -86,12 +86,12 @@ export const nearby = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`
     ],
     "title": `The house among olive `,
-    "is_favorite": false,
-    "is_premium": false,
+    "isFavorite": false,
+    "isPremium": false,
     "rating": 5,
     "type": `room`,
     "bedrooms": 1,
-    "max_adults": 3,
+    "maxAdults": 3,
     "price": 277,
     "goods": [
       `Towels`,
@@ -106,7 +106,7 @@ export const nearby = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
+      "isPro": true,
       "avatar_url": `img/avatar-angelina.jpg`
     },
     "description": `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
@@ -126,7 +126,7 @@ export const nearby = [
         "zoom": 13
       }
     },
-    "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
     "images": [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
@@ -144,12 +144,12 @@ export const nearby = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`
     ],
     "title": `Beautiful & luxurious apartment at great location`,
-    "is_favorite": false,
-    "is_premium": false,
+    "isFavorite": false,
+    "isPremium": false,
     "rating": 3.9,
     "type": `room`,
     "bedrooms": 1,
-    "max_adults": 1,
+    "maxAdults": 1,
     "price": 197,
     "goods": [
       `Washer`,
@@ -160,7 +160,7 @@ export const nearby = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "is_pro": true,
+      "isPro": true,
       "avatar_url": `img/avatar-angelina.jpg`
     },
     "description": `This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.`,
