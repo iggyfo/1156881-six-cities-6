@@ -3,11 +3,12 @@ import Rating from "../rating/rating";
 import propTypes from "prop-types";
 import {reviewsPropsTypes} from "../../props-types";
 import {ratingTypes} from "../../const";
+import dayjs from "dayjs";
 
 
 const PropertyReviewItem = ({review}) => {
-  const {id, user, rating, comment, date} = review;
-  const {isPro, name, avatarUrl} = user;
+  const {user, rating, comment, date} = review;
+  const {name, avatarUrl} = user;
 
   return (
     <li className="reviews__item">
@@ -27,10 +28,9 @@ const PropertyReviewItem = ({review}) => {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={`${dayjs(date).format(`YYYY-MM-DD`)}`}>{dayjs(date).format(`MMMM YYYY`)}</time>
       </div>
     </li>
-
   );
 };
 
