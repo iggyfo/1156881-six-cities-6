@@ -31,3 +31,7 @@ export const Rating = [
   },
 ];
 
+export const ratingTypes = {
+  reviews: `reviews`,
+};
+

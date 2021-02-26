@@ -1,6 +1,8 @@
 import React from "react";
+import Rating from "../rating/rating";
 import propTypes from "prop-types";
 import {reviewsPropsTypes} from "../../props-types";
+import {ratingTypes} from "../../const";
 
 
 const PropertyReviewItem = ({review}) => {
@@ -18,12 +20,10 @@ const PropertyReviewItem = ({review}) => {
         </span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: `80%`}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          className={ratingTypes.reviews}
+        />
         <p className="reviews__text">
           {comment}
         </p>

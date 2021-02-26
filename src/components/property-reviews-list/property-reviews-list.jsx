@@ -28,3 +28,4 @@ PropertyReviewsList.propTypes = {
 };
 
 export default PropertyReviewsList;
+
