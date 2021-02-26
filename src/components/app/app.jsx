@@ -11,7 +11,7 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({offers, nearby, offerNum, userAuth, cities}) => {
+const App = ({offers, nearby, offerNum, userAuth, cities, reviews}) => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -39,7 +39,7 @@ const App = ({offers, nearby, offerNum, userAuth, cities}) => {
         <Route exact path="/offer/:id"
           render={({match}) => {
             const currentOffer = offers[match.params.id];
-            return <PropertyScreen offer={currentOffer} nearby={nearby} />;
+            return <PropertyScreen offer={currentOffer} nearby={nearby} reviews={reviews}/>;
           }}
         />
         <Route exact path="/dev-property-not-logged">

@@ -1,14 +1,15 @@
 import PropertyImage from "../property-image/property-image";
 import PropertyNewComment from "../property-new-comment/property-new-comment";
 import PropertyGoods from "../property-goods/property-goods";
+import PropertyHost from "../property-host/property-host";
+import PropertyReviewsList from "../property-reviews-list/property-reviews-list";
 import React from "react";
 import propTypes from "prop-types";
-import {offerPropsTypes} from "../../props-types";
-import PropertyHost from "../property-host/property-host";
+import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearby}) => {
+const PropertyScreen = ({offer, nearby, reviews}) => {
 
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   return (
@@ -99,31 +100,7 @@ const PropertyScreen = ({offer, nearby}) => {
                 description={description}
               />
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width={54} height={54} alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: `80%`}} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
+                <PropertyReviewsList reviews={reviews}/>
                 <PropertyNewComment />
               </section>
             </div>
@@ -237,6 +214,8 @@ const PropertyScreen = ({offer, nearby}) => {
 
 PropertyScreen.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
+  nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
+  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes))
 };
 
 export default PropertyScreen;

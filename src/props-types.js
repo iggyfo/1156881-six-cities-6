@@ -10,6 +10,16 @@ export const offerPropsTypes = {
   images: propTypes.array.isRequired,
 };
 
+export const reviewsPropsTypes = {
+  id: propTypes.number.isRequired,
+  user: propTypes.shape({
+    id: propTypes.number.isRequired,
+    isPro: propTypes.bool.isRequired,
+    name: propTypes.string.isRequired,
+    avatarUrl: propTypes.string.isRequired
+  })
+};
+
 export const hostPropsTypes = {
   id: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
