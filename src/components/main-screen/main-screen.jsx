@@ -1,11 +1,18 @@
 import React from "react";
 import propTypes from "prop-types";
 import Cities from "../cities/cities";
+import Map from "../map/map";
 import {nanoid} from "nanoid";
 import OfferList from "../offer-list/offer-list";
 
 
 const MainScreen = ({offers, offerNum, userAuth, cities}) => {
+
+  const offersLocation = [];
+  offers.map((offer) => {
+    offersLocation.push(offer.location);
+  });
+
   return (
     <React.Fragment>
       <header className="header">
@@ -50,7 +57,11 @@ const MainScreen = ({offers, offerNum, userAuth, cities}) => {
               offers={offers}
             />
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map
+                  offersLocation={offersLocation}
+                />
+              </section>
             </div>
           </div>
         </div>
