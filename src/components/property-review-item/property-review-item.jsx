@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "../rating/rating";
 import propTypes from "prop-types";
 import {reviewsPropsTypes} from "../../props-types";
-import {ratingTypes} from "../../const";
+import {classNameTypes} from "../../const";
 import dayjs from "dayjs";
 
 
@@ -23,7 +23,7 @@ const PropertyReviewItem = ({review}) => {
       <div className="reviews__info">
         <Rating
           rating={rating}
-          className={ratingTypes.reviews}
+          className={classNameTypes.reviews}
         />
         <p className="reviews__text">
           {comment}

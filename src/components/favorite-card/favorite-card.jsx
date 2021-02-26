@@ -1,7 +1,7 @@
 import React from "react";
 import {offerPropsTypes} from "../../props-types";
 import propTypes from "prop-types";
-import {ratingTypes} from "../../const";
+import {classNameTypes} from "../../const";
 import Rating from "../rating/rating";
 
 
@@ -30,7 +30,7 @@ const FavoriteCard = ({offer}) => {
         </div>
         <Rating
           rating={rating}
-          className={ratingTypes.placeCard}
+          className={classNameTypes.placeCard}
         />
         <h2 className="place-card__name">
           <a href="#">{title}</a>

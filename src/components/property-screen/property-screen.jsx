@@ -6,13 +6,15 @@ import PropertyReviewsList from "../property-reviews-list/property-reviews-list"
 import React from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
+import {classNameTypes} from "../../const";
 import Header from "../header/header";
+import OfferMark from "../offer-mark/offer-mark";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
 const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
 
-  const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
+  const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
   return (
     <div className="page">
       <Header userAuth={userAuth} />
@@ -29,14 +31,14 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium
+                ? <OfferMark className={classNameTypes.property} />
+                : null}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
