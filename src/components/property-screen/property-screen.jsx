@@ -6,36 +6,16 @@ import PropertyReviewsList from "../property-reviews-list/property-reviews-list"
 import React from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
+import Header from "../header/header";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearby, reviews}) => {
+const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
 
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header userAuth={userAuth} />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -215,7 +195,8 @@ const PropertyScreen = ({offer, nearby, reviews}) => {
 PropertyScreen.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
   nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes))
+  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes)),
+  userAuth: propTypes.string,
 };
 
 export default PropertyScreen;

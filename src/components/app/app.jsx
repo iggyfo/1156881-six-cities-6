@@ -31,15 +31,21 @@ const App = ({offers, nearby, offerNum, userAuth, cities, reviews}) => {
         <Route exact path="/favorites">
           <FavoritesScreen
             offers={favoriteOffers}
+            userAuth={userAuth}
           />
         </Route>
         <Route exact path="/dev-favorites-empty">
-          <FavoritesEmptyScreen />
+          <FavoritesEmptyScreen userAuth={userAuth} />
         </Route>
         <Route exact path="/offer/:id"
           render={({match}) => {
             const currentOffer = offers[match.params.id];
-            return <PropertyScreen offer={currentOffer} nearby={nearby} reviews={reviews}/>;
+            return <PropertyScreen
+              offer={currentOffer}
+              nearby={nearby}
+              reviews={reviews}
+              userAuth={userAuth}
+            />;
           }}
         />
         <Route exact path="/dev-property-not-logged">
