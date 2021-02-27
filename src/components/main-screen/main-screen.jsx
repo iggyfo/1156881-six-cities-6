@@ -5,11 +5,11 @@ import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 import Header from "../header/header";
 import {nanoid} from "nanoid";
-
+import {getOffersLocation} from "../../utils";
 
 const MainScreen = ({offers, offerNum, userAuth, cities}) => {
 
-  const offersLocation = offers.map(({location}) => location);
+  const offersLocation = getOffersLocation(offers);
 
   return (
     <React.Fragment>
