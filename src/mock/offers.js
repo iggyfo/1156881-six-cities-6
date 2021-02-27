@@ -27,7 +27,7 @@ export const offers = [
     ],
     "title": `Waterfront with extraordinary view`,
     "isFavorite": true,
-    "isPremium": false,
+    "isPremium": true,
     "rating": 3.4,
     "type": `apartment`,
     "bedrooms": 2,

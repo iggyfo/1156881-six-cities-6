@@ -31,3 +31,20 @@ export const Rating = [
   },
 ];
 
+export const classNameTypes = {
+  reviews: `reviews`,
+  placeCard: `place-card`,
+  property: `property`,
+};
+
+export const offerMarkTypes = {
+  property: `property`,
+  placeCard: `place-card`
+};
+
+export const cityLocation = {
+  latitude: 52.37454,
+  longitude: 4.897976,
+  zoom: 12
+};
+

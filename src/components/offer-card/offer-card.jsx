@@ -2,6 +2,8 @@ import React from "react";
 import propTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
+import {classNameTypes} from "../../const";
+import OfferMark from "../offer-mark/offer-mark";
 
 
 const OfferCard = ({offer, onMouseEnter}) => {
@@ -10,12 +12,12 @@ const OfferCard = ({offer, onMouseEnter}) => {
     onMouseEnter(offer.id);
   };
 
-  const {previewImage, title, type, price, isFavorite, id} = offer;
+  const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
   return (
     <article className="cities__place-card place-card" onMouseEnter={handleActiveOffer}>
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {isPremium
+        ? <OfferMark className={classNameTypes.placeCard} />
+        : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
@@ -27,11 +29,9 @@ const OfferCard = ({offer, onMouseEnter}) => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={
-            isFavorite ?
-              `place-card__bookmark-button--active button` :
-              `place-card__bookmark-button button`
-          } type="button">
+          <button className={`place-card__bookmark-button${isFavorite
+            ? `--active`
+            : null} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>

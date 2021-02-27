@@ -8,3 +8,5 @@ const getRandomInteger = (a = 1, b = 0) => {
 };
 
 export const getOfferNum = () => getRandomInteger(Offer.MIN_OFFERS, Offer.MAX_OFFERS);
+
+export const getOffersLocation = (offers) => offers.map(({location}) => location);
