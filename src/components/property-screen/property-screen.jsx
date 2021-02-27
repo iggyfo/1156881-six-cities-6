@@ -11,7 +11,7 @@ import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import {getOffersLocation} from "../../utils";
 import Map from "../map/map";
-import NearPlacesList from "../near-places-list/near-places-list";
+import OfferList from "../offer-list/offer-list";
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
 const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
@@ -98,7 +98,12 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
           </section>
         </section>
         <div className="container">
-          <NearPlacesList nearby={nearby}/>
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              <OfferList offers={nearby} />
+            </div>
+          </section>
         </div>
       </main>
     </div>

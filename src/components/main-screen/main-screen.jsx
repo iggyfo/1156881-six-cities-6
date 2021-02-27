@@ -4,6 +4,7 @@ import Cities from "../cities/cities";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 import Header from "../header/header";
+import Sorting from "../sorting/sorting";
 import {nanoid} from "nanoid";
 import {getOffersLocation} from "../../utils";
 
@@ -29,10 +30,14 @@ const MainScreen = ({offers, offerNum, userAuth, cities}) => {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList
-              offerNum={offerNum}
-              offers={offers}
-            />
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{offerNum} places to stay in Amsterdam</b>
+              <Sorting/>
+              <div className="cities__places-list places__list tabs__content">
+                <OfferList offers={offers}/>
+              </div>
+            </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
