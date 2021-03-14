@@ -5,6 +5,9 @@ import {getOfferNum} from "./utils";
 import {offers} from "./mock/offers";
 import {nearby} from "./mock/nerby";
 import {reviews} from "./mock/reviews";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {reducer} from './store/reducer';
 
 
 const Setting = {
@@ -20,14 +23,18 @@ const Setting = {
   ],
 };
 
+const store = createStore(reducer);
+
 ReactDOM.render(
-    <App
-      offerNum={Setting.NUM_OFFER}
-      userAuth={Setting.USER_AUTH}
-      cities={Setting.CITIES}
-      offers={offers}
-      nearby={nearby}
-      reviews={reviews}
-    />,
+    <Provider store={store}>
+      <App
+        offerNum={Setting.NUM_OFFER}
+        userAuth={Setting.USER_AUTH}
+        cities={Setting.CITIES}
+        offers={offers}
+        nearby={nearby}
+        reviews={reviews}
+      />
+    </Provider>,
     document.querySelector(`#root`)
 );
