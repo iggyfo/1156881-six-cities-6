@@ -7,8 +7,11 @@ import Header from "../header/header";
 import Sorting from "../sorting/sorting";
 import {nanoid} from "nanoid";
 import {getOffersLocation} from "../../utils";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
-const MainScreen = ({offers, offerNum, userAuth, cities}) => {
+
+const MainScreen = ({offers, offerNum, userAuth, cities, onChangeCity}) => {
 
   const offersLocation = getOffersLocation(offers);
 
@@ -24,6 +27,8 @@ const MainScreen = ({offers, offerNum, userAuth, cities}) => {
                 <Cities
                   key={nanoid()}
                   city={city}
+                  changeCity={onChangeCity}
+                  // () => {changeCity(city)}
                 />)}
             </ul>
           </section>
@@ -59,6 +64,18 @@ MainScreen.propTypes = {
   offerNum: propTypes.number.isRequired,
   userAuth: propTypes.string,
   cities: propTypes.arrayOf(propTypes.string),
+  onChangeCity: propTypes.func,
 };
 
-export default MainScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+export {MainScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

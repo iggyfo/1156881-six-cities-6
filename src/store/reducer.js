@@ -1,8 +1,17 @@
 import {ActionType} from "./action";
+import {offers} from "./mock/offers";
 
 const initialState = {
   city: `Paris`,
-  offers: []
+  citiesList: [
+    `Paris`,
+    `Cologne`,
+    `Brussels`,
+    `Amsterdam`,
+    `Hamburg`,
+    `Dusseldorf`
+  ],
+  offers,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return {
         ...state,
-        city: ``,
+        city: action.payload,
       };
 
     case ActionType.LOAD_OFFERS:

@@ -48,3 +48,12 @@ export const cityLocation = {
   zoom: 12
 };
 
+export const citiesNames = {
+  paris: `Paris`,
+  cologne: `Cologne`,
+  brussels: `Brussels`,
+  amsterdam: `Amsterdam`,
+  hamburg: `Hamburg`,
+  dusseldorf: `Dusseldorf`,
+};
+
