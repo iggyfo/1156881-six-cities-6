@@ -5,11 +5,11 @@ import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 
 
-const CitiesList = ({cities, onChangeCity}) => {
+const CitiesList = ({citiesList, onChangeCity}) => {
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((city, index) =>
+      {citiesList.map((city, index) =>
         <Cities
           key={index}
           city={city}
@@ -20,12 +20,12 @@ const CitiesList = ({cities, onChangeCity}) => {
 };
 
 CitiesList.propTypes = {
-  cities: propTypes.arrayOf(propTypes.string),
+  citiesList: propTypes.arrayOf(propTypes.string),
   onChangeCity: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.citiesList,
+  citiesList: state.citiesList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

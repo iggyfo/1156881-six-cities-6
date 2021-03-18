@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import CitiesList from "../cities-list/cities-list";
 
 
-const MainScreen = ({offers, offerNum, userAuth, cities}) => {
+const MainScreen = ({offers, userAuth, citiesList, currentCity}) => {
 
   const offersLocation = getOffersLocation(offers);
 
@@ -20,14 +20,14 @@ const MainScreen = ({offers, offerNum, userAuth, cities}) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={cities} />
+            <CitiesList citiesList={citiesList} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offerNum} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
               <Sorting/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList offers={offers}/>
@@ -53,12 +53,14 @@ MainScreen.propTypes = {
   ),
   offerNum: propTypes.number.isRequired,
   userAuth: propTypes.string.isRequired,
-  cities: propTypes.arrayOf(propTypes.string).isRequired,
+  citiesList: propTypes.arrayOf(propTypes.string).isRequired,
+  currentCity: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: getCurrentCityOffers(state.currentCity, state.offers),
-  cities: state.citiesList,
+  citiesList: state.citiesList,
+  currentCity: state.currentCity,
 });
 
 export {MainScreen};
