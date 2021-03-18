@@ -4,8 +4,8 @@ import React from "react";
 const Sorting = () => {
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
+      <span className="places__sorting-caption">Sort by </span>
+      <span className="places__sorting-type" tabIndex={0} onClick={}>
                 Popular
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
@@ -20,6 +20,12 @@ const Sorting = () => {
     </form>
   );
 };
+
+const sortingOpen = () => {
+  document.querySelector(`.places__options--custom`)
+    .classList
+    .add(`places__options--opened`)
+}
 
 
 export default Sorting;
