@@ -13,8 +13,7 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({offers, nearby, offerNum, userAuth, cities, reviews}) => {
-  const currentCityOffers = getCurrentCityOffers(citiesNames.amsterdam, offers);
+const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -25,7 +24,6 @@ const App = ({offers, nearby, offerNum, userAuth, cities, reviews}) => {
             offers={offers}
             offerNum={offerNum}
             userAuth={userAuth}
-            cities={cities}
           />
         </Route>
         <Route exact path="/login">

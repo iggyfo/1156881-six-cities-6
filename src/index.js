@@ -14,14 +14,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 const Setting = {
   NUM_OFFER: getOfferNum(),
   USER_AUTH: `simplepeople@gmail.com`,
-  CITIES: [
-    `Paris`,
-    `Cologne`,
-    `Brussels`,
-    `Amsterdam`,
-    `Hamburg`,
-    `Dusseldorf`
-  ],
 };
 
 const store = createStore(
@@ -34,7 +26,6 @@ ReactDOM.render(
       <App
         offerNum={Setting.NUM_OFFER}
         userAuth={Setting.USER_AUTH}
-        cities={Setting.CITIES}
         offers={offers}
         nearby={nearby}
         reviews={reviews}
