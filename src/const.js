@@ -47,13 +47,3 @@ export const cityLocation = {
   longitude: 4.897976,
   zoom: 12
 };
-
-export const citiesNames = {
-  paris: `Paris`,
-  cologne: `Cologne`,
-  brussels: `Brussels`,
-  amsterdam: `Amsterdam`,
-  hamburg: `Hamburg`,
-  dusseldorf: `Dusseldorf`,
-};
-

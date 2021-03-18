@@ -2,8 +2,6 @@ import React from "react";
 import propTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
-import {citiesNames} from "../../const";
-import {getCurrentCityOffers} from "../../utils";
 import MainScreen from "../main-screen/main-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
