@@ -47,4 +47,3 @@ export const cityLocation = {
   longitude: 4.897976,
   zoom: 12
 };
-
