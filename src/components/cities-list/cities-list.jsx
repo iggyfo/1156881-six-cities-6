@@ -5,7 +5,7 @@ import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 
 
-const CitiesList = ({citiesList, onChangeCity}) => {
+const CitiesList = ({citiesList, handleChangeCity}) => {
 
   return (
     <ul className="locations__list tabs__list">
@@ -13,7 +13,7 @@ const CitiesList = ({citiesList, onChangeCity}) => {
         <Cities
           key={index}
           city={city}
-          changeCity={onChangeCity}
+          changeCity={handleChangeCity}
         />)}
     </ul>
   );
@@ -21,15 +21,15 @@ const CitiesList = ({citiesList, onChangeCity}) => {
 
 CitiesList.propTypes = {
   citiesList: propTypes.arrayOf(propTypes.string),
-  onChangeCity: propTypes.func.isRequired,
+  handleChangeCity: propTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  citiesList: state.citiesList,
+const mapStateToProps = ({citiesList}) => ({
+  citiesList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeCity(city) {
+  handleChangeCity(city) {
     dispatch(ActionCreator.changeCity(city));
   },
 });
