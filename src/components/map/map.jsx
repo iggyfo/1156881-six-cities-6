@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from "react";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import propTypes from "prop-types";
-import {getOffersLocation, getCitiesCoords} from "../../utils";
+import {getCitiesCoords} from "../../utils";
 import {offerPropsTypes} from "../../props-types";
 import {connect} from "react-redux";
 
