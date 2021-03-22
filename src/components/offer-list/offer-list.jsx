@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";

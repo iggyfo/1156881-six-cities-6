@@ -9,7 +9,6 @@ import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
 import {classNameTypes} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
-import {getOffersLocation} from "../../utils";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
