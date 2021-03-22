@@ -4,16 +4,13 @@ import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 import Header from "../header/header";
 import Sorting from "../sorting/sorting";
-import {getCurrentCityOffers, getOffersLocation, getSortedOffers} from "../../utils";
+import {getCurrentCityOffers, getSortedOffers} from "../../utils";
 import {connect} from 'react-redux';
 import CitiesList from "../cities-list/cities-list";
 
 
 const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort}) => {
 
-  const sortedOffers = getSortedOffers(currentSort, offers);
-  console.log(offers.map((offer) => offer.price));
-  console.log(sortedOffers.map((offer) => offer.price));
   return (
     <React.Fragment>
       <Header userAuth={userAuth} />
@@ -37,7 +34,7 @@ const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort}) =>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offersLocation={getOffersLocation(offers)}
+                  offers={offers}
                 />
               </section>
             </div>

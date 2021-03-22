@@ -43,9 +43,36 @@ const offerMarkTypes = {
 };
 
 const cityLocation = {
-  latitude: 52.37454,
-  longitude: 4.897976,
+  latitude: 48.85661,
+  longitude: 2.351499,
   zoom: 12
+};
+
+const citiesLocation = {
+  paris: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+  },
+  cologne: {
+    latitude: 50.938361,
+    longitude: 6.959974,
+  },
+  brussels: {
+    latitude: 50.846557,
+    longitude: 4.351697,
+  },
+  amsterdam: {
+    latitude: 52.37454,
+    longitude: 4.897976,
+  },
+  hamburg: {
+    latitude: 53.550341,
+    longitude: 10.000654,
+  },
+  dusseldorf: {
+    latitude: 51.225402,
+    longitude: 6.776314,
+  },
 };
 
 const SortType = {
@@ -64,4 +91,4 @@ const citiesNames = {
   dusseldorf: `Dusseldorf`,
 };
 
-export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames};
+export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation};

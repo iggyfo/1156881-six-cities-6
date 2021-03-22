@@ -9,11 +9,12 @@ const initialState = {
     citiesNames.cologne,
     citiesNames.brussels,
     citiesNames.amsterdam,
-    citiesNames.amsterdam,
+    citiesNames.hamburg,
     citiesNames.dusseldorf
   ],
   offers,
-  currentSort: SortType.LOW_TO_HIGH
+  currentSort: SortType.LOW_TO_HIGH,
+  activeOfferId: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentSort: action.payload
+      };
+    case ActionType.CHANGE_ACTIVE_OFFER_ID:
+      return {
+        ...state,
+        activeOfferId: action.payload
       };
   }
 

@@ -1,4 +1,4 @@
-import {Offer, SortType} from "./const";
+import {citiesLocation, citiesNames, Offer, SortType} from "./const";
 
 
 const getRandomInteger = (a = 1, b = 0) => {
@@ -23,7 +23,7 @@ const getSortedOffers = (currentSort, offers) => {
       sortedOffers = offers.sort((a, b) => b.price - a.price);
       break;
     case SortType.TOP_RATED:
-      sortedOffers = offers.sort((a, b) => a.rating - b.rating);
+      sortedOffers = offers.sort((a, b) => b.rating - a.rating);
       break;
     default:
       sortedOffers = offers;
@@ -31,4 +31,28 @@ const getSortedOffers = (currentSort, offers) => {
   return sortedOffers;
 };
 
-export {getOfferNum, getOffersLocation, getCurrentCityOffers, getSortedOffers};
+const getCitiesCoords = (currentCity) => {
+  let cityCoords = [];
+  switch (currentCity) {
+    case citiesNames.cologne:
+      cityCoords = [citiesLocation.cologne.latitude, citiesLocation.cologne.longitude];
+      break;
+    case citiesNames.brussels:
+      cityCoords = [citiesLocation.brussels.latitude, citiesLocation.brussels.longitude];
+      break;
+    case citiesNames.amsterdam:
+      cityCoords = [citiesLocation.amsterdam.latitude, citiesLocation.amsterdam.longitude];
+      break;
+    case citiesNames.hamburg:
+      cityCoords = [citiesLocation.hamburg.latitude, citiesLocation.hamburg.longitude];
+      break;
+    case citiesNames.dusseldorf:
+      cityCoords = [citiesLocation.dusseldorf.latitude, citiesLocation.dusseldorf.longitude];
+      break;
+    default:
+      cityCoords = [citiesLocation.paris.latitude, citiesLocation.paris.longitude];
+  }
+  return cityCoords;
+};
+
+export {getOfferNum, getOffersLocation, getCurrentCityOffers, getSortedOffers, getCitiesCoords};

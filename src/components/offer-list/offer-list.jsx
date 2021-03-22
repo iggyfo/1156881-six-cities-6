@@ -2,17 +2,18 @@ import React, {useState} from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";
+import {ActionCreator} from "../../store/action";
+import {connect} from "react-redux";
 
 
-const OfferList = ({offers}) => {
-  const [, setActiveOfferId] = useState(null);
+const OfferList = ({offers, handleActiveOfferId}) => {
 
   return (
     offers.map((offer) =>
       <OfferCard
         key={offer.id}
         offer={offer}
-        onMouseEnter={setActiveOfferId}
+        handleActiveOfferId={handleActiveOfferId}
       />)
   );
 };
@@ -20,5 +21,17 @@ const OfferList = ({offers}) => {
 OfferList.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired)};
 
-export default OfferList;
+
+const mapStateToProps = ({activeOffer}) => ({
+  activeOffer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleActiveOfferId(offerCoords) {
+    dispatch(ActionCreator.changeActiveOfferId(offerCoords));
+  },
+});
+
+export {OfferList};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferList);
 
