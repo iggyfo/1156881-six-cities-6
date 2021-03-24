@@ -8,18 +8,19 @@ import {connect} from "react-redux";
 
 
 const CITY_ZOOM = 12;
+const ICON_SIZE = [27, 39];
 
 const Map = ({offers, currentCity, activeOfferId}) => {
   const cityCoords = getCitiesCoords(currentCity);
 
   const icon = leaflet.icon({
     iconUrl: `./img/pin.svg`,
-    iconSize: [27, 39]
+    iconSize: ICON_SIZE,
   });
 
   const activeIcon = leaflet.icon({
     iconUrl: `./img/pin-active.svg`,
-    iconSize: [27, 39]
+    iconSize: ICON_SIZE,
   });
 
   const mapRef = useRef();
@@ -38,18 +39,15 @@ const Map = ({offers, currentCity, activeOfferId}) => {
       })
       .addTo(mapRef.current);
 
-    offers.map((offer) => {
-      if (activeOfferId === offer.id) {
-        const activeOfferCoords = [offer.location.latitude, offer.location.longitude];
+    offers.map(({id, location}) => {
+      const addOfferToMap = (iconType) => {
         leaflet
-          .marker(activeOfferCoords, {icon: activeIcon})
+          .marker([location.latitude, location.longitude], {icon: iconType})
           .addTo(mapRef.current);
-      } else {
-        const offerCords = [offer.location.latitude, offer.location.longitude];
-        leaflet
-          .marker(offerCords, {icon})
-          .addTo(mapRef.current);
-      }
+      };
+      return activeOfferId === id
+        ? addOfferToMap(activeIcon)
+        : addOfferToMap(icon);
     });
 
     return () => {
