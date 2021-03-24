@@ -31,28 +31,13 @@ const getSortedOffers = (currentSort, offers) => {
   return sortedOffers;
 };
 
-const getCitiesCoords = (currentCity) => {
-  let cityCoords = [];
-  switch (currentCity) {
-    case citiesNames.cologne:
-      cityCoords = [citiesLocation.cologne.latitude, citiesLocation.cologne.longitude];
-      break;
-    case citiesNames.brussels:
-      cityCoords = [citiesLocation.brussels.latitude, citiesLocation.brussels.longitude];
-      break;
-    case citiesNames.amsterdam:
-      cityCoords = [citiesLocation.amsterdam.latitude, citiesLocation.amsterdam.longitude];
-      break;
-    case citiesNames.hamburg:
-      cityCoords = [citiesLocation.hamburg.latitude, citiesLocation.hamburg.longitude];
-      break;
-    case citiesNames.dusseldorf:
-      cityCoords = [citiesLocation.dusseldorf.latitude, citiesLocation.dusseldorf.longitude];
-      break;
-    default:
-      cityCoords = [citiesLocation.paris.latitude, citiesLocation.paris.longitude];
-  }
-  return cityCoords;
+const getCityCoords = (offers) => {
+  const cityCoords = new Set();
+  offers.map(({city}) => {
+    cityCoords.add(city.location.latitude).add(city.location.longitude);
+  });
+  return Array.from(cityCoords);
 };
 
-export {getOfferNum, getOffersLocation, getCurrentCityOffers, getSortedOffers, getCitiesCoords};
+
+export {getOfferNum, getOffersLocation, getCurrentCityOffers, getSortedOffers, getCityCoords};

@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from "react";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import propTypes from "prop-types";
-import {getCitiesCoords} from "../../utils";
+import {getCityCoords} from "../../utils";
 import {offerPropsTypes} from "../../props-types";
 import {connect} from "react-redux";
 
@@ -10,9 +10,9 @@ import {connect} from "react-redux";
 const CITY_ZOOM = 12;
 const ICON_SIZE = [27, 39];
 
-const Map = ({offers, currentCity, activeOfferId}) => {
-  const cityCoords = getCitiesCoords(currentCity);
+const Map = ({offers, activeOfferId}) => {
 
+  const cityCoords = getCityCoords(offers);
   const icon = leaflet.icon({
     iconUrl: `./img/pin.svg`,
     iconSize: ICON_SIZE,
@@ -67,7 +67,6 @@ const mapStateToProps = ({currentCity, activeOfferId}) => ({
 
 Map.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
-  currentCity: propTypes.string.isRequired,
   activeOfferId: propTypes.number,
 };
 
