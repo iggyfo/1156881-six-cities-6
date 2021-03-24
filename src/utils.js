@@ -1,4 +1,4 @@
-import {citiesLocation, citiesNames, Offer, SortType} from "./const";
+import {Offer, SortType} from "./const";
 
 
 const getRandomInteger = (a = 1, b = 0) => {
