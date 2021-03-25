@@ -1,4 +1,4 @@
-import {citiesLocation, citiesNames, Offer, SortType} from "./const";
+import {citiesLocation, Offer, SortType} from "./const";
 
 
 const getRandomInteger = (a = 1, b = 0) => {
@@ -8,8 +8,6 @@ const getRandomInteger = (a = 1, b = 0) => {
 };
 
 const getOfferNum = () => getRandomInteger(Offer.MIN_OFFERS, Offer.MAX_OFFERS);
-
-const getOffersLocation = (offers) => offers.map(({location}) => location);
 
 const getCurrentCityOffers = (currentCity, offers) => offers.filter((offer) => offer.city.name === currentCity);
 
@@ -35,28 +33,4 @@ const getCitiesCoords = (currentCity) => {
   return [citiesLocation[currentCity.toLowerCase()].latitude, citiesLocation[currentCity.toLowerCase()].longitude];
 };
 
-// const getCitiesCoords = (currentCity) => {
-//   let cityCoords = [];
-//   switch (currentCity) {
-//     case citiesNames.cologne:
-//       cityCoords = [citiesLocation.cologne.latitude, citiesLocation.cologne.longitude];
-//       break;
-//     case citiesNames.brussels:
-//       cityCoords = [citiesLocation.brussels.latitude, citiesLocation.brussels.longitude];
-//       break;
-//     case citiesNames.amsterdam:
-//       cityCoords = [citiesLocation.amsterdam.latitude, citiesLocation.amsterdam.longitude];
-//       break;
-//     case citiesNames.hamburg:
-//       cityCoords = [citiesLocation.hamburg.latitude, citiesLocation.hamburg.longitude];
-//       break;
-//     case citiesNames.dusseldorf:
-//       cityCoords = [citiesLocation.dusseldorf.latitude, citiesLocation.dusseldorf.longitude];
-//       break;
-//     default:
-//       cityCoords = [citiesLocation.paris.latitude, citiesLocation.paris.longitude];
-//   }
-//   return cityCoords;
-// }
-
-export {getOfferNum, getOffersLocation, getCurrentCityOffers, getSortedOffers, getCitiesCoords};
+export {getOfferNum, getCurrentCityOffers, getSortedOffers, getCitiesCoords};
