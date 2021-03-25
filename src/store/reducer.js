@@ -24,7 +24,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentCity: action.payload,
       };
-
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+      };
     case ActionType.CHANGE_SORT_TYPE:
       return {
         ...state,

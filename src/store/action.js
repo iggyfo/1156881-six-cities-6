@@ -16,6 +16,11 @@ export const ActionCreator = {
     payload: sortType,
   }),
 
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+
   changeActiveOfferId: (offerId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: offerId,
