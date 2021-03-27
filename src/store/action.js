@@ -3,6 +3,7 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION:`,
 };
 
 export const ActionCreator = {
@@ -24,5 +25,10 @@ export const ActionCreator = {
   changeActiveOfferId: (offerId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: offerId,
+  }),
+
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
   })
 };

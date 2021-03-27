@@ -1,6 +1,5 @@
 import {ActionType} from "./action";
-import {offers} from "../mock/offers";
-import {SortType, citiesNames} from "../const";
+import {SortType, citiesNames, AuthorizationStatus} from "../const";
 
 const initialState = {
   currentCity: citiesNames.paris,
@@ -12,9 +11,10 @@ const initialState = {
     citiesNames.hamburg,
     citiesNames.dusseldorf
   ],
-  offers,
+  offers: [],
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +38,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeOfferId: action.payload
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
       };
   }
 
