@@ -21,11 +21,9 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
         ? <OfferMark className={classNameTypes.placeCard} />
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <Link to={`/offer/${id}`}>
-            <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
-          </Link>
-        </a>
+        <Link to={`/offer/${id}`}>
+          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

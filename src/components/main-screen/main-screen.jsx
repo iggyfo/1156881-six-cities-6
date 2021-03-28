@@ -67,7 +67,7 @@ MainScreen.propTypes = {
   currentSort: propTypes.string.isRequired,
   isOffersLoaded: propTypes.bool.isRequired,
   onLoadData: propTypes.func.isRequired,
-  userAuth: propTypes.string.isRequired,
+  userAuth: propTypes.string,
 };
 
 const mapStateToProps = (state) => ({

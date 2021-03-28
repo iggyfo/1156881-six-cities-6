@@ -125,7 +125,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
 };
 
 PropertyScreen.propTypes = {
-  offer: propTypes.shape(offerPropsTypes).isRequired,
+  offer: propTypes.shape(offerPropsTypes),
   nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   userAuth: propTypes.string,
