@@ -4,12 +4,14 @@ import Header from "../header/header";
 import propTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
+import {AppRoute} from "../../const";
 
 
 const AuthScreen = ({onSubmit}) => {
 
   const loginRef = useRef();
   const passwordRef = useRef();
+  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -17,6 +19,7 @@ const AuthScreen = ({onSubmit}) => {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
+    history.push(AppRoute.MAIN_SCREEN);
   };
 
   return (
@@ -49,7 +52,12 @@ const AuthScreen = ({onSubmit}) => {
                   required
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                // onClick={() => history.push(AppRoute.MAIN_SCREEN)}
+                className="login__submit form__submit button"
+                type="submit">
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

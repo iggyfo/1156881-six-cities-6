@@ -53,8 +53,8 @@ export const ActionCreator = {
     payload: status,
   }),
 
-  setAuthInfo: (user) => ({
+  setAuthInfo: (data) => ({
     type: ActionType.SET_AUTHORIZATION_INFO,
-    payload: user,
+    payload: data,
   })
 };
