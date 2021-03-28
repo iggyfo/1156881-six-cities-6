@@ -6,7 +6,7 @@ import {createApi} from "./services/api";
 import {ActionCreator} from './store/action';
 import App from './components/app/app';
 import {offers} from "./mock/offers";
-import {nearby} from "./mock/nerby";
+import {nearPlaces} from "./mock/nerby";
 import {reviews} from "./mock/reviews";
 import {Provider} from 'react-redux';
 import {reducer} from './store/reducer';
@@ -31,7 +31,7 @@ ReactDOM.render(
     <Provider store={store}>
       <App
         offers={offers}
-        nearby={nearby}
+        nearPlaces={nearPlaces}
         reviews={reviews}
       />
     </Provider>,

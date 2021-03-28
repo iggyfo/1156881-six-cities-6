@@ -12,10 +12,17 @@ const initialState = {
     citiesNames.dusseldorf
   ],
   offers: [],
+  comments: [],
+  nearPlaces: [],
+  favorites: [],
+  offer: null,
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
+  isNearPlacesLoaded: false,
+  isOfferLoaded: false,
+  isCommentsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +37,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        offer: action.payload,
+        isOfferLoaded: true
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        isCommentsLoaded: true
+      };
+    case ActionType.LOAD_NEAR_OFFERS:
+      return {
+        ...state,
+        nearPlaces: action.payload,
+        isNearPlacesLoaded: true
       };
     case ActionType.CHANGE_SORT_TYPE:
       return {

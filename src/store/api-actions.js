@@ -1,12 +1,30 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus} from "../const";
+import {ApiRoute, AuthorizationStatus} from "../const";
+
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
     .then(({data}) => {
-      console.log(data);
       dispatch(ActionCreator.loadOffers(data));
     })
+);
+
+export const fetchOffer = (id) => (dispatch, _getState, api) => (
+  api
+    .get(`${ApiRoute.OFFERS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+);
+
+export const fetchComments = (id) => (dispatch, _getState, api) => (
+  api
+    .get(`${ApiRoute.COMMENTS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+);
+
+export const fetchNearOffers = (id) => (dispatch, _getState, api) => (
+  api
+    .get(`${ApiRoute.OFFERS}/${id}/nearby`)
+    .then(({data}) => dispatch(ActionCreator.loadNearOffers(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

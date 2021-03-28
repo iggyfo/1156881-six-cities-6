@@ -6,20 +6,24 @@ import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 
 
-const OfferList = ({offers, handleActiveOfferId}) => {
+const OfferList = ({offers, handleInActiveOfferId, handleOutActiveOfferId}) => {
 
   return (
     offers.map((offer) =>
       <OfferCard
         key={offer.id}
         offer={offer}
-        handleActiveOfferId={handleActiveOfferId}
+        handleInActiveOfferId={handleInActiveOfferId}
+        handleOutActiveOfferId={handleOutActiveOfferId}
       />)
   );
 };
 
 OfferList.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired)};
+  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
+  handleOutActiveOfferId: propTypes.func.isRequired,
+  handleInActiveOfferId: propTypes.func.isRequired,
+};
 
 
 const mapStateToProps = ({activeOffer}) => ({
@@ -27,8 +31,11 @@ const mapStateToProps = ({activeOffer}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleActiveOfferId(offerCoords) {
-    dispatch(ActionCreator.changeActiveOfferId(offerCoords));
+  handleInActiveOfferId(offerId) {
+    dispatch(ActionCreator.changeActiveOfferId(offerId));
+  },
+  handleOutActiveOfferId() {
+    dispatch(ActionCreator.changeActiveOfferId(null));
   },
 });
 

@@ -11,7 +11,7 @@ export const offerPropsTypes = {
   rating: propTypes.number.isRequired
 };
 
-export const reviewsPropsTypes = {
+export const commentPropsTypes = {
   id: propTypes.number.isRequired,
   user: propTypes.shape({
     id: propTypes.number.isRequired,

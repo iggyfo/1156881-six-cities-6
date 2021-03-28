@@ -1,13 +1,13 @@
 import React from "react";
 import Rating from "../rating/rating";
 import propTypes from "prop-types";
-import {reviewsPropsTypes} from "../../props-types";
+import {commentPropsTypes} from "../../props-types";
 import {classNameTypes} from "../../const";
 import dayjs from "dayjs";
 
 
-const PropertyReviewItem = ({review}) => {
-  const {user, rating, comment, date} = review;
+const PropertyReviewItem = ({userComment}) => {
+  const {user, rating, comment, date} = userComment;
   const {name, avatarUrl} = user;
 
   return (
@@ -35,7 +35,7 @@ const PropertyReviewItem = ({review}) => {
 };
 
 PropertyReviewItem.propTypes = {
-  review: propTypes.shape(reviewsPropsTypes),
+  userComment: propTypes.shape(commentPropsTypes),
 };
 
 export default PropertyReviewItem;

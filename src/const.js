@@ -101,4 +101,20 @@ const AuthorizationData = {
   PASS: `12345678`,
 };
 
-export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus};
+const AppRoute = {
+  MAIN_SCREEN: `/`,
+  LOGIN_SCREEN: `/login`,
+  FAVORITES_SCREEN: `/favorites`,
+  OFFER_SCREEN: `/offer/:id`,
+  NOT_FOUND: `/404`
+};
+
+const ApiRoute = {
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+  OFFERS: `/hotels`,
+  COMMENTS: `/comments`,
+  FAVORITES: `/favorite`
+};
+
+export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
