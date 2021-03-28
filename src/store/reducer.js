@@ -15,6 +15,7 @@ const initialState = {
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
+        isDataLoaded: true,
       };
     case ActionType.CHANGE_SORT_TYPE:
       return {

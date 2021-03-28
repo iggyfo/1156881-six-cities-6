@@ -11,7 +11,7 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
+const App = ({offers, nearby, userAuth, reviews}) => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -19,8 +19,6 @@ const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
       <Switch>
         <Route exact path="/">
           <MainScreen
-            offers={offers}
-            offerNum={offerNum}
             userAuth={userAuth}
           />
         </Route>
@@ -61,9 +59,6 @@ const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
 App.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
   nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-
-  offerNum: propTypes.number.isRequired,
-  userAuth: propTypes.string.isRequired,
   cities: propTypes.arrayOf(propTypes.string),
   reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes))
 };

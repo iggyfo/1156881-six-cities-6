@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import propTypes from "prop-types";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
@@ -7,10 +7,23 @@ import Sorting from "../sorting/sorting";
 import {getCurrentCityOffers, getSortedOffers} from "../../utils";
 import {connect} from 'react-redux';
 import CitiesList from "../cities-list/cities-list";
+import LoadingScreen from '../loading-screen/loading-screen';
+import {fetchOffers} from "../../store/api-actions";
 
 
-const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort}) => {
+const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort, isDataLoaded, onLoadData}) => {
 
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <React.Fragment>
       <Header userAuth={userAuth} />
@@ -22,7 +35,7 @@ const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort}) =>
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
+          <div className="cities__places-container container" style={{height: `700px`}}>
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {currentCity}</b>
@@ -49,11 +62,11 @@ MainScreen.propTypes = {
   offers: propTypes.arrayOf(
       propTypes.shape({})
   ),
-  offerNum: propTypes.number.isRequired,
-  userAuth: propTypes.string.isRequired,
   citiesList: propTypes.arrayOf(propTypes.string).isRequired,
   currentCity: propTypes.string.isRequired,
   currentSort: propTypes.string.isRequired,
+  isDataLoaded: propTypes.bool.isRequired,
+  onLoadData: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -61,7 +74,14 @@ const mapStateToProps = (state) => ({
   offers: getCurrentCityOffers(state.currentCity, state.offers),
   citiesList: state.citiesList,
   currentCity: state.currentCity,
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchOffers());
+  },
 });
 
 export {MainScreen};
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

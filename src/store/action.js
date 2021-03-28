@@ -1,3 +1,5 @@
+import {adaptToClient} from "../utils";
+
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -19,7 +21,7 @@ export const ActionCreator = {
 
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
-    payload: offers,
+    payload: offers.map((offer) => adaptToClient(offer)),
   }),
 
   changeActiveOfferId: (offerId) => ({

@@ -1,4 +1,4 @@
-import {citiesLocation, Offer, SortType} from "./const";
+import {citiesLocation, SortType} from "./const";
 
 
 const getRandomInteger = (a = 1, b = 0) => {
@@ -6,8 +6,6 @@ const getRandomInteger = (a = 1, b = 0) => {
   const upper = Math.floor(Math.max(a, b));
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
-
-const getOfferNum = () => getRandomInteger(Offer.MIN_OFFERS, Offer.MAX_OFFERS);
 
 const getCurrentCityOffers = (currentCity, offers) => offers.filter((offer) => offer.city.name === currentCity);
 
@@ -33,4 +31,32 @@ const getCitiesCoords = (currentCity) => {
   return [citiesLocation[currentCity.toLowerCase()].latitude, citiesLocation[currentCity.toLowerCase()].longitude];
 };
 
-export {getOfferNum, getCurrentCityOffers, getSortedOffers, getCitiesCoords};
+const adaptToClient = (offer) => {
+  const adaptedOffer = Object.assign(
+      {},
+      offer,
+      {
+        isFavorite: offer[`is_favorite`],
+        isPremium: offer[`is_premium`],
+        host: {
+          id: offer.host.id,
+          name: offer.host.name,
+          isPro: offer.host[`is_pro`],
+          avatarUrl: offer.host[`avatar_url`]
+        },
+        maxAdults: offer[`max_adults`],
+        previewImage: offer[`preview_image`],
+      },
+  );
+
+  delete adaptedOffer[`is_favorite`];
+  delete adaptedOffer[`is_premium`];
+  delete adaptedOffer[`max_adults`];
+  delete adaptedOffer[`preview_image`];
+  delete adaptedOffer.host[`is_pro`];
+  delete adaptedOffer.host[`avatar_url`];
+
+  return adaptedOffer;
+};
+
+export {getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient};

@@ -96,4 +96,9 @@ const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+const AuthorizationData = {
+  USER: `simplepeople@gmail.com`,
+  PASS: `12345678`,
+};
+
 export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus};
