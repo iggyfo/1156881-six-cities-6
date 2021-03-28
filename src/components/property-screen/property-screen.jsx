@@ -22,7 +22,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
     if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
       onLoadData(id);
     }
-  }, [id, isOfferLoaded, isCommentsLoaded, onLoadData, isNearPlacesLoaded]);
+  }, [id, isOfferLoaded, isCommentsLoaded, isNearPlacesLoaded]);
 
   if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
     return (
@@ -130,6 +130,10 @@ PropertyScreen.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   userAuth: propTypes.string,
   id: propTypes.string.isRequired,
+  isNearPlacesLoaded: propTypes.bool.isRequired,
+  isOfferLoaded: propTypes.bool.isRequired,
+  isCommentsLoaded: propTypes.bool.isRequired,
+  onLoadData: propTypes.func.isRequired,
 };
 
 const mapStateToProps = ({offer, comments, nearPlaces, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded}, {match}) => ({

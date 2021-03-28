@@ -19,7 +19,7 @@ const initialState = {
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false,
+  isOffersLoaded: false,
   isNearPlacesLoaded: false,
   isOfferLoaded: false,
   isCommentsLoaded: false,
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        isDataLoaded: true,
+        isOffersLoaded: true,
       };
     case ActionType.LOAD_OFFER:
       return {

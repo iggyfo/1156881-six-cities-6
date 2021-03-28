@@ -22,7 +22,9 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+          <Link to={`/offer/${id}`}>
+            <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+          </Link>
         </a>
       </div>
       <div className="place-card__info">

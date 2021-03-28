@@ -11,15 +11,15 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOffers} from "../../store/api-actions";
 
 
-const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort, isDataLoaded, onLoadData}) => {
+const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort, isOffersLoaded, onLoadData}) => {
 
   useEffect(() => {
-    if (!isDataLoaded) {
+    if (!isOffersLoaded) {
       onLoadData();
     }
-  }, [isDataLoaded]);
+  }, [isOffersLoaded]);
 
-  if (!isDataLoaded) {
+  if (!isOffersLoaded) {
     return (
       <LoadingScreen />
     );
@@ -65,8 +65,9 @@ MainScreen.propTypes = {
   citiesList: propTypes.arrayOf(propTypes.string).isRequired,
   currentCity: propTypes.string.isRequired,
   currentSort: propTypes.string.isRequired,
-  isDataLoaded: propTypes.bool.isRequired,
+  isOffersLoaded: propTypes.bool.isRequired,
   onLoadData: propTypes.func.isRequired,
+  userAuth: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -74,7 +75,7 @@ const mapStateToProps = (state) => ({
   offers: getCurrentCityOffers(state.currentCity, state.offers),
   citiesList: state.citiesList,
   currentCity: state.currentCity,
-  isDataLoaded: state.isDataLoaded,
+  isOffersLoaded: state.isOffersLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
