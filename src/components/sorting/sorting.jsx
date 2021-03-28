@@ -1,25 +1,52 @@
-import React from "react";
+import React, {useRef} from "react";
+import {SortType} from "../../const";
+import {ActionCreator} from "../../store/action";
+import {connect} from "react-redux";
+import propTypes from "prop-types";
 
 
-const Sorting = () => {
+const Sorting = ({handleSortingClick, currentSort}) => {
+
+  const sortPopupRef = useRef();
+  const sortingPopupToggle = () => {
+    sortPopupRef
+      .current
+      .classList
+      .toggle(`places__options--opened`);
+  };
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
-                Popular
+      <span className="places__sorting-caption">Sort by </span>
+      <span className="places__sorting-type" tabIndex={0} onClick={sortingPopupToggle}>
+        {currentSort}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
-        <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-        <li className="places__option" tabIndex={0}>Price: low to high</li>
-        <li className="places__option" tabIndex={0}>Price: high to low</li>
-        <li className="places__option" tabIndex={0}>Top rated first</li>
+      <ul className="places__options places__options--custom" ref={sortPopupRef}>
+        <li className="places__option places__option--active" tabIndex={0} data-sort-type={`${SortType.DEFAULT}`} onClick={handleSortingClick}>Popular</li>
+        <li className="places__option" tabIndex={0} data-sort-type={`${SortType.LOW_TO_HIGH}`} onClick={handleSortingClick}>Price: low to high</li>
+        <li className="places__option" tabIndex={0} data-sort-type={`${SortType.HIGH_TO_LOW}`} onClick={handleSortingClick}>Price: high to low</li>
+        <li className="places__option" tabIndex={0} data-sort-type={`${SortType.TOP_RATED}`} onClick={handleSortingClick}>Top rated first</li>
       </ul>
     </form>
   );
 };
 
+Sorting.propTypes = {
+  currentSort: propTypes.string.isRequired,
+  handleSortingClick: propTypes.func.isRequired,
+};
 
-export default Sorting;
+const mapStateToProps = ({currentSort}) => ({
+  currentSort,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleSortingClick(evt) {
+    dispatch(ActionCreator.changeSortType(evt.target.dataset.sortType));
+  },
+});
+
+export {Sorting};
+export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

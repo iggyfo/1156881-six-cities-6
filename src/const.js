@@ -1,9 +1,9 @@
-export const Offer = {
+const Offer = {
   MIN_OFFERS: 10,
   MAX_OFFERS: 478,
 };
 
-export const Rating = [
+const Rating = [
   {
     id: `5-star`,
     defaultValue: 5,
@@ -31,19 +31,64 @@ export const Rating = [
   },
 ];
 
-export const classNameTypes = {
+const classNameTypes = {
   reviews: `reviews`,
   placeCard: `place-card`,
   property: `property`,
 };
 
-export const offerMarkTypes = {
+const offerMarkTypes = {
   property: `property`,
   placeCard: `place-card`
 };
 
-export const cityLocation = {
-  latitude: 52.37454,
-  longitude: 4.897976,
+const cityLocation = {
+  latitude: 48.85661,
+  longitude: 2.351499,
   zoom: 12
 };
+
+const citiesLocation = {
+  paris: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+  },
+  cologne: {
+    latitude: 50.938361,
+    longitude: 6.959974,
+  },
+  brussels: {
+    latitude: 50.846557,
+    longitude: 4.351697,
+  },
+  amsterdam: {
+    latitude: 52.37454,
+    longitude: 4.897976,
+  },
+  hamburg: {
+    latitude: 53.550341,
+    longitude: 10.000654,
+  },
+  dusseldorf: {
+    latitude: 51.225402,
+    longitude: 6.776314,
+  },
+};
+
+const SortType = {
+  DEFAULT: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
+};
+
+const citiesNames = {
+  paris: `Paris`,
+  cologne: `Cologne`,
+  brussels: `Brussels`,
+  amsterdam: `Amsterdam`,
+  hamburg: `Hamburg`,
+  dusseldorf: `Dusseldorf`,
+};
+
+export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation};

@@ -6,15 +6,13 @@ import {classNameTypes} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
 
 
-const OfferCard = ({offer, onMouseEnter}) => {
-
-  const handleActiveOffer = () => {
-    onMouseEnter(offer.id);
-  };
+const OfferCard = ({offer, handleActiveOfferId}) => {
 
   const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
   return (
-    <article className="cities__place-card place-card" onMouseEnter={handleActiveOffer}>
+    <article className="cities__place-card place-card" onMouseEnter={() => {
+      handleActiveOfferId(offer.id);
+    }}>
       {isPremium
         ? <OfferMark className={classNameTypes.placeCard} />
         : null}
@@ -56,7 +54,7 @@ const OfferCard = ({offer, onMouseEnter}) => {
 
 OfferCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
-  onMouseEnter: propTypes.func,
+  handleActiveOfferId: propTypes.func.isRequired,
 };
 
 export default OfferCard;

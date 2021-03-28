@@ -9,7 +9,6 @@ import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
 import {classNameTypes} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
-import {getOffersLocation} from "../../utils";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
@@ -17,7 +16,6 @@ const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
 
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
-  const offersLocation = getOffersLocation(nearby);
 
   return (
     <div className="page">
@@ -93,7 +91,7 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
           </div>
           <section className="property__map map">
             <Map
-              offersLocation={offersLocation}
+              offers={nearby}
             />
           </section>
         </section>

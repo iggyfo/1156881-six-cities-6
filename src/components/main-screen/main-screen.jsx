@@ -4,14 +4,12 @@ import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 import Header from "../header/header";
 import Sorting from "../sorting/sorting";
-import {getCurrentCityOffers, getOffersLocation} from "../../utils";
+import {getCurrentCityOffers, getSortedOffers} from "../../utils";
 import {connect} from 'react-redux';
 import CitiesList from "../cities-list/cities-list";
 
 
-const MainScreen = ({offers, userAuth, citiesList, currentCity}) => {
-
-  const offersLocation = getOffersLocation(offers);
+const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort}) => {
 
   return (
     <React.Fragment>
@@ -28,15 +26,15 @@ const MainScreen = ({offers, userAuth, citiesList, currentCity}) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {currentCity}</b>
-              <Sorting/>
+              <Sorting />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers}/>
+                <OfferList offers={getSortedOffers(currentSort, offers)}/>
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offersLocation={offersLocation}
+                  offers={offers}
                 />
               </section>
             </div>
@@ -55,9 +53,11 @@ MainScreen.propTypes = {
   userAuth: propTypes.string.isRequired,
   citiesList: propTypes.arrayOf(propTypes.string).isRequired,
   currentCity: propTypes.string.isRequired,
+  currentSort: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  currentSort: state.currentSort,
   offers: getCurrentCityOffers(state.currentCity, state.offers),
   citiesList: state.citiesList,
   currentCity: state.currentCity,

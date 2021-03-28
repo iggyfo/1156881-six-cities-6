@@ -3,8 +3,8 @@ export const offers = [
     "city": {
       "name": `Paris`,
       "location": {
-        "latitude": 52.37454,
-        "longitude": 4.897976,
+        "latitude": 48.85661,
+        "longitude": 2.351499,
         "zoom": 13
       }
     },
@@ -53,8 +53,8 @@ export const offers = [
     },
     "description": `I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.`,
     "location": {
-      "latitude": 52.3909553943508,
-      "longitude": 4.85309666406198,
+      "latitude": 48.87961000000001,
+      "longitude": 2.353499,
       "zoom": 16
     },
     "id": 1
@@ -63,8 +63,8 @@ export const offers = [
     "city": {
       "name": `Paris`,
       "location": {
-        "latitude": 52.37454,
-        "longitude": 4.897976,
+        "latitude": 48.85661,
+        "longitude": 2.351499,
         "zoom": 13
       }
     },
@@ -105,8 +105,8 @@ export const offers = [
     },
     "description": `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
     "location": {
-      "latitude": 52.369553943508,
-      "longitude": 4.85309666406198,
+      "latitude": 48.837610000000005,
+      "longitude": 2.3454990000000002,
       "zoom": 16
     },
     "id": 2
