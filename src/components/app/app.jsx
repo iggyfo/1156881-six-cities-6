@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {offerPropsTypes} from "../../props-types";
 import {AppRoute} from "../../const";
 import MainScreen from "../main-screen/main-screen";
-import LoginScreen from "../login-screen/login-screen";
+import AuthScreen from "../auth-screen/auth-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import PropertyScreen from "../property-screen/property-screen";
 import PropertyNotLoggedScreen from "../property-not-logged-screen/property-not-logged-screen";
@@ -22,7 +22,7 @@ const App = ({offers}) => {
           <MainScreen />
         </Route>
         <Route exact path={AppRoute.LOGIN_SCREEN}>
-          <LoginScreen />
+          <AuthScreen />
         </Route>
         <Route exact path={AppRoute.FAVORITES_SCREEN}>
           <FavoritesScreen

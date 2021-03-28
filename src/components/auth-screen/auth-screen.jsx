@@ -1,8 +1,24 @@
-import React from "react";
+import React, {useRef} from "react";
 import Header from "../header/header";
+import propTypes from "prop-types";
+import {connect} from "react-redux";
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
+import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
 
-const LoginScreen = () => {
+const AuthScreen = ({onSubmit}) => {
+
+  const loginRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onSubmit({
+      login: loginRef.current.value,
+      password: passwordRef.current.value,
+    });
+  };
+
   return (
     <div className="page page--gray page--login">
       <Header />
@@ -10,7 +26,7 @@ const LoginScreen = () => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
@@ -35,4 +51,9 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+AuthScreen.propTypes = {
+  onSubmit: propTypes.func.isRequired,
+};
+
+export {AuthScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
