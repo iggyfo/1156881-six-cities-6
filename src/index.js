@@ -12,7 +12,7 @@ import {Provider} from 'react-redux';
 import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {checkAuth} from "./store/api-actions";
-import {AuthorizationStatus, AuthorizationData} from "./const";
+import {AuthorizationStatus} from "./const";
 
 const api = createApi(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))

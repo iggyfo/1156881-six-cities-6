@@ -96,11 +96,6 @@ const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const AuthorizationData = {
-  USER: `simplepeople@gmail.com`,
-  PASS: `12345678`,
-};
-
 const AppRoute = {
   MAIN_SCREEN: `/`,
   LOGIN_SCREEN: `/login`,

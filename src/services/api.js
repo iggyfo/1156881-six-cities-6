@@ -18,7 +18,6 @@ const createApi = () => {
 
   const onFail = (err) => {
     const {response} = err;
-    throw err;
     if (response.status === HttpCode.UNAUTHORIZED) {
       // onUnauthorized();
 

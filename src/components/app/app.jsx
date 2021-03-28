@@ -12,14 +12,14 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({offers, userAuth}) => {
+const App = ({offers}) => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN_SCREEN}>
-          <MainScreen userAuth={userAuth}/>
+          <MainScreen />
         </Route>
         <Route exact path={AppRoute.LOGIN_SCREEN}>
           <LoginScreen />
@@ -27,11 +27,10 @@ const App = ({offers, userAuth}) => {
         <Route exact path={AppRoute.FAVORITES_SCREEN}>
           <FavoritesScreen
             offers={favoriteOffers}
-            userAuth={userAuth}
           />
         </Route>
         <Route exact path="/dev-favorites-empty">
-          <FavoritesEmptyScreen userAuth={userAuth} />
+          <FavoritesEmptyScreen />
         </Route>
         <Route exact path={AppRoute.OFFER_SCREEN} component={PropertyScreen} />
         <Route exact path="/dev-property-not-logged">
