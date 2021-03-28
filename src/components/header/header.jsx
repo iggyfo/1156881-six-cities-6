@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 
 const Header = ({userAuth}) => {
@@ -24,11 +25,10 @@ const Header = ({userAuth}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
+                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.AUTH_SCREEN}>
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   {getSingIn()}
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

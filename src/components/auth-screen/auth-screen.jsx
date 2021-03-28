@@ -1,9 +1,9 @@
 import React, {useRef} from "react";
+import {useHistory} from 'react-router-dom';
 import Header from "../header/header";
 import propTypes from "prop-types";
 import {connect} from "react-redux";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
+import {login} from "../../store/api-actions";
 
 
 const AuthScreen = ({onSubmit}) => {
@@ -29,11 +29,25 @@ const AuthScreen = ({onSubmit}) => {
             <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
+                <input
+                  ref={loginRef}
+                  className="login__input form__input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
+                <input
+                  ref={passwordRef}
+                  className="login__input form__input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
@@ -55,5 +69,11 @@ AuthScreen.propTypes = {
   onSubmit: propTypes.func.isRequired,
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(authData) {
+    dispatch(login(authData));
+  }
+});
+
 export {AuthScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
+export default connect(null, mapDispatchToProps)(AuthScreen);

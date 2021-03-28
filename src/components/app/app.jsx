@@ -21,7 +21,7 @@ const App = ({offers}) => {
         <Route exact path={AppRoute.MAIN_SCREEN}>
           <MainScreen />
         </Route>
-        <Route exact path={AppRoute.LOGIN_SCREEN}>
+        <Route exact path={AppRoute.AUTH_SCREEN}>
           <AuthScreen />
         </Route>
         <Route exact path={AppRoute.FAVORITES_SCREEN}>
