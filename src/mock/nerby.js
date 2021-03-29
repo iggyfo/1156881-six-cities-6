@@ -1,4 +1,4 @@
-export const nearby = [
+export const nearPlaces = [
   {
     "city": {
       "name": `Amsterdam`,

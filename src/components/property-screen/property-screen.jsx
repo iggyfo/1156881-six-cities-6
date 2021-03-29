@@ -3,9 +3,12 @@ import PropertyNewComment from "../property-new-comment/property-new-comment";
 import PropertyGoods from "../property-goods/property-goods";
 import PropertyHost from "../property-host/property-host";
 import PropertyReviewsList from "../property-reviews-list/property-reviews-list";
-import React from "react";
+import LoadingScreen from "../loading-screen/loading-screen";
+import React, {useEffect} from "react";
+import {connect} from "react-redux";
+import {fetchOffer, fetchNearOffers, fetchComments} from "../../store/api-actions";
 import propTypes from "prop-types";
-import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
+import {offerPropsTypes, commentPropsTypes} from "../../props-types";
 import {classNameTypes} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
@@ -13,7 +16,20 @@ import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
+const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded, onLoadData}) => {
+
+  useEffect(() => {
+    if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+      onLoadData(id);
+    }
+  }, [id, isOfferLoaded, isCommentsLoaded, isNearPlacesLoaded]);
+
+  if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
 
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
 
@@ -84,14 +100,14 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
                 description={description}
               />
               <section className="property__reviews reviews">
-                <PropertyReviewsList reviews={reviews}/>
+                <PropertyReviewsList comments={comments}/>
                 <PropertyNewComment />
               </section>
             </div>
           </div>
           <section className="property__map map">
             <Map
-              offers={nearby}
+              offers={nearPlaces}
             />
           </section>
         </section>
@@ -99,7 +115,7 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={nearby} />
+              <OfferList offers={nearPlaces} />
             </div>
           </section>
         </div>
@@ -109,10 +125,33 @@ const PropertyScreen = ({offer, nearby, reviews, userAuth}) => {
 };
 
 PropertyScreen.propTypes = {
-  offer: propTypes.shape(offerPropsTypes).isRequired,
-  nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes)),
+  offer: propTypes.shape(offerPropsTypes),
+  nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
+  comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   userAuth: propTypes.string,
+  id: propTypes.string.isRequired,
+  isNearPlacesLoaded: propTypes.bool.isRequired,
+  isOfferLoaded: propTypes.bool.isRequired,
+  isCommentsLoaded: propTypes.bool.isRequired,
+  onLoadData: propTypes.func.isRequired,
 };
 
-export default PropertyScreen;
+const mapStateToProps = ({offer, comments, nearPlaces, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded}, {match}) => ({
+  offer,
+  comments,
+  nearPlaces,
+  isNearPlacesLoaded,
+  isOfferLoaded,
+  isCommentsLoaded,
+  id: match.params.id,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData(id) {
+    dispatch(fetchOffer(id));
+    dispatch(fetchNearOffers(id));
+    dispatch(fetchComments(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PropertyScreen);

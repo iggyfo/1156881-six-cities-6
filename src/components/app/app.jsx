@@ -1,7 +1,8 @@
 import React from "react";
 import propTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
+import {offerPropsTypes} from "../../props-types";
+import {AppRoute} from "../../const";
 import MainScreen from "../main-screen/main-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
@@ -11,42 +12,27 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 
 
-const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
+const App = ({offers}) => {
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainScreen
-            offers={offers}
-            offerNum={offerNum}
-            userAuth={userAuth}
-          />
+        <Route exact path={AppRoute.MAIN_SCREEN}>
+          <MainScreen />
         </Route>
-        <Route exact path="/login">
+        <Route exact path={AppRoute.LOGIN_SCREEN}>
           <LoginScreen />
         </Route>
-        <Route exact path="/favorites">
+        <Route exact path={AppRoute.FAVORITES_SCREEN}>
           <FavoritesScreen
             offers={favoriteOffers}
-            userAuth={userAuth}
           />
         </Route>
         <Route exact path="/dev-favorites-empty">
-          <FavoritesEmptyScreen userAuth={userAuth} />
+          <FavoritesEmptyScreen />
         </Route>
-        <Route exact path="/offer/:id"
-          render={({match}) => {
-            const currentOffer = offers[match.params.id];
-            return <PropertyScreen
-              offer={currentOffer}
-              nearby={nearby}
-              reviews={reviews}
-              userAuth={userAuth}
-            />;
-          }}
-        />
+        <Route exact path={AppRoute.OFFER_SCREEN} component={PropertyScreen} />
         <Route exact path="/dev-property-not-logged">
           <PropertyNotLoggedScreen />
         </Route>
@@ -60,12 +46,7 @@ const App = ({offers, nearby, offerNum, userAuth, reviews}) => {
 
 App.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-
-  offerNum: propTypes.number.isRequired,
-  userAuth: propTypes.string.isRequired,
   cities: propTypes.arrayOf(propTypes.string),
-  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes))
 };
 
 export default App;

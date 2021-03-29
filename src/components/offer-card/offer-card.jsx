@@ -6,20 +6,24 @@ import {classNameTypes} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
 
 
-const OfferCard = ({offer, handleActiveOfferId}) => {
+const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
 
   const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
   return (
-    <article className="cities__place-card place-card" onMouseEnter={() => {
-      handleActiveOfferId(offer.id);
-    }}>
+    <article className="cities__place-card place-card"
+      onMouseEnter={() => {
+        handleInActiveOfferId(offer.id);
+      }}
+      onMouseOut={() => {
+        handleOutActiveOfferId();
+      }}>
       {isPremium
         ? <OfferMark className={classNameTypes.placeCard} />
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -54,7 +58,8 @@ const OfferCard = ({offer, handleActiveOfferId}) => {
 
 OfferCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
-  handleActiveOfferId: propTypes.func.isRequired,
+  handleInActiveOfferId: propTypes.func.isRequired,
+  handleOutActiveOfferId: propTypes.func.isRequired,
 };
 
 export default OfferCard;

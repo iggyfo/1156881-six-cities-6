@@ -1,20 +1,20 @@
 import React from "react";
 import PropertyReviewItem from "../property-review-item/property-review-item";
 import propTypes from "prop-types";
-import {offerPropsTypes, reviewsPropsTypes} from "../../props-types";
+import {offerPropsTypes, commentPropsTypes} from "../../props-types";
 
 
-const PropertyReviewsList = ({reviews}) => {
+const PropertyReviewsList = ({comments}) => {
 
-  const reviewsAmount = reviews.length;
+  const reviewsAmount = comments.length;
   return (
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviewsAmount}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review) =>
+        {comments.map((userComment) =>
           <PropertyReviewItem
-            key={review.user.id}
-            review={review}
+            key={userComment.user.id}
+            userComment={userComment}
           />
         )}
       </ul>
@@ -23,8 +23,8 @@ const PropertyReviewsList = ({reviews}) => {
 };
 
 PropertyReviewsList.propTypes = {
-  nearby: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  reviews: propTypes.arrayOf(propTypes.shape(reviewsPropsTypes)),
+  nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
+  comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
 };
 
 export default PropertyReviewsList;

@@ -1,6 +1,5 @@
 import {ActionType} from "./action";
-import {offers} from "../mock/offers";
-import {SortType, citiesNames} from "../const";
+import {SortType, citiesNames, AuthorizationStatus} from "../const";
 
 const initialState = {
   currentCity: citiesNames.paris,
@@ -12,9 +11,18 @@ const initialState = {
     citiesNames.hamburg,
     citiesNames.dusseldorf
   ],
-  offers,
+  offers: [],
+  comments: [],
+  nearPlaces: [],
+  favorites: [],
+  offer: null,
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isOffersLoaded: false,
+  isNearPlacesLoaded: false,
+  isOfferLoaded: false,
+  isCommentsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +32,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentCity: action.payload,
       };
-
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isOffersLoaded: true,
+      };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        offer: action.payload,
+        isOfferLoaded: true
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        isCommentsLoaded: true
+      };
+    case ActionType.LOAD_NEAR_OFFERS:
+      return {
+        ...state,
+        nearPlaces: action.payload,
+        isNearPlacesLoaded: true
+      };
     case ActionType.CHANGE_SORT_TYPE:
       return {
         ...state,
@@ -34,6 +65,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeOfferId: action.payload
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
       };
   }
 
