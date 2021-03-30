@@ -1,16 +1,11 @@
 import React from "react";
 import propTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
+import {connect} from "react-redux";
 
 
-const Header = ({userAuth}) => {
-
-  const getSingIn = () => {
-    if (userAuth) {
-      return <span className="header__user-name user__name">{userAuth}</span>;
-    }
-    return <span className="header__login">Sign in</span>;
-  };
+const Header = ({authInfo}) => {
 
   return (
     <header className="header">
@@ -24,11 +19,16 @@ const Header = ({userAuth}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  {getSingIn()}
-                </a>
+                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.AUTH_SCREEN}>
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  <span className="header__user-name user__name">
+                    {
+                      authInfo
+                        ? authInfo.email
+                        : `Sign in`
+                    }
+                  </span>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -39,9 +39,16 @@ const Header = ({userAuth}) => {
 };
 
 Header.propTypes = {
-  userAuth: propTypes.string
+  authInfo: propTypes.shape({
+    email: propTypes.string.isRequired
+  })
 };
 
-export default Header;
+const mapStateToProps = ({authInfo}) => ({
+  authInfo,
+});
+
+export {Header};
+export default connect(mapStateToProps, null)(Header);
 
 

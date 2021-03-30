@@ -98,7 +98,7 @@ const AuthorizationStatus = {
 
 const AppRoute = {
   MAIN_SCREEN: `/`,
-  LOGIN_SCREEN: `/login`,
+  AUTH_SCREEN: `/login`,
   FAVORITES_SCREEN: `/favorites`,
   OFFER_SCREEN: `/offer/:id`,
   NOT_FOUND: `/404`

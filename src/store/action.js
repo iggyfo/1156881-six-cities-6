@@ -9,6 +9,7 @@ export const ActionType = {
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION:`,
+  SET_AUTHORIZATION_INFO: `SET_AUTHORIZATION_INFO`,
 };
 
 export const ActionCreator = {
@@ -50,5 +51,10 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
+  }),
+
+  setAuthInfo: (data) => ({
+    type: ActionType.SET_AUTHORIZATION_INFO,
+    payload: data,
   })
 };
