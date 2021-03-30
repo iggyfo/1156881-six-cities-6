@@ -1,7 +1,13 @@
 import {citiesLocation, SortType} from "./const";
 
 
-const getCurrentCityOffers = (currentCity, offers) => offers.filter((offer) => offer.city.name === currentCity);
+const getCurrentCityOffers = (currentCity, offers) => {
+  if (!offers) {
+    return null;
+  } else {
+    return offers.filter((offer) => offer.city.name === currentCity);
+  }
+};
 
 const getSortedOffers = (currentSort, offers) => {
   let sortedOffers = [];

@@ -1,15 +1,16 @@
 import {ActionCreator} from "./action";
-import {ApiRoute, AuthorizationStatus} from "../const";
+import {ApiRoute, AppRoute, AuthorizationStatus} from "../const";
 
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
+  api.get(ApiRoute.OFFERS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
 );
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${ApiRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+    .catch(() => history.push(AppRoute.NOT_FOUND))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (

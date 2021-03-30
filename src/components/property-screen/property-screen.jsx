@@ -14,23 +14,24 @@ import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
+
+
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded, onLoadData}) => {
+const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, onLoadData}) => {
+  const prevId = id;
 
   useEffect(() => {
-    if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+    if (!offer || !nearPlaces || !comments || prevId !== id) {
       onLoadData(id);
     }
-  }, [id, isOfferLoaded, isCommentsLoaded, isNearPlacesLoaded]);
+  }, [id, offer, nearPlaces, comments]);
 
-  if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+  if (!offer || !nearPlaces || !comments) {
     return (
       <LoadingScreen />
     );
   }
-
-
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
 
   return (
@@ -130,19 +131,13 @@ PropertyScreen.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   userAuth: propTypes.string,
   id: propTypes.string.isRequired,
-  isNearPlacesLoaded: propTypes.bool.isRequired,
-  isOfferLoaded: propTypes.bool.isRequired,
-  isCommentsLoaded: propTypes.bool.isRequired,
   onLoadData: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded}, {match}) => ({
+const mapStateToProps = ({offer, comments, nearPlaces}, {match}) => ({
   offer,
   comments,
   nearPlaces,
-  isNearPlacesLoaded,
-  isOfferLoaded,
-  isCommentsLoaded,
   id: match.params.id,
 });
 
@@ -154,4 +149,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export {PropertyScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyScreen);

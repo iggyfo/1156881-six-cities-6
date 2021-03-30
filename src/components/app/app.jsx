@@ -10,10 +10,10 @@ import PropertyScreen from "../property-screen/property-screen";
 import PropertyNotLoggedScreen from "../property-not-logged-screen/property-not-logged-screen";
 import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
+import PrivateRoute from "../private-route/private-route";
 
 
-const App = ({offers}) => {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+const App = () => {
 
   return (
     <BrowserRouter>
@@ -24,11 +24,11 @@ const App = ({offers}) => {
         <Route exact path={AppRoute.AUTH_SCREEN}>
           <AuthScreen />
         </Route>
-        <Route exact path={AppRoute.FAVORITES_SCREEN}>
-          <FavoritesScreen
-            offers={favoriteOffers}
-          />
-        </Route>
+        <PrivateRoute exact
+          path={AppRoute.FAVORITES_SCREEN}
+          render={() => <FavoritesScreen />}
+        >
+        </PrivateRoute>
         <Route exact path="/dev-favorites-empty">
           <FavoritesEmptyScreen />
         </Route>
