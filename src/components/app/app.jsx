@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import {offerPropsTypes} from "../../props-types";
 import {AppRoute} from "../../const";
 import MainScreen from "../main-screen/main-screen";
@@ -11,12 +11,13 @@ import PropertyNotLoggedScreen from "../property-not-logged-screen/property-not-
 import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
 
 
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.MAIN_SCREEN}>
           <MainScreen />

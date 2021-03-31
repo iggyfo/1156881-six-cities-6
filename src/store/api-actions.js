@@ -10,7 +10,7 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${ApiRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
-    .catch(() => history.push(AppRoute.NOT_FOUND))
+    .catch(() => {})
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (

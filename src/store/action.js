@@ -10,6 +10,7 @@ export const ActionType = {
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION:`,
   SET_AUTHORIZATION_INFO: `SET_AUTHORIZATION_INFO`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
@@ -56,5 +57,10 @@ export const ActionCreator = {
   setAuthInfo: (data) => ({
     type: ActionType.SET_AUTHORIZATION_INFO,
     payload: data,
+  }),
+
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   })
 };
