@@ -10,7 +10,7 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${ApiRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
-    .catch(() => {})
+    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (
@@ -26,11 +26,13 @@ export const fetchNearOffers = (id) => (dispatch, _getState, api) => (
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))
 );
+
+
