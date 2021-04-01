@@ -41,4 +41,10 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))
 );
 
+export const logout = () => (dispatch, _getState, api) => (
+  api.get(ApiRoute.LOGOUT)
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(ApiRoute.LOGIN)))
+);
+
 

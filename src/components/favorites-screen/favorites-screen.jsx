@@ -5,11 +5,11 @@ import {offerPropsTypes} from "../../props-types";
 import Header from "../header/header";
 
 
-const FavoritesScreen = ({offers, userAuth}) => {
+const FavoritesScreen = ({offers}) => {
 
   return (
     <div className="page">
-      <Header userAuth={userAuth} />
+      <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -45,10 +45,7 @@ const FavoritesScreen = ({offers, userAuth}) => {
 };
 
 FavoritesScreen.propTypes = {
-  offers: propTypes.arrayOf(
-      propTypes.shape(offerPropsTypes).isRequired
-  ),
-  userAuth: propTypes.string,
+  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired)
 };
 
 export default FavoritesScreen;

@@ -11,7 +11,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchOffers} from "../../store/api-actions";
 
 
-const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort, onLoadData}) => {
+const MainScreen = ({offers, citiesList, currentCity, currentSort, onLoadData}) => {
 
   useEffect(() => {
     if (!offers) {
@@ -26,7 +26,7 @@ const MainScreen = ({offers, userAuth, citiesList, currentCity, currentSort, onL
   }
   return (
     <React.Fragment>
-      <Header userAuth={userAuth} />
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -66,7 +66,6 @@ MainScreen.propTypes = {
   currentCity: propTypes.string.isRequired,
   currentSort: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
-  userAuth: propTypes.string,
 };
 
 const mapStateToProps = (state) => ({
