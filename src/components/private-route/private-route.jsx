@@ -6,7 +6,6 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 
 
 const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
-  debugger
   return (
     <Route
       path={path}

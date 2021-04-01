@@ -12,7 +12,6 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
-import {nanoid} from "nanoid";
 
 
 const App = () => {

@@ -9,12 +9,11 @@ import {connect} from "react-redux";
 import {fetchOffer, fetchNearOffers, fetchComments} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
-import {AppRoute, AuthorizationStatus, classNameTypes} from "../../const";
+import {AuthorizationStatus, classNameTypes} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
-import {Redirect} from "react-router-dom";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
