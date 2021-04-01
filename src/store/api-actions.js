@@ -18,18 +18,24 @@ export const fetchComments = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadComments(data)))
 );
 
+export const uploadComments = (id, comment) => (dispatch, _getState, api) => (
+  api.post(`${ApiRoute.COMMENTS}/${id}`, comment)
+    .then(() => api.get(`${ApiRoute.COMMENTS}/${id}`)
+      .then(({data}) => dispatch(ActionCreator.loadComments(data))))
+);
+
 export const fetchNearOffers = (id) => (dispatch, _getState, api) => (
-  api.get(`${ApiRoute.OFFERS}/${id}/nearby`)
+  api.get(`${ApiRoute.OFFERS}/${id}${AppRoute.NEAR_BY}`)
     .then(({data}) => dispatch(ActionCreator.loadNearOffers(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(AppRoute.AUTH_SCREEN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(AppRoute.AUTH_SCREEN, {email, password})
     .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))

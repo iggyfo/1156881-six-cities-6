@@ -9,16 +9,17 @@ import {connect} from "react-redux";
 import {fetchOffer, fetchNearOffers, fetchComments} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
-import {classNameTypes} from "../../const";
+import {AppRoute, AuthorizationStatus, classNameTypes} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
+import {Redirect} from "react-router-dom";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, onLoadData}) => {
+const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, onLoadData}) => {
   const prevId = id;
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, onLoadData})
 
   return (
     <div className="page">
-      <Header userAuth={userAuth} />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -101,8 +102,10 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, onLoadData})
                 description={description}
               />
               <section className="property__reviews reviews">
-                <PropertyReviewsList comments={comments}/>
-                <PropertyNewComment />
+                <PropertyReviewsList />
+                {authorizationStatus === AuthorizationStatus.AUTH
+                  ? <PropertyNewComment id={id} />
+                  : ``}
               </section>
             </div>
           </div>
@@ -129,15 +132,16 @@ PropertyScreen.propTypes = {
   offer: propTypes.shape(offerPropsTypes),
   nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
-  userAuth: propTypes.string,
+  authorizationStatus: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces}, {match}) => ({
+const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus}, {match}) => ({
   offer,
   comments,
   nearPlaces,
+  authorizationStatus,
   id: match.params.id,
 });
 

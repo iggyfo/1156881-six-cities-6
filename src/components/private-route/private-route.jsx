@@ -6,6 +6,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 
 
 const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
+  debugger
   return (
     <Route
       path={path}
@@ -28,8 +29,8 @@ PrivateRoute.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({authorizationStatus}) => ({
+  authorizationStatus,
 });
 
 

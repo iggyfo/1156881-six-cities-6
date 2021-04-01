@@ -101,6 +101,7 @@ const AppRoute = {
   AUTH_SCREEN: `/login`,
   FAVORITES_SCREEN: `/favorites`,
   OFFER_SCREEN: `/offer/:id`,
+  NEAR_BY: `/nearby`,
   NOT_FOUND: `/404`
 };
 

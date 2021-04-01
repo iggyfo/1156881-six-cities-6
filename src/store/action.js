@@ -5,6 +5,7 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_OFFER: `LOAD_OFFER`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  UPLOAD_COMMENTS: `UPLOAD_COMMENTS`,
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
@@ -62,5 +63,5 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
-  })
+  }),
 };
