@@ -20,7 +20,11 @@ const Header = ({authInfo}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.AUTH_SCREEN}>
+                <Link className="header__nav-link header__nav-link--profile" to={
+                  authInfo
+                    ? AppRoute.FAVORITES_SCREEN
+                    : AppRoute.AUTH_SCREEN
+                }>
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">
                     {

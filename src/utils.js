@@ -9,6 +9,10 @@ const getCurrentCityOffers = (currentCity, offers) => {
   }
 };
 
+const getFavoritesOffers = (offers) => {
+  return offers.filter((offer) => offer.isFavorite);
+};
+
 const getSortedOffers = (currentSort, offers) => {
   let sortedOffers = [];
   switch (currentSort) {
@@ -123,4 +127,4 @@ const adaptAuthDataToClient = (data) => {
   return adaptedAuthInfo;
 };
 
-export {getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient};
+export {getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers};

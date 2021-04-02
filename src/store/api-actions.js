@@ -31,7 +31,9 @@ export const fetchNearOffers = (id) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(AppRoute.AUTH_SCREEN)
+    .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
@@ -43,6 +45,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGOUT)
+    .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(ApiRoute.LOGIN)))
 );
