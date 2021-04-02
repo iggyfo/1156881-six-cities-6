@@ -5,14 +5,17 @@ import propTypes from "prop-types";
 import {connect} from "react-redux";
 import {uploadComments} from "../../store/api-actions";
 
-const MIN_COMMENT_LENGHT = 50;
-const MAX_COMMENT_LENGHT = 300;
+const CommentLength = {
+  MIN: 50,
+  MAX: 300,
+};
 
 const PropertyNewComment = ({id, onUploadComment}) => {
 
   const formRef = useRef();
   const textareaRef = useRef();
   const submitBtnRef = useRef();
+
   const [comment, setComment] = useState(``);
   const [rating, setRating] = useState(null);
 
@@ -53,8 +56,10 @@ const PropertyNewComment = ({id, onUploadComment}) => {
         <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={
-          comment.length < MIN_COMMENT_LENGHT || comment.length > MAX_COMMENT_LENGHT || rating === null} ref={submitBtnRef}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit"
+          disabled={
+            comment.length < CommentLength.MIN || comment.length > CommentLength.MAX || rating === null
+          } ref={submitBtnRef}>Submit</button>
       </div>
     </form>
   );
