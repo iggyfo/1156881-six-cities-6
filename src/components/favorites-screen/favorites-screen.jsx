@@ -2,7 +2,8 @@ import React from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import Header from "../header/header";
-import FavoriteItem from "../favorite-item/favorite-item";
+import FavoriteList from "../favorite-list/favorite-list";
+import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 import {connect} from "react-redux";
 import {getFavoritesOffers} from "../../utils";
 
@@ -18,20 +19,23 @@ const FavoritesScreen = ({offers, citiesList}) => {
           ? `page__main--favorites-empty`
           : ``
       }`}>
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {citiesList.map((city, index) =>
-                <FavoriteItem
+        <section className={`favorites ${
+          !favoritesOffers
+            ? `favorites--empty`
+            : ``}`}>
+          <div className="page__favorites-container container">
+            {!favoritesOffers
+              ? <FavoritesEmptyScreen />
+              : citiesList.map((city, index) =>
+                <FavoriteList
                   key={index}
                   offers={favoritesOffers}
                   currentCity={city}
                 />
-              )}
-            </ul>
-          </section>
-        </div>
+              )
+            }
+          </div>
+        </section>
       </main>
       <footer className="footer container">
         <a className="footer__logo-link" href="main.html">

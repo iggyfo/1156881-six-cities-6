@@ -10,7 +10,13 @@ const getCurrentCityOffers = (currentCity, offers) => {
 };
 
 const getFavoritesOffers = (offers) => {
-  return offers.filter((offer) => offer.isFavorite);
+  let favoriteOffers = offers.filter((offer) => {
+    return offer.isFavorite;
+  });
+  if (favoriteOffers.length !== 0) {
+    return favoriteOffers;
+  }
+  return null;
 };
 
 const getSortedOffers = (currentSort, offers) => {

@@ -21,7 +21,12 @@ export const fetchComments = (id) => (dispatch, _getState, api) => (
 export const uploadComments = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${ApiRoute.COMMENTS}/${id}`, comment)
     .then(() => api.get(`${ApiRoute.COMMENTS}/${id}`)
-      .then(({data}) => dispatch(ActionCreator.loadComments(data))))
+    .then(({data}) => dispatch(ActionCreator.loadComments(data))))
+);
+
+export const setFavorite = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${ApiRoute.FAVORITES}/${id}/${status}`)
+    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.AUTH_SCREEN)))
 );
 
 export const fetchNearOffers = (id) => (dispatch, _getState, api) => (
