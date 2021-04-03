@@ -6,21 +6,24 @@ import PropertyReviewsList from "../property-reviews-list/property-reviews-list"
 import LoadingScreen from "../loading-screen/loading-screen";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
+import {useParams} from "react-router-dom";
 import {fetchOffer, fetchNearOffers, fetchComments, setFavorite} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
-import {AuthorizationStatus, classNameTypes} from "../../const";
+import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
-import OfferList from "../offer-list/offer-list";
+import NearPlacesList from "../near-places-list/near-places-list";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite}) => {
+const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite}) => {
+  const {id} = useParams();
+
   useEffect(() => {
-    if (!offer || !nearPlaces || !comments) {
+    if (!offer || !nearPlaces || !comments || offer.id !== +id) {
       onLoadData(id);
     }
   }, [id, offer, nearPlaces, comments]);
@@ -79,7 +82,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, o
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {OfferType[offer.type.toUpperCase()]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
@@ -124,7 +127,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, o
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={nearPlaces} />
+              <NearPlacesList offers={nearPlaces}/>
             </div>
           </section>
         </div>
@@ -138,17 +141,15 @@ PropertyScreen.propTypes = {
   nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   authorizationStatus: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
   onOfferFavorite: propTypes.func.isRequired
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus}, {match}) => ({
+const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus}) => ({
   offer,
   comments,
   nearPlaces,
   authorizationStatus,
-  id: match.params.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

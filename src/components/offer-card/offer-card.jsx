@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
-import {classNameTypes} from "../../const";
+import {classNameTypes, OfferType} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
 import {setFavorite} from "../../store/api-actions";
 import {connect} from "react-redux";
@@ -57,7 +57,7 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId, onOffe
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{OfferType[type.toUpperCase()]}</p>
       </div>
     </article>
   );

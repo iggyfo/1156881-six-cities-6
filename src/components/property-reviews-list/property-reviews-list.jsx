@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 
 
 const PropertyReviewsList = ({comments}) => {
+
   return (
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>

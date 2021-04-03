@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 const Cities = ({city, changeCity, currentCity}) => {
 
   return (
-    <li className="locations__item " onClick={(evt) => {
+    <li className="locations__item" onClick={(evt) => {
       evt.preventDefault();
       changeCity(city);
     }}>

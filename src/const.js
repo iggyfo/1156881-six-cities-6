@@ -105,6 +105,13 @@ const AppRoute = {
   NOT_FOUND: `/404`
 };
 
+export const OfferType = {
+  ROOM: `Private Room`,
+  APARTMENT: `Apartment`,
+  HOTEL: `Hotel`,
+  HOUSE: `House`
+};
+
 const ApiRoute = {
   LOGIN: `/login`,
   LOGOUT: `/logout`,
