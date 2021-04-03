@@ -82,7 +82,7 @@ const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoa
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {OfferType[offer.type.toUpperCase()]}
+                  {OfferType[type.toUpperCase()]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
