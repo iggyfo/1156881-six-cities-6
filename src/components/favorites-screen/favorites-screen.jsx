@@ -15,24 +15,18 @@ const FavoritesScreen = ({offers, citiesList}) => {
     <div className="page">
       <Header />
       <main className={`page__main page__main--favorites ${
-        !favoritesOffers
-          ? `page__main--favorites-empty`
-          : ``
+        favoritesOffers
+          ? ``
+          : `page__main--favorites-empty`
       }`}>
         <section className={`favorites ${
-          !favoritesOffers
+          favoritesOffers
             ? `favorites--empty`
             : ``}`}>
           <div className="page__favorites-container container">
-            {!favoritesOffers
-              ? <FavoritesEmptyScreen />
-              : citiesList.map((city, index) =>
-                <FavoriteList
-                  key={index}
-                  offers={favoritesOffers}
-                  currentCity={city}
-                />
-              )
+            {favoritesOffers
+              ? <FavoriteList favoriteOffers={favoritesOffers} currentCity={citiesList}/>
+              : <FavoritesEmptyScreen />
             }
           </div>
         </section>

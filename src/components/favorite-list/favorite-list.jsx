@@ -1,42 +1,30 @@
 import React from "react";
-import FavoriteCard from "../favorite-card/favorite-card";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
-import {getCurrentCityOffers} from "../../utils";
+import {getCitiesWithFavoriteOffers} from "../../utils";
+import FavoriteItem from "../favorite-item/favorite-item";
 
 
-const FavoriteList = ({offers, currentCity}) => {
+const FavoriteList = ({favoriteOffers}) => {
 
-  const currentCityOffers = getCurrentCityOffers(currentCity, offers);
-
+  const citiesList = getCitiesWithFavoriteOffers(favoriteOffers);
   return (
     <>
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        <li className="favorites__locations-items">
-          <div className="favorites__locations locations locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>{currentCity}</span>
-              </a>
-            </div>
-          </div>
-          <div className="favorites__places">
-            {currentCityOffers.map((offer) =>
-              <FavoriteCard
-                key={offer.id}
-                offer={offer}
-              />)}
-          </div>
-        </li>
+        {citiesList.map((city, index) =>
+          <FavoriteItem
+            key={index}
+            offers={favoriteOffers}
+            currentCity={city}
+          />)}
       </ul>
     </>
   );
 };
 
 FavoriteList.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
-  currentCity: propTypes.string.isRequired,
+  favoriteOffers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
 };
 
 export default FavoriteList;

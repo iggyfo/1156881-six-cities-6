@@ -6,7 +6,7 @@ import PropertyReviewsList from "../property-reviews-list/property-reviews-list"
 import LoadingScreen from "../loading-screen/loading-screen";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {fetchOffer, fetchNearOffers, fetchComments} from "../../store/api-actions";
+import {fetchOffer, fetchNearOffers, fetchComments, setFavorite} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
 import {AuthorizationStatus, classNameTypes} from "../../const";
@@ -18,11 +18,9 @@ import OfferList from "../offer-list/offer-list";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, onLoadData}) => {
-  const prevId = id;
-
+const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite}) => {
   useEffect(() => {
-    if (!offer || !nearPlaces || !comments || prevId !== id) {
+    if (!offer || !nearPlaces || !comments) {
       onLoadData(id);
     }
   }, [id, offer, nearPlaces, comments]);
@@ -33,6 +31,10 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, o
     );
   }
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
+  const handleFavoriteClick = (evt) => {
+    evt.currentTarget.classList.toggle(`property__bookmark-button--active`);
+    onOfferFavorite(id, Number(!isFavorite));
+  };
 
   return (
     <div className="page">
@@ -57,7 +59,11 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, authorizationStatus, o
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
+                <button className={`property__bookmark-button ${isFavorite
+                  ? `property__bookmark-button--active`
+                  : ``} button`}
+                onClick={handleFavoriteClick}
+                type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -134,6 +140,7 @@ PropertyScreen.propTypes = {
   authorizationStatus: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
+  onOfferFavorite: propTypes.func.isRequired
 };
 
 const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus}, {match}) => ({
@@ -149,6 +156,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOffer(id));
     dispatch(fetchNearOffers(id));
     dispatch(fetchComments(id));
+  },
+  onOfferFavorite(id, favoriteStatus) {
+    dispatch(setFavorite(id, favoriteStatus));
   },
 });
 

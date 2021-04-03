@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React from "react";
 import propTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
@@ -14,7 +14,6 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId, onOffe
 
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`place-card__bookmark-button--active`);
-    console.log(evt.currentTarget.classList);
     onOfferFavorite(id, Number(!isFavorite));
   };
 

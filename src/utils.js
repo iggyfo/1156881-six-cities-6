@@ -9,8 +9,14 @@ const getCurrentCityOffers = (currentCity, offers) => {
   }
 };
 
+const getCitiesWithFavoriteOffers = (favoriteOffers) => {
+  let cities = new Set();
+  favoriteOffers.map((offer) => cities.add(offer.city.name))
+  return Array.from(cities);
+};
+
 const getFavoritesOffers = (offers) => {
-  let favoriteOffers = offers.filter((offer) => {
+  const favoriteOffers = offers.filter((offer) => {
     return offer.isFavorite;
   });
   if (favoriteOffers.length !== 0) {
@@ -133,4 +139,4 @@ const adaptAuthDataToClient = (data) => {
   return adaptedAuthInfo;
 };
 
-export {getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers};
+export {getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers};
