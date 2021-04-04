@@ -7,7 +7,7 @@ import {offerPropsTypes} from "../../props-types";
 import {connect} from "react-redux";
 
 
-const CITY_ZOOM = 12;
+const CITY_ZOOM = 13;
 const ICON_SIZE = [27, 39];
 
 const Map = ({offers, currentCity, activeOfferId}) => {

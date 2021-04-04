@@ -1,39 +1,35 @@
 import React from "react";
-import FavoriteCard from "../favorite-card/favorite-card";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import Header from "../header/header";
+import FavoriteList from "../favorite-list/favorite-list";
+import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
+import {connect} from "react-redux";
+import {getFavoritesOffers} from "../../utils";
 
 
-const FavoritesScreen = ({offers, userAuth}) => {
+const FavoritesScreen = ({offers, citiesList}) => {
 
+  const favoritesOffers = getFavoritesOffers(offers);
   return (
     <div className="page">
-      <Header userAuth={userAuth} />
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {offers.map((offer) =>
-                    <FavoriteCard
-                      key={offer.id}
-                      offer={offer}
-                    />)}
-                </div>
-              </li>
-            </ul>
-          </section>
-        </div>
+      <Header />
+      <main className={`page__main page__main--favorites ${
+        favoritesOffers
+          ? ``
+          : `page__main--favorites-empty`
+      }`}>
+        <section className={`favorites ${
+          favoritesOffers
+            ? `favorites--empty`
+            : ``}`}>
+          <div className="page__favorites-container container">
+            {favoritesOffers
+              ? <FavoriteList favoriteOffers={favoritesOffers} currentCity={citiesList}/>
+              : <FavoritesEmptyScreen />
+            }
+          </div>
+        </section>
       </main>
       <footer className="footer container">
         <a className="footer__logo-link" href="main.html">
@@ -45,10 +41,16 @@ const FavoritesScreen = ({offers, userAuth}) => {
 };
 
 FavoritesScreen.propTypes = {
-  offers: propTypes.arrayOf(
-      propTypes.shape(offerPropsTypes).isRequired
-  ),
-  userAuth: propTypes.string,
+  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
+  currentCity: propTypes.string.isRequired,
+  citiesList: propTypes.arrayOf(propTypes.string).isRequired
 };
 
-export default FavoritesScreen;
+const mapStateToProps = ({offers, currentCity, citiesList}) => ({
+  offers,
+  currentCity,
+  citiesList,
+});
+
+export {FavoritesScreen};
+export default connect(mapStateToProps, null)(FavoritesScreen);

@@ -13,6 +13,9 @@ import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
+import {redirect} from "./store/middlewares/redirect";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const api = createApi(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
@@ -21,7 +24,8 @@ const api = createApi(
 const store = createStore(
     reducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
@@ -33,6 +37,17 @@ ReactDOM.render(
         offers={offers}
         nearPlaces={nearPlaces}
         reviews={reviews}
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </Provider>,
     document.querySelector(`#root`)

@@ -6,36 +6,67 @@ import PropertyReviewsList from "../property-reviews-list/property-reviews-list"
 import LoadingScreen from "../loading-screen/loading-screen";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {fetchOffer, fetchNearOffers, fetchComments} from "../../store/api-actions";
+import {useParams} from "react-router-dom";
+import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
-import {classNameTypes} from "../../const";
+import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
-import OfferList from "../offer-list/offer-list";
+import NearPlacesList from "../near-places-list/near-places-list";
+import {ActionCreator} from "../../store/action";
+
+
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded, onLoadData}) => {
+const PropertyScreen = ({
+  offer,
+  nearPlaces,
+  comments,
+  authorizationStatus,
+  onLoadData,
+  onOfferFavorite,
+  handleInActiveOfferId,
+  handleOutActiveOfferId,
+  handleChangeCity,
+}) => {
 
+  const {id} = useParams();
   useEffect(() => {
-    if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+    if (!offer || !nearPlaces || !comments || offer.id !== +id) {
       onLoadData(id);
     }
-  }, [id, isOfferLoaded, isCommentsLoaded, isNearPlacesLoaded]);
+    if (offer) {
+      handleInActiveOfferId(+id);
+      handleChangeCity(offer.city.name);
+    }
+    return () => {
+      handleOutActiveOfferId();
+    };
+  }, [id, offer, nearPlaces, comments]);
 
-  if (!isOfferLoaded && !isCommentsLoaded && !isNearPlacesLoaded) {
+  if (!offer || !nearPlaces || !comments) {
     return (
       <LoadingScreen />
     );
   }
-
-
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
+  const handleFavoriteClick = (evt) => {
+    evt.currentTarget.classList.toggle(`property__bookmark-button--active`);
+    onOfferFavorite(id, Number(!isFavorite));
+  };
+
+  const getOffersForMap = () => {
+    return [
+      ...nearPlaces,
+      offer
+    ];
+  };
 
   return (
     <div className="page">
-      <Header userAuth={userAuth} />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -56,7 +87,11 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
+                <button className={`property__bookmark-button ${isFavorite
+                  ? `property__bookmark-button--active`
+                  : ``} button`}
+                onClick={handleFavoriteClick}
+                type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -72,7 +107,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {OfferType[type.toUpperCase()]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
@@ -100,14 +135,17 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
                 description={description}
               />
               <section className="property__reviews reviews">
-                <PropertyReviewsList comments={comments}/>
-                <PropertyNewComment />
+                <PropertyReviewsList />
+                {authorizationStatus === AuthorizationStatus.AUTH
+                  ? <PropertyNewComment id={id} />
+                  : ``}
               </section>
             </div>
           </div>
           <section className="property__map map">
             <Map
-              offers={nearPlaces}
+              offers={getOffersForMap()}
+              activeOfferId={offer.id}
             />
           </section>
         </section>
@@ -115,7 +153,7 @@ const PropertyScreen = ({id, offer, nearPlaces, comments, userAuth, isNearPlaces
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={nearPlaces} />
+              <NearPlacesList offers={nearPlaces}/>
             </div>
           </section>
         </div>
@@ -128,22 +166,20 @@ PropertyScreen.propTypes = {
   offer: propTypes.shape(offerPropsTypes),
   nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
-  userAuth: propTypes.string,
-  id: propTypes.string.isRequired,
-  isNearPlacesLoaded: propTypes.bool.isRequired,
-  isOfferLoaded: propTypes.bool.isRequired,
-  isCommentsLoaded: propTypes.bool.isRequired,
+  authorizationStatus: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
+  onOfferFavorite: propTypes.func.isRequired,
+  handleInActiveOfferId: propTypes.func.isRequired,
+  handleOutActiveOfferId: propTypes.func.isRequired,
+  handleChangeCity: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces, isNearPlacesLoaded, isOfferLoaded, isCommentsLoaded}, {match}) => ({
+const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus, activeOfferId}) => ({
   offer,
   comments,
   nearPlaces,
-  isNearPlacesLoaded,
-  isOfferLoaded,
-  isCommentsLoaded,
-  id: match.params.id,
+  authorizationStatus,
+  activeOfferId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -152,6 +188,20 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchNearOffers(id));
     dispatch(fetchComments(id));
   },
+  onOfferFavorite(id, favoriteStatus) {
+    dispatch(setFavorite(id, favoriteStatus));
+    dispatch(fetchOffers());
+  },
+  handleInActiveOfferId(offerId) {
+    dispatch(ActionCreator.changeActiveOfferId(offerId));
+  },
+  handleOutActiveOfferId() {
+    dispatch(ActionCreator.changeActiveOfferId(null));
+  },
+  handleChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
 });
 
+export {PropertyScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyScreen);

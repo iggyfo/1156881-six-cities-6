@@ -4,7 +4,9 @@ const BACKEND_URL = `https://6.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
 
 const HttpCode = {
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404
 };
 
 const createApi = () => {
@@ -19,10 +21,6 @@ const createApi = () => {
   const onFail = (err) => {
     const {response} = err;
     if (response.status === HttpCode.UNAUTHORIZED) {
-      // onUnauthorized();
-
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации — это особый случай и важно дать понять приложению, что запрос был неудачным.
       throw err;
     }
   };
@@ -32,4 +30,4 @@ const createApi = () => {
   return api;
 };
 
-export {createApi};
+export {createApi, HttpCode};

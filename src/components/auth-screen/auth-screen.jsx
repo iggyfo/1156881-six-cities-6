@@ -1,26 +1,61 @@
-import React, {useRef} from "react";
-import {useHistory} from 'react-router-dom';
+import React, {useRef, useState, useEffect} from "react";
+import {Redirect} from 'react-router-dom';
 import Header from "../header/header";
 import propTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
-import {AppRoute} from "../../const";
+import {AppRoute, AuthorizationStatus} from "../../const";
+import {toast} from "react-toastify";
 
 
-const AuthScreen = ({onSubmit}) => {
-
+const AuthScreen = ({onSubmit, authorizationStatus}) => {
+  const [validEmail, setValidEmail] = useState(true);
+  const notify = () => toast(`Incorrect Email`);
+  const notifyPassword = () => toast(`Password can't be empty`);
   const loginRef = useRef();
   const passwordRef = useRef();
-  const history = useHistory();
+
+  const handleBlur = () => {
+    if (loginRef.current.value === ``) {
+      setValidEmail(false);
+    }
+    const RE = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+    setValidEmail(RE.test(loginRef.current.value));
+  };
+
+  const handleFocus = () => {
+    setValidEmail(true);
+  };
+
+  useEffect(() => {
+    if (!validEmail) {
+      notify();
+    }
+  }, [validEmail]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if (loginRef.current.value === `` || passwordRef.current.value === ``) {
+      if (loginRef.current.value === ``) {
+        setValidEmail(false);
+      }
+
+      if (passwordRef.current.value === ``) {
+        notifyPassword();
+      }
+
+      return false;
+    }
     onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-    history.push(AppRoute.MAIN_SCREEN);
+    return true;
   };
+
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return <Redirect to={AppRoute.MAIN_SCREEN} />;
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -34,6 +69,8 @@ const AuthScreen = ({onSubmit}) => {
                 <label className="visually-hidden">E-mail</label>
                 <input
                   ref={loginRef}
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -53,7 +90,6 @@ const AuthScreen = ({onSubmit}) => {
                 />
               </div>
               <button
-                // onClick={() => history.push(AppRoute.MAIN_SCREEN)}
                 className="login__submit form__submit button"
                 type="submit">
                 Sign in
@@ -75,7 +111,12 @@ const AuthScreen = ({onSubmit}) => {
 
 AuthScreen.propTypes = {
   onSubmit: propTypes.func.isRequired,
+  authorizationStatus: propTypes.string.isRequired,
 };
+
+const mapStateToProps = ({authorizationStatus}) => ({
+  authorizationStatus,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
@@ -84,4 +125,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {AuthScreen};
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);

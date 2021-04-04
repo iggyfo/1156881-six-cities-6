@@ -2,13 +2,21 @@ import React from "react";
 import propTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
-import {classNameTypes} from "../../const";
+import {classNameTypes, OfferType} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
+import {setFavorite, fetchOffers} from "../../store/api-actions";
+import {connect} from "react-redux";
 
 
-const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
+const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId, onOfferFavorite}) => {
 
   const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
+
+  const handleFavoriteClick = (evt) => {
+    evt.currentTarget.classList.toggle(`place-card__bookmark-button--active`);
+    onOfferFavorite(id, Number(!isFavorite));
+  };
+
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={() => {
@@ -31,9 +39,9 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button${isFavorite
-            ? `--active`
-            : null} button`} type="button">
+          <button onClick={handleFavoriteClick} className={`place-card__bookmark-button ${isFavorite
+            ? `place-card__bookmark-button--active`
+            : ``} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -49,7 +57,7 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{OfferType[type.toUpperCase()]}</p>
       </div>
     </article>
   );
@@ -60,6 +68,15 @@ OfferCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
   handleInActiveOfferId: propTypes.func.isRequired,
   handleOutActiveOfferId: propTypes.func.isRequired,
+  onOfferFavorite: propTypes.func.isRequired
 };
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  onOfferFavorite(id, favoriteStatus) {
+    dispatch(setFavorite(id, favoriteStatus));
+    dispatch(fetchOffers());
+  }
+});
+
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);

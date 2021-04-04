@@ -1,8 +1,3 @@
-const Offer = {
-  MIN_OFFERS: 10,
-  MAX_OFFERS: 478,
-};
-
 const Rating = [
   {
     id: `5-star`,
@@ -101,7 +96,15 @@ const AppRoute = {
   AUTH_SCREEN: `/login`,
   FAVORITES_SCREEN: `/favorites`,
   OFFER_SCREEN: `/offer/:id`,
+  NEAR_BY: `/nearby`,
   NOT_FOUND: `/404`
+};
+
+export const OfferType = {
+  ROOM: `Private Room`,
+  APARTMENT: `Apartment`,
+  HOTEL: `Hotel`,
+  HOUSE: `House`
 };
 
 const ApiRoute = {
@@ -112,4 +115,4 @@ const ApiRoute = {
   FAVORITES: `/favorite`
 };
 
-export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
+export {classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
