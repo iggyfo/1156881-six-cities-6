@@ -29,7 +29,6 @@ export const uploadComments = (id, comment) => (dispatch, _getState, api) => (
       if (error.response.status === HttpCode.BAD_REQUEST) {
         notify();
       }
-      return error;
     })
 );
 
@@ -59,7 +58,6 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       if (error.response.status === HttpCode.BAD_REQUEST) {
         notify();
       }
-      return error;
     })
 );
 
