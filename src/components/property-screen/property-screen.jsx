@@ -15,16 +15,17 @@ import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import NearPlacesList from "../near-places-list/near-places-list";
+import {ActionCreator} from "../../store/action";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite}) => {
+const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite, handleInActiveOfferId}) => {
   const {id} = useParams();
-
   useEffect(() => {
     if (!offer || !nearPlaces || !comments || offer.id !== +id) {
       onLoadData(id);
+      handleInActiveOfferId(+id);
     }
   }, [id, offer, nearPlaces, comments]);
 
@@ -37,6 +38,13 @@ const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoa
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`property__bookmark-button--active`);
     onOfferFavorite(id, Number(!isFavorite));
+  };
+
+  const getOffersForMap = () => {
+    return [
+      ...nearPlaces,
+      offer
+    ];
   };
 
   return (
@@ -119,7 +127,8 @@ const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoa
           </div>
           <section className="property__map map">
             <Map
-              offers={nearPlaces}
+              offers={getOffersForMap()}
+              activeOfferId={offer.id}
             />
           </section>
         </section>
@@ -142,14 +151,16 @@ PropertyScreen.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
   authorizationStatus: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
-  onOfferFavorite: propTypes.func.isRequired
+  onOfferFavorite: propTypes.func.isRequired,
+  handleInActiveOfferId: propTypes.func.isRequired
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus}) => ({
+const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus, activeOfferId}) => ({
   offer,
   comments,
   nearPlaces,
   authorizationStatus,
+  activeOfferId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -160,6 +171,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onOfferFavorite(id, favoriteStatus) {
     dispatch(setFavorite(id, favoriteStatus));
+  },
+  handleInActiveOfferId(offerId) {
+    dispatch(ActionCreator.changeActiveOfferId(offerId));
   },
 });
 
