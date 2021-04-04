@@ -15,6 +15,10 @@ const PropertyHost = ({host, description}) => {
           <img className="property__avatar user__avatar" src={avatarUrl} width={74} height={74} alt="Host avatar" />
         </div>
         <span className="property__user-name">{name}</span>
+        {isPro
+          ? <span className="property__user-status">Pro</span>
+          : ``
+        }
       </div>
       <div className="property__description">
         <p className="property__text">{description}</p>
