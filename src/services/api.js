@@ -30,4 +30,4 @@ const createApi = () => {
   return api;
 };
 
-export {createApi};
+export {createApi, HttpCode};

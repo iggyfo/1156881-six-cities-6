@@ -3,6 +3,8 @@ import {ApiRoute, AppRoute, AuthorizationStatus} from "../const";
 import {toast} from 'react-toastify';
 import {HttpCode} from "../services/api";
 
+const notify = () => toast(`Неправильный запрос. Проверьте данные.`);
+
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.OFFERS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
@@ -23,6 +25,12 @@ export const uploadComments = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${ApiRoute.COMMENTS}/${id}`, comment)
     .then(() => api.get(`${ApiRoute.COMMENTS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data))))
+    .catch(function (error) {
+      if (error.response.status === HttpCode.BAD_REQUEST) {
+        notify();
+      }
+      return error;
+    })
 );
 
 export const setFavorite = (id, status) => (dispatch, _getState, api) => (
@@ -47,6 +55,12 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))
+    .catch(function (error) {
+      if (error.response.status === HttpCode.BAD_REQUEST) {
+        notify();
+      }
+      return error;
+    })
 );
 
 export const logout = () => (dispatch, _getState, api) => (
