@@ -20,7 +20,18 @@ import {ActionCreator} from "../../store/action";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite, handleInActiveOfferId, handleOutActiveOfferId}) => {
+const PropertyScreen = ({
+  offer,
+  nearPlaces,
+  comments,
+  authorizationStatus,
+  onLoadData,
+  onOfferFavorite,
+  handleInActiveOfferId,
+  handleOutActiveOfferId,
+  handleChangeCity,
+}) => {
+
   const {id} = useParams();
   useEffect(() => {
     if (!offer || !nearPlaces || !comments || offer.id !== +id) {
@@ -28,6 +39,7 @@ const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoa
     }
     if (offer) {
       handleInActiveOfferId(+id);
+      handleChangeCity(offer.city.name);
     }
     return () => {
       handleOutActiveOfferId();
@@ -157,7 +169,9 @@ PropertyScreen.propTypes = {
   authorizationStatus: propTypes.string.isRequired,
   onLoadData: propTypes.func.isRequired,
   onOfferFavorite: propTypes.func.isRequired,
-  handleInActiveOfferId: propTypes.func.isRequired
+  handleInActiveOfferId: propTypes.func.isRequired,
+  handleOutActiveOfferId: propTypes.func.isRequired,
+  handleChangeCity: propTypes.func.isRequired,
 };
 
 const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus, activeOfferId}) => ({
@@ -182,6 +196,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleOutActiveOfferId() {
     dispatch(ActionCreator.changeActiveOfferId(null));
+  },
+  handleChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
   },
 });
 

@@ -1,4 +1,5 @@
 import {citiesLocation, SortType} from "./const";
+import dayjs from "dayjs";
 
 
 const getCurrentCityOffers = (currentCity, offers) => {
@@ -42,6 +43,10 @@ const getSortedOffers = (currentSort, offers) => {
   }
   return sortedOffers;
 };
+
+const getSortedComments = (a, b) => {
+  dayjs(b.date).diff(dayjs(a.date));
+}
 
 const getCitiesCoords = (currentCity) => {
   return [citiesLocation[currentCity.toLowerCase()].latitude, citiesLocation[currentCity.toLowerCase()].longitude];
@@ -139,4 +144,4 @@ const adaptAuthDataToClient = (data) => {
   return adaptedAuthInfo;
 };
 
-export {getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers};
+export {getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers, getSortedComments};

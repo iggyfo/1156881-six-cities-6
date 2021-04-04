@@ -1,8 +1,3 @@
-const Offer = {
-  MIN_OFFERS: 10,
-  MAX_OFFERS: 478,
-};
-
 const Rating = [
   {
     id: `5-star`,
@@ -120,4 +115,4 @@ const ApiRoute = {
   FAVORITES: `/favorite`
 };
 
-export {Offer, classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
+export {classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
