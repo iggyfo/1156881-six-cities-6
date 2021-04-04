@@ -55,7 +55,7 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
     return <Redirect to={AppRoute.MAIN_SCREEN} />;
-  };
+  }
 
   return (
     <div className="page page--gray page--login">

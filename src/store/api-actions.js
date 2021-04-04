@@ -1,13 +1,15 @@
 import {ActionCreator} from "./action";
 import {ApiRoute, AppRoute, AuthorizationStatus} from "../const";
-import {toast} from 'react-toastify';
+import {getErrorNotify} from "../utils";
 import {HttpCode} from "../services/api";
 
-const notify = () => toast(`Неправильный запрос. Проверьте данные.`);
+
+const ERROR_MESSAGE = `Неправильный запрос. Проверьте данные.`;
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.OFFERS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+    .catch(() => {})
 );
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
@@ -19,17 +21,14 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => (
 export const fetchComments = (id) => (dispatch, _getState, api) => (
   api.get(`${ApiRoute.COMMENTS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+    .catch(() => getErrorNotify(ERROR_MESSAGE))
 );
 
 export const uploadComments = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${ApiRoute.COMMENTS}/${id}`, comment)
     .then(() => api.get(`${ApiRoute.COMMENTS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data))))
-    .catch(function (error) {
-      if (error.response.status === HttpCode.BAD_REQUEST) {
-        notify();
-      }
-    })
+    .catch(() => getErrorNotify(ERROR_MESSAGE))
 );
 
 export const setFavorite = (id, status) => (dispatch, _getState, api) => (
@@ -54,9 +53,9 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN_SCREEN)))
-    .catch(function (error) {
-      if (error.response.status === HttpCode.BAD_REQUEST) {
-        notify();
+    .catch(({response}) => {
+      if (response.status === HttpCode.BAD_REQUEST) {
+        getErrorNotify(ERROR_MESSAGE);
       }
     })
 );

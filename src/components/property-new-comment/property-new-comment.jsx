@@ -3,7 +3,8 @@ import RatingStars from "../rating-stars/rating-stars";
 import {Rating} from "../../const";
 import propTypes from "prop-types";
 import {connect} from "react-redux";
-import {uploadComments} from "../../store/api-actions";
+import {uploadComments, fetchComments} from "../../store/api-actions";
+
 
 const CommentLength = {
   MIN: 50,
@@ -74,6 +75,7 @@ const mapStateToProps = ({onUploadComment}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onUploadComment(id, comment) {
     dispatch(uploadComments(id, comment));
+    dispatch(fetchComments(id));
   }
 });
 

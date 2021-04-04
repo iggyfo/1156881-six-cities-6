@@ -1,6 +1,18 @@
 import {citiesLocation, SortType} from "./const";
 import dayjs from "dayjs";
+import {toast} from 'react-toastify';
 
+const getErrorNotify = (message) => {
+  toast.error(message, {
+    position: `top-center`,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
 
 const getCurrentCityOffers = (currentCity, offers) => {
   if (!offers) {
@@ -12,7 +24,7 @@ const getCurrentCityOffers = (currentCity, offers) => {
 
 const getCitiesWithFavoriteOffers = (favoriteOffers) => {
   let cities = new Set();
-  favoriteOffers.map((offer) => cities.add(offer.city.name))
+  favoriteOffers.map((offer) => cities.add(offer.city.name));
   return Array.from(cities);
 };
 
@@ -46,7 +58,7 @@ const getSortedOffers = (currentSort, offers) => {
 
 const getSortedComments = (a, b) => {
   dayjs(b.date).diff(dayjs(a.date));
-}
+};
 
 const getCitiesCoords = (currentCity) => {
   return [citiesLocation[currentCity.toLowerCase()].latitude, citiesLocation[currentCity.toLowerCase()].longitude];
@@ -144,4 +156,4 @@ const adaptAuthDataToClient = (data) => {
   return adaptedAuthInfo;
 };
 
-export {getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers, getSortedComments};
+export {getErrorNotify, getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers, getSortedComments};

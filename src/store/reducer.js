@@ -14,7 +14,6 @@ const initialState = {
   offers: null,
   comments: null,
   nearPlaces: null,
-  favorites: null,
   offer: null,
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,
