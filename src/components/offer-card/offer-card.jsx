@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {offerPropsTypes} from "../../props-types";
 import {classNameTypes, OfferType} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
-import {setFavorite} from "../../store/api-actions";
+import {setFavorite, fetchOffers} from "../../store/api-actions";
 import {connect} from "react-redux";
 
 
@@ -74,6 +74,7 @@ OfferCard.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onOfferFavorite(id, favoriteStatus) {
     dispatch(setFavorite(id, favoriteStatus));
+    dispatch(fetchOffers());
   }
 });
 

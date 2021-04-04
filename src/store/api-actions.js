@@ -1,6 +1,7 @@
 import {ActionCreator} from "./action";
 import {ApiRoute, AppRoute, AuthorizationStatus} from "../const";
-
+import {toast} from 'react-toastify';
+import {HttpCode} from "../services/api";
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.OFFERS)
@@ -50,7 +51,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGOUT)
-    .then(({data}) => dispatch(ActionCreator.setAuthInfo(data)))
+    .then(() => dispatch(ActionCreator.setAuthInfo(null)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(ApiRoute.LOGIN)))
 );

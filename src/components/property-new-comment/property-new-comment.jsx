@@ -13,8 +13,6 @@ const CommentLength = {
 const PropertyNewComment = ({id, onUploadComment}) => {
 
   const formRef = useRef();
-  const textareaRef = useRef();
-  const submitBtnRef = useRef();
 
   const [comment, setComment] = useState(``);
   const [rating, setRating] = useState(null);
@@ -50,7 +48,6 @@ const PropertyNewComment = ({id, onUploadComment}) => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={``}
-        ref={textareaRef}
         onChange={handleCommentInput} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -59,7 +56,7 @@ const PropertyNewComment = ({id, onUploadComment}) => {
         <button className="reviews__submit form__submit button" type="submit"
           disabled={
             comment.length < CommentLength.MIN || comment.length > CommentLength.MAX || rating === null
-          } ref={submitBtnRef}>Submit</button>
+          }>Submit</button>
       </div>
     </form>
   );

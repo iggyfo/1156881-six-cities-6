@@ -7,7 +7,7 @@ import LoadingScreen from "../loading-screen/loading-screen";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
-import {fetchOffer, fetchNearOffers, fetchComments, setFavorite} from "../../store/api-actions";
+import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} from "../../store/api-actions";
 import propTypes from "prop-types";
 import {offerPropsTypes, commentPropsTypes} from "../../props-types";
 import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
@@ -190,6 +190,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onOfferFavorite(id, favoriteStatus) {
     dispatch(setFavorite(id, favoriteStatus));
+    dispatch(fetchOffers());
   },
   handleInActiveOfferId(offerId) {
     dispatch(ActionCreator.changeActiveOfferId(offerId));
