@@ -9,7 +9,7 @@ import {offers} from "./mock/offers";
 import {nearPlaces} from "./mock/nerby";
 import {reviews} from "./mock/reviews";
 import {Provider} from 'react-redux';
-import {reducer} from './store/reducer';
+import {rootReducer} from './store/root-reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
@@ -22,7 +22,7 @@ const api = createApi(
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api)),
         applyMiddleware(redirect)
