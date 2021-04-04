@@ -20,13 +20,18 @@ import {ActionCreator} from "../../store/action";
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite, handleInActiveOfferId}) => {
+const PropertyScreen = ({offer, nearPlaces, comments, authorizationStatus, onLoadData, onOfferFavorite, handleInActiveOfferId, handleOutActiveOfferId}) => {
   const {id} = useParams();
   useEffect(() => {
     if (!offer || !nearPlaces || !comments || offer.id !== +id) {
       onLoadData(id);
+    }
+    if (offer) {
       handleInActiveOfferId(+id);
     }
+    return () => {
+      handleOutActiveOfferId();
+    };
   }, [id, offer, nearPlaces, comments]);
 
   if (!offer || !nearPlaces || !comments) {
@@ -174,6 +179,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleInActiveOfferId(offerId) {
     dispatch(ActionCreator.changeActiveOfferId(offerId));
+  },
+  handleOutActiveOfferId() {
+    dispatch(ActionCreator.changeActiveOfferId(null));
   },
 });
 
