@@ -23,7 +23,7 @@ const Sorting = ({handleSortingClick, currentSort}) => {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className="places__options places__options--custom" ref={sortPopupRef}>
+      <ul className="places__options places__options--custom" onMouseOut={sortingPopupToggle} ref={sortPopupRef}>
         <li className="places__option places__option--active" tabIndex={0} data-sort-type={`${SortType.DEFAULT}`} onClick={handleSortingClick}>Popular</li>
         <li className="places__option" tabIndex={0} data-sort-type={`${SortType.LOW_TO_HIGH}`} onClick={handleSortingClick}>Price: low to high</li>
         <li className="places__option" tabIndex={0} data-sort-type={`${SortType.HIGH_TO_LOW}`} onClick={handleSortingClick}>Price: high to low</li>
@@ -38,8 +38,8 @@ Sorting.propTypes = {
   handleSortingClick: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({currentSort}) => ({
-  currentSort,
+const mapStateToProps = ({CHANGE}) => ({
+  currentSort: CHANGE.currentSort,
 });
 
 const mapDispatchToProps = (dispatch) => ({

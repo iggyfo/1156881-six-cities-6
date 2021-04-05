@@ -174,12 +174,12 @@ PropertyScreen.propTypes = {
   handleChangeCity: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offer, comments, nearPlaces, authorizationStatus, activeOfferId}) => ({
-  offer,
-  comments,
-  nearPlaces,
-  authorizationStatus,
-  activeOfferId,
+const mapStateToProps = ({DATA, CHANGE, USER}) => ({
+  offer: DATA.offer,
+  comments: DATA.comments,
+  nearPlaces: DATA.comments,
+  authorizationStatus: USER.authorizationStatus,
+  activeOfferId: CHANGE.activeOfferId,
 });
 
 const mapDispatchToProps = (dispatch) => ({

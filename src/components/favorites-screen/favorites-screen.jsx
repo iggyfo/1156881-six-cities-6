@@ -46,10 +46,10 @@ FavoritesScreen.propTypes = {
   citiesList: propTypes.arrayOf(propTypes.string).isRequired
 };
 
-const mapStateToProps = ({offers, currentCity, citiesList}) => ({
-  offers,
-  currentCity,
-  citiesList,
+const mapStateToProps = ({CHANGE, DATA}) => ({
+  offers: DATA.offers,
+  currentCity: CHANGE. currentCity,
+  citiesList: CHANGE.citiesList,
 });
 
 export {FavoritesScreen};

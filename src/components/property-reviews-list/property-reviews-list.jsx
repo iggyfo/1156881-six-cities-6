@@ -33,8 +33,8 @@ PropertyReviewsList.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
 };
 
-const mapStateToProps = ({comments}) => ({
-  comments,
+const mapStateToProps = ({DATA}) => ({
+  comments: DATA.comments,
 });
 
 const mapDispatchToProps = (dispatch) => ({

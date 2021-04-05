@@ -60,9 +60,9 @@ const Map = ({offers, currentCity, activeOfferId}) => {
   );
 };
 
-const mapStateToProps = ({currentCity, activeOfferId}) => ({
-  currentCity,
-  activeOfferId,
+const mapStateToProps = ({CHANGE}) => ({
+  currentCity: CHANGE.currentCity,
+  activeOfferId: CHANGE.activeOfferId,
 });
 
 Map.propTypes = {
