@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {SortType} from "../../const";
-import {ActionCreator} from "../../store/action";
+import {changeSortType} from "../../store/action";
 import {connect} from "react-redux";
 import propTypes from "prop-types";
 import {getCurrentSort} from "../../store/change-data/selectors";
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleSortingClick(evt) {
-    dispatch(ActionCreator.changeSortType(evt.target.dataset.sortType));
+    dispatch(changeSortType(evt.target.dataset.sortType));
   },
 });
 

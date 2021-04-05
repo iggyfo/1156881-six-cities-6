@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createApi} from "./services/api";
-import {ActionCreator} from './store/action';
+import {requireAuthorization} from './store/action';
 import App from './components/app/app';
 import {offers} from "./mock/offers";
 import {nearPlaces} from "./mock/nerby";
@@ -16,7 +16,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const api = createApi(
-    () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
 const store = configureStore({

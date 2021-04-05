@@ -15,7 +15,7 @@ import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import NearPlacesList from "../near-places-list/near-places-list";
-import {ActionCreator} from "../../store/action";
+import {changeActiveOfferId, changeCity} from "../../store/action";
 import {getComments, getNearPlaces, getOffer} from "../../store/load-data/selectors";
 import {getAuthorizationStatus} from "../../store/user/selectors";
 import {getActiveOfferId} from "../../store/change-data/selectors";
@@ -196,13 +196,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOffers());
   },
   handleInActiveOfferId(offerId) {
-    dispatch(ActionCreator.changeActiveOfferId(offerId));
+    dispatch(changeActiveOfferId(offerId));
   },
   handleOutActiveOfferId() {
-    dispatch(ActionCreator.changeActiveOfferId(null));
+    dispatch(changeActiveOfferId(null));
   },
   handleChangeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(changeCity(city));
   },
 });
 

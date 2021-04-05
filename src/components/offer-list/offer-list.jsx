@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";
-import {ActionCreator} from "../../store/action";
+import {changeActiveOfferId} from "../../store/action";
 import {connect} from "react-redux";
 import Sorting from "../sorting/sorting";
 import Map from "../map/map";
@@ -52,10 +52,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleInActiveOfferId(offerId) {
-    dispatch(ActionCreator.changeActiveOfferId(offerId));
+    dispatch(changeActiveOfferId(offerId));
   },
   handleOutActiveOfferId() {
-    dispatch(ActionCreator.changeActiveOfferId(null));
+    dispatch(changeActiveOfferId(null));
   },
 });
 

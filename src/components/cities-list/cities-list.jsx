@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import Cities from "../cities/cities";
-import {ActionCreator} from "../../store/action";
+import {changeCity} from "../../store/action";
 import {connect} from "react-redux";
 import {getCitiesList} from "../../store/change-data/selectors";
 
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleChangeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(changeCity(city));
   },
 });
 
