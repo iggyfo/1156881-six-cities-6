@@ -50,8 +50,8 @@ Header.propTypes = {
   })
 };
 
-const mapStateToProps = ({authInfo}) => ({
-  authInfo,
+const mapStateToProps = ({USER}) => ({
+  authInfo: USER.authInfo,
 });
 
 export {Header};

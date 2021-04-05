@@ -60,11 +60,11 @@ MainScreen.propTypes = {
   onLoadData: propTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentSort: state.currentSort,
-  offers: getCurrentCityOffers(state.currentCity, state.offers),
-  citiesList: state.citiesList,
-  currentCity: state.currentCity,
+const mapStateToProps = ({CHANGE, DATA}) => ({
+  currentSort: CHANGE.currentSort,
+  offers: getCurrentCityOffers(CHANGE.currentCity, DATA.offers),
+  citiesList: CHANGE.citiesList,
+  currentCity: CHANGE.currentCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -45,8 +45,8 @@ OfferList.propTypes = {
 };
 
 
-const mapStateToProps = ({activeOffer}) => ({
-  activeOffer,
+const mapStateToProps = ({CHANGE}) => ({
+  activeOffer: CHANGE.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

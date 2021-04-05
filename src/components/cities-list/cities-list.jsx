@@ -24,8 +24,8 @@ CitiesList.propTypes = {
   handleChangeCity: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({citiesList}) => ({
-  citiesList,
+const mapStateToProps = ({CHANGE}) => ({
+  citiesList: CHANGE.citiesList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
