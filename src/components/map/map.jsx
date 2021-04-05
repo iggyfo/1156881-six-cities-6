@@ -1,16 +1,17 @@
 import React, {useRef, useEffect} from "react";
+import propTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {getCitiesCoords} from "../../utils";
 import {useSelector} from "react-redux";
+import {offerPropsTypes} from "../../props-types";
 
 
 const CITY_ZOOM = 13;
 const ICON_SIZE = [27, 39];
 
-const Map = () => {
+const Map = ({offers}) => {
 
-  const {offers} = useSelector((state) => state.DATA);
   const {currentCity, activeOfferId} = useSelector((state) => state.CHANGE);
   const cityCoords = getCitiesCoords(currentCity);
 
@@ -59,6 +60,10 @@ const Map = () => {
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
   );
+};
+
+Map.propTypes = {
+  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes))
 };
 
 export default Map;

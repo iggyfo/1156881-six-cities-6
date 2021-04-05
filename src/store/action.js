@@ -35,7 +35,7 @@ const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => {
 
 const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => {
   return {
-    payload: offer,
+    payload: adaptToClient(offer),
   };
 });
 
