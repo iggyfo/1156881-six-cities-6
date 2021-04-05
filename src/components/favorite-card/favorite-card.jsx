@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import {classNameTypes} from "../../const";
 import Rating from "../rating/rating";
 import {fetchOffers, setFavorite} from "../../store/api-actions";
-import {connect, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
 

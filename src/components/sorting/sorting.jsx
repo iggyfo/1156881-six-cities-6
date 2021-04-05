@@ -9,7 +9,7 @@ const Sorting = () => {
   const {currentSort} = useSelector((state) => state.CHANGE);
   const dispatch = useDispatch();
   const sortPopupRef = useRef();
-  const handleSortingClick = () => dispatch(changeSortType(evt.target.dataset.sortType));
+  const handleSortingClick = (evt) => dispatch(changeSortType(evt.target.dataset.sortType));
   const sortingPopupToggle = () => {
     sortPopupRef
       .current
