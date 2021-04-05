@@ -24,18 +24,13 @@ const getCurrentCityOffers = (currentCity, offers) => {
 
 const getCitiesWithFavoriteOffers = (favoriteOffers) => {
   let cities = new Set();
-  favoriteOffers.map((offer) => cities.add(offer.city.name));
+  favoriteOffers.forEach((offer) => cities.add(offer.city.name));
   return Array.from(cities);
 };
 
 const getFavoritesOffers = (offers) => {
-  const favoriteOffers = offers.filter((offer) => {
-    return offer.isFavorite;
-  });
-  if (favoriteOffers.length !== 0) {
-    return favoriteOffers;
-  }
-  return null;
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  return favoriteOffers.length !== 0 ? favoriteOffers : null;
 };
 
 const getSortedOffers = (currentSort, offers) => {
