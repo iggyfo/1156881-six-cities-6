@@ -1,4 +1,5 @@
-import {ActionType} from '../action';
+import {createReducer} from '@reduxjs/toolkit';
+import {changeCity, changeSortType, changeActiveOfferId} from '../action';
 import {citiesNames, SortType} from "../../const";
 
 
@@ -16,26 +17,16 @@ const initialState = {
   activeOfferId: null,
 };
 
-const changeData = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CHANGE_CITY:
-      return {
-        ...state,
-        currentCity: action.payload,
-      };
-    case ActionType.CHANGE_SORT_TYPE:
-      return {
-        ...state,
-        currentSort: action.payload
-      };
-    case ActionType.CHANGE_ACTIVE_OFFER_ID:
-      return {
-        ...state,
-        activeOfferId: action.payload
-      };
-  }
-
-  return state;
-};
+const changeData = createReducer(initialState, (builder) => {
+  builder.addCase(changeCity, (state, action) => {
+    state.currentCity = action.payload;
+  });
+  builder.addCase(changeSortType, (state, action) => {
+    state.currentSort = action.payload;
+  });
+  builder.addCase(changeActiveOfferId, (state, action) => {
+    state.activeOfferId = action.payload;
+  });
+});
 
 export {changeData};

@@ -45,9 +45,4 @@ const App = () => {
   );
 };
 
-App.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  cities: propTypes.arrayOf(propTypes.string),
-};
-
 export default App;

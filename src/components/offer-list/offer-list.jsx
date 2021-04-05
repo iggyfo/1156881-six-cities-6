@@ -1,15 +1,19 @@
 import React from "react";
-import propTypes from "prop-types";
-import {offerPropsTypes} from "../../props-types";
 import OfferCard from "../offer-card/offer-card";
-import {changeActiveOfferId} from "../../store/action";
-import {connect} from "react-redux";
 import Sorting from "../sorting/sorting";
 import Map from "../map/map";
-import {getActiveOfferId} from "../../store/change-data/selectors";
+import propTypes from "prop-types";
+import {changeActiveOfferId} from "../../store/action";
+import {useDispatch} from "react-redux";
+import {offerPropsTypes} from "../../props-types";
 
 
-const OfferList = ({offers, currentCity, handleInActiveOfferId, handleOutActiveOfferId}) => {
+const OfferList = ({offers, currentCity}) => {
+
+  const dispatch = useDispatch();
+
+  const handleInActiveOfferId = (offerId) => dispatch(changeActiveOfferId(offerId));
+  const handleOutActiveOfferId = () => dispatch(changeActiveOfferId(null));
 
   return (
     <div className="cities__places-container container" style={{height: `700px`}}>
@@ -41,24 +45,7 @@ const OfferList = ({offers, currentCity, handleInActiveOfferId, handleOutActiveO
 OfferList.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
   currentCity: propTypes.string.isRequired,
-  handleOutActiveOfferId: propTypes.func.isRequired,
-  handleInActiveOfferId: propTypes.func.isRequired,
 };
 
-
-const mapStateToProps = (state) => ({
-  activeOffer: getActiveOfferId(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleInActiveOfferId(offerId) {
-    dispatch(changeActiveOfferId(offerId));
-  },
-  handleOutActiveOfferId() {
-    dispatch(changeActiveOfferId(null));
-  },
-});
-
-export {OfferList};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferList);
+export default OfferList;
 

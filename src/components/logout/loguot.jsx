@@ -1,11 +1,13 @@
 import React from "react";
-import propTypes from "prop-types";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {logout} from "../../store/api-actions";
 import {Link} from "react-router-dom";
 
 
-const Logout = ({onLogout}) => {
+const Logout = () => {
+
+  const dispatch = useDispatch();
+  const onLogout = () => dispatch(logout());
 
   return (
     <nav className="header__nav">
@@ -21,21 +23,6 @@ const Logout = ({onLogout}) => {
   );
 };
 
-Logout.propTypes = {
-  onLogout: propTypes.func.isRequired,
-};
-
-const mapStateToProps = ({onLogout}) => ({
-  onLogout,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLogout() {
-    dispatch(logout());
-  }
-});
-
-export {Logout};
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default Logout;
 
 

@@ -2,12 +2,13 @@ import React from "react";
 import propTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import Logout from "../logout/loguot";
-import {getAuthInfo} from "../../store/user/selectors";
 
 
-const Header = ({authInfo}) => {
+const Header = () => {
+
+  const {authInfo} = useSelector((state) => state.USER);
 
   return (
     <header className="header">
@@ -45,17 +46,6 @@ const Header = ({authInfo}) => {
   );
 };
 
-Header.propTypes = {
-  authInfo: propTypes.shape({
-    email: propTypes.string.isRequired
-  })
-};
-
-const mapStateToProps = (state) => ({
-  authInfo: getAuthInfo(state),
-});
-
-export {Header};
-export default connect(mapStateToProps, null)(Header);
+export default Header;
 
 

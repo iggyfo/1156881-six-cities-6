@@ -1,17 +1,17 @@
 import React, {useRef, useEffect} from "react";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-import propTypes from "prop-types";
 import {getCitiesCoords} from "../../utils";
-import {offerPropsTypes} from "../../props-types";
-import {connect} from "react-redux";
-import {getActiveOfferId, getCurrentCity, getCurrentSort} from "../../store/change-data/selectors";
+import {useSelector} from "react-redux";
 
 
 const CITY_ZOOM = 13;
 const ICON_SIZE = [27, 39];
 
-const Map = ({offers, currentCity, activeOfferId}) => {
+const Map = () => {
+
+  const {offers} = useSelector((state) => state.DATA);
+  const {currentCity, activeOfferId} = useSelector((state) => state.CHANGE);
   const cityCoords = getCitiesCoords(currentCity);
 
   const icon = leaflet.icon({
@@ -61,17 +61,5 @@ const Map = ({offers, currentCity, activeOfferId}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: getCurrentCity(state),
-  activeOfferId: getActiveOfferId(state),
-});
-
-Map.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
-  currentCity: propTypes.string.isRequired,
-  activeOfferId: propTypes.number,
-};
-
-export {Map};
-export default connect(mapStateToProps)(Map);
+export default Map;
 

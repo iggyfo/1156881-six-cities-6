@@ -39,7 +39,7 @@ const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => {
   };
 });
 
-const loadComments = createAction(ActionType.CHANGE_CITY, (comments) => {
+const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => {
   return {
     payload: comments.map((comment) => adaptCommentsToClient(comment)),
   };

@@ -1,22 +1,22 @@
 import React, {useEffect} from "react";
-import propTypes from "prop-types";
+import {useSelector, useDispatch} from 'react-redux';
 import OfferList from "../offer-list/offer-list";
 import Header from "../header/header";
 import {getCurrentCityOffers, getSortedOffers} from "../../utils";
-import {connect} from 'react-redux';
 import CitiesList from "../cities-list/cities-list";
 import LoadingScreen from '../loading-screen/loading-screen';
 import OfferListEmpty from "../offer-list-empty/offer-list-empty";
 import {fetchOffers} from "../../store/api-actions";
-import {getCitiesList, getCurrentCity, getCurrentSort} from "../../store/change-data/selectors";
-import {getOffers} from "../../store/load-data/selectors";
 
+const MainScreen = () => {
 
-const MainScreen = ({offers, citiesList, currentCity, currentSort, onLoadData}) => {
+  const {offers} = useSelector((state) => state.DATA);
+  const {currentCity, currentSort} = useSelector((state) => state.CHANGE);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!offers) {
-      onLoadData();
+      dispatch(fetchOffers());
     }
   }, [offers]);
 
@@ -25,24 +25,27 @@ const MainScreen = ({offers, citiesList, currentCity, currentSort, onLoadData}) 
       <LoadingScreen />
     );
   }
+
+  const currentCityOffers = getCurrentCityOffers(currentCity, offers);
+
   return (
     <div className={`page page--gray page--main`}>
       <Header />
-      <main className={`page__main page__main--index ${!offers
+      <main className={`page__main page__main--index ${!currentCityOffers
         ? `page__main--index-empty`
         : ``
       }`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList citiesList={citiesList} />
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
-          {!offers
+          {!currentCityOffers
             ? <OfferListEmpty currentCity={currentCity}/>
             : <OfferList
-              offers={getSortedOffers(currentSort, offers)}
+              offers={getSortedOffers(currentSort, currentCityOffers)}
               currentCity={currentCity}
             />
           }
@@ -52,28 +55,4 @@ const MainScreen = ({offers, citiesList, currentCity, currentSort, onLoadData}) 
   );
 };
 
-MainScreen.propTypes = {
-  offers: propTypes.arrayOf(
-      propTypes.shape({})
-  ),
-  citiesList: propTypes.arrayOf(propTypes.string).isRequired,
-  currentCity: propTypes.string.isRequired,
-  currentSort: propTypes.string.isRequired,
-  onLoadData: propTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  currentSort: getCurrentSort(state),
-  offers: getCurrentCityOffers(getCurrentCity(state), getOffers(state)),
-  citiesList: getCitiesList(state),
-  currentCity: getCurrentCity(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchOffers());
-  },
-});
-
-export {MainScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default MainScreen;

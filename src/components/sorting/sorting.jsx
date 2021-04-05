@@ -1,20 +1,22 @@
 import React, {useRef} from "react";
 import {SortType} from "../../const";
 import {changeSortType} from "../../store/action";
-import {connect} from "react-redux";
-import propTypes from "prop-types";
-import {getCurrentSort} from "../../store/change-data/selectors";
+import {useDispatch, useSelector} from "react-redux";
 
 
-const Sorting = ({handleSortingClick, currentSort}) => {
+const Sorting = () => {
 
+  const {currentSort} = useSelector((state) => state.CHANGE);
+  const dispatch = useDispatch();
   const sortPopupRef = useRef();
+  const handleSortingClick = () => dispatch(changeSortType(evt.target.dataset.sortType));
   const sortingPopupToggle = () => {
     sortPopupRef
       .current
       .classList
       .toggle(`places__options--opened`);
   };
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
@@ -34,20 +36,5 @@ const Sorting = ({handleSortingClick, currentSort}) => {
   );
 };
 
-Sorting.propTypes = {
-  currentSort: propTypes.string.isRequired,
-  handleSortingClick: propTypes.func.isRequired,
-};
 
-const mapStateToProps = (state) => ({
-  currentSort: getCurrentSort(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleSortingClick(evt) {
-    dispatch(changeSortType(evt.target.dataset.sortType));
-  },
-});
-
-export {Sorting};
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default Sorting;

@@ -1,15 +1,16 @@
 import React, {useRef, useState, useEffect} from "react";
 import {Redirect} from 'react-router-dom';
 import Header from "../header/header";
-import propTypes from "prop-types";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../store/api-actions";
 import {AppRoute, AuthorizationStatus} from "../../const";
 import {toast} from "react-toastify";
-import {getAuthorizationStatus} from "../../store/user/selectors";
 
 
-const AuthScreen = ({onSubmit, authorizationStatus}) => {
+const AuthScreen = () => {
+
+  const {authorizationStatus} = useSelector((state) => state.USER);
+  const dispatch = useDispatch();
   const [validEmail, setValidEmail] = useState(true);
   const notify = () => toast(`Incorrect Email`);
   const notifyPassword = () => toast(`Password can't be empty`);
@@ -47,10 +48,11 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
 
       return false;
     }
-    onSubmit({
+
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
+    }));
     return true;
   };
 
@@ -110,20 +112,4 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
   );
 };
 
-AuthScreen.propTypes = {
-  onSubmit: propTypes.func.isRequired,
-  authorizationStatus: propTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  }
-});
-
-export {AuthScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
+export default AuthScreen;

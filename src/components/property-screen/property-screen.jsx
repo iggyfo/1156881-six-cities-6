@@ -4,48 +4,39 @@ import PropertyGoods from "../property-goods/property-goods";
 import PropertyHost from "../property-host/property-host";
 import PropertyReviewsList from "../property-reviews-list/property-reviews-list";
 import LoadingScreen from "../loading-screen/loading-screen";
-import React, {useEffect} from "react";
-import {connect} from "react-redux";
-import {useParams} from "react-router-dom";
-import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} from "../../store/api-actions";
-import propTypes from "prop-types";
-import {offerPropsTypes, commentPropsTypes} from "../../props-types";
-import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import Header from "../header/header";
 import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import NearPlacesList from "../near-places-list/near-places-list";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} from "../../store/api-actions";
+import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import {changeActiveOfferId, changeCity} from "../../store/action";
-import {getComments, getNearPlaces, getOffer} from "../../store/load-data/selectors";
-import {getAuthorizationStatus} from "../../store/user/selectors";
-import {getActiveOfferId} from "../../store/change-data/selectors";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
 
-const PropertyScreen = ({
-  offer,
-  nearPlaces,
-  comments,
-  authorizationStatus,
-  onLoadData,
-  onOfferFavorite,
-  handleInActiveOfferId,
-  handleOutActiveOfferId,
-  handleChangeCity,
-}) => {
+const PropertyScreen = () => {
 
+  const {offer, nearPlaces, comments} = useSelector((state) => state.DATA);
+  const {authorizationStatus} = useSelector((state) => state.USER);
+  const dispatch = useDispatch();
   const {id} = useParams();
+
   useEffect(() => {
     if (!offer || !nearPlaces || !comments || offer.id !== +id) {
-      onLoadData(id);
+      dispatch(fetchOffer(id));
+      dispatch(fetchNearOffers(id));
+      dispatch(fetchComments(id));
     }
     if (offer) {
-      handleInActiveOfferId(+id);
-      handleChangeCity(offer.city.name);
+      dispatch(changeActiveOfferId(+id));
+      dispatch(changeCity(offer.city.name));
     }
     return () => {
-      handleOutActiveOfferId();
+      dispatch(changeActiveOfferId(null));
     };
   }, [id, offer, nearPlaces, comments]);
 
@@ -54,18 +45,16 @@ const PropertyScreen = ({
       <LoadingScreen />
     );
   }
+
   const {images, title, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite, isPremium} = offer;
+
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`property__bookmark-button--active`);
-    onOfferFavorite(id, Number(!isFavorite));
+    dispatch(setFavorite(id, Number(!isFavorite)));
+    dispatch(fetchOffers());
   };
 
-  const getOffersForMap = () => {
-    return [
-      ...nearPlaces,
-      offer
-    ];
-  };
+  const getOffersForMap = () => [...nearPlaces, offer];
 
   return (
     <div className="page">
@@ -165,46 +154,4 @@ const PropertyScreen = ({
   );
 };
 
-PropertyScreen.propTypes = {
-  offer: propTypes.shape(offerPropsTypes),
-  nearPlaces: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
-  authorizationStatus: propTypes.string.isRequired,
-  onLoadData: propTypes.func.isRequired,
-  onOfferFavorite: propTypes.func.isRequired,
-  handleInActiveOfferId: propTypes.func.isRequired,
-  handleOutActiveOfferId: propTypes.func.isRequired,
-  handleChangeCity: propTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  offer: getOffer(state),
-  comments: getComments(state),
-  nearPlaces: getNearPlaces(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  activeOfferId: getActiveOfferId(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData(id) {
-    dispatch(fetchOffer(id));
-    dispatch(fetchNearOffers(id));
-    dispatch(fetchComments(id));
-  },
-  onOfferFavorite(id, favoriteStatus) {
-    dispatch(setFavorite(id, favoriteStatus));
-    dispatch(fetchOffers());
-  },
-  handleInActiveOfferId(offerId) {
-    dispatch(changeActiveOfferId(offerId));
-  },
-  handleOutActiveOfferId() {
-    dispatch(changeActiveOfferId(null));
-  },
-  handleChangeCity(city) {
-    dispatch(changeCity(city));
-  },
-});
-
-export {PropertyScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(PropertyScreen);
+export default PropertyScreen;
