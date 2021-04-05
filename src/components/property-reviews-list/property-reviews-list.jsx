@@ -2,9 +2,8 @@ import React from "react";
 import PropertyReviewItem from "../property-review-item/property-review-item";
 import propTypes from "prop-types";
 import {commentPropsTypes} from "../../props-types";
-import {fetchComments} from "../../store/api-actions";
 import {getSortedComments} from "../../utils";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 const CommentsNum = {
   MIN: 0,
@@ -14,8 +13,6 @@ const CommentsNum = {
 const PropertyReviewsList = () => {
 
   const {comments} = useSelector((state) => state.DATA);
-  const dispatch = useDispatch();
-  const onLoadData = (id) => dispatch(fetchComments(id));
 
   const sortedComments = comments.slice(0, CommentsNum.MAX).sort(getSortedComments);
   return (

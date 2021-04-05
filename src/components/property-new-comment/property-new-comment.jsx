@@ -23,7 +23,7 @@ const PropertyNewComment = ({id}) => {
   const handleCommentRating = (evt) => setRating(evt.target.value);
   const handleCommentSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(uploadComments(id, comment));
+    dispatch(uploadComments(id, {comment, rating}));
     dispatch(fetchComments(id));
     formRef.current.reset();
     setComment(``);

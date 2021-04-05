@@ -31,7 +31,7 @@ const PropertyScreen = () => {
       dispatch(fetchNearOffers(id));
       dispatch(fetchComments(id));
     }
-    if (offer) {
+    if (offer && nearPlaces && comments) {
       dispatch(changeActiveOfferId(+id));
       dispatch(changeCity(offer.city.name));
     }
@@ -154,4 +154,4 @@ const PropertyScreen = () => {
   );
 };
 
-export default PropertyScreen;
+export default React.memo(PropertyScreen);

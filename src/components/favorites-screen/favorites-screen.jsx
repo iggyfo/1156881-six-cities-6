@@ -10,6 +10,7 @@ const FavoritesScreen = () => {
 
   const {offers} = useSelector((state) => state.DATA);
   const {citiesList} = useSelector((state) => state.CHANGE);
+
   const favoritesOffers = getFavoritesOffers(offers);
 
   return (
