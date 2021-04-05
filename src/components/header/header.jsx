@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import {connect} from "react-redux";
 import Logout from "../logout/loguot";
+import {getAuthInfo} from "../../store/user/selectors";
 
 
 const Header = ({authInfo}) => {
@@ -50,8 +51,8 @@ Header.propTypes = {
   })
 };
 
-const mapStateToProps = ({USER}) => ({
-  authInfo: USER.authInfo,
+const mapStateToProps = (state) => ({
+  authInfo: getAuthInfo(state),
 });
 
 export {Header};

@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
 import {AppRoute, AuthorizationStatus} from "../../const";
 import {toast} from "react-toastify";
+import {getAuthorizationStatus} from "../../store/user/selectors";
 
 
 const AuthScreen = ({onSubmit, authorizationStatus}) => {
@@ -114,8 +115,8 @@ AuthScreen.propTypes = {
   authorizationStatus: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

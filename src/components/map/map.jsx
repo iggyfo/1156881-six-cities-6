@@ -5,6 +5,7 @@ import propTypes from "prop-types";
 import {getCitiesCoords} from "../../utils";
 import {offerPropsTypes} from "../../props-types";
 import {connect} from "react-redux";
+import {getActiveOfferId, getCurrentCity, getCurrentSort} from "../../store/change-data/selectors";
 
 
 const CITY_ZOOM = 13;
@@ -60,9 +61,9 @@ const Map = ({offers, currentCity, activeOfferId}) => {
   );
 };
 
-const mapStateToProps = ({CHANGE}) => ({
-  currentCity: CHANGE.currentCity,
-  activeOfferId: CHANGE.activeOfferId,
+const mapStateToProps = (state) => ({
+  currentCity: getCurrentCity(state),
+  activeOfferId: getActiveOfferId(state),
 });
 
 Map.propTypes = {

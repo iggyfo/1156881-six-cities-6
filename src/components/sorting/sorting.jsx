@@ -3,6 +3,7 @@ import {SortType} from "../../const";
 import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 import propTypes from "prop-types";
+import {getCurrentSort} from "../../store/change-data/selectors";
 
 
 const Sorting = ({handleSortingClick, currentSort}) => {
@@ -38,8 +39,8 @@ Sorting.propTypes = {
   handleSortingClick: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({CHANGE}) => ({
-  currentSort: CHANGE.currentSort,
+const mapStateToProps = (state) => ({
+  currentSort: getCurrentSort(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

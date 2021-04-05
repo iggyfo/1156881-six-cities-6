@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import {connect} from "react-redux";
+import {getCurrentCity} from "../../store/change-data/selectors";
 
 
 const Cities = ({city, changeCity, currentCity}) => {
@@ -25,8 +26,8 @@ Cities.propTypes = {
   currentCity: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({CHANGE}) => ({
-  currentCity: CHANGE.currentCity,
+const mapStateToProps = (state) => ({
+  currentCity: getCurrentCity(state),
 });
 
 export {Cities};

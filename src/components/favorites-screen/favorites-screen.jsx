@@ -6,6 +6,8 @@ import FavoriteList from "../favorite-list/favorite-list";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
 import {connect} from "react-redux";
 import {getFavoritesOffers} from "../../utils";
+import {getOffers} from "../../store/load-data/selectors";
+import {getCitiesList, getCurrentCity} from "../../store/change-data/selectors";
 
 
 const FavoritesScreen = ({offers, citiesList}) => {
@@ -46,10 +48,10 @@ FavoritesScreen.propTypes = {
   citiesList: propTypes.arrayOf(propTypes.string).isRequired
 };
 
-const mapStateToProps = ({CHANGE, DATA}) => ({
-  offers: DATA.offers,
-  currentCity: CHANGE. currentCity,
-  citiesList: CHANGE.citiesList,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+  currentCity: getCurrentCity(state),
+  citiesList: getCitiesList(state),
 });
 
 export {FavoritesScreen};

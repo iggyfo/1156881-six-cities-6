@@ -6,6 +6,7 @@ import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
 import Sorting from "../sorting/sorting";
 import Map from "../map/map";
+import {getActiveOfferId} from "../../store/change-data/selectors";
 
 
 const OfferList = ({offers, currentCity, handleInActiveOfferId, handleOutActiveOfferId}) => {
@@ -45,8 +46,8 @@ OfferList.propTypes = {
 };
 
 
-const mapStateToProps = ({CHANGE}) => ({
-  activeOffer: CHANGE.activeOffer,
+const mapStateToProps = (state) => ({
+  activeOffer: getActiveOfferId(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

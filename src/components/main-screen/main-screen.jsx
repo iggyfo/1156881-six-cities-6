@@ -8,6 +8,8 @@ import CitiesList from "../cities-list/cities-list";
 import LoadingScreen from '../loading-screen/loading-screen';
 import OfferListEmpty from "../offer-list-empty/offer-list-empty";
 import {fetchOffers} from "../../store/api-actions";
+import {getCitiesList, getCurrentCity, getCurrentSort} from "../../store/change-data/selectors";
+import {getOffers} from "../../store/load-data/selectors";
 
 
 const MainScreen = ({offers, citiesList, currentCity, currentSort, onLoadData}) => {
@@ -60,11 +62,11 @@ MainScreen.propTypes = {
   onLoadData: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({CHANGE, DATA}) => ({
-  currentSort: CHANGE.currentSort,
-  offers: getCurrentCityOffers(CHANGE.currentCity, DATA.offers),
-  citiesList: CHANGE.citiesList,
-  currentCity: CHANGE.currentCity,
+const mapStateToProps = (state) => ({
+  currentSort: getCurrentSort(state),
+  offers: getCurrentCityOffers(getCurrentCity(state), getOffers(state)),
+  citiesList: getCitiesList(state),
+  currentCity: getCurrentCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

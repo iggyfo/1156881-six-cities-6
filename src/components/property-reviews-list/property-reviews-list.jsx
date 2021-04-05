@@ -5,6 +5,7 @@ import {commentPropsTypes} from "../../props-types";
 import {fetchComments} from "../../store/api-actions";
 import {getSortedComments} from "../../utils";
 import {connect} from "react-redux";
+import {getComments} from "../../store/load-data/selectors";
 
 const CommentsNum = {
   MIN: 0,
@@ -33,8 +34,8 @@ PropertyReviewsList.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
 };
 
-const mapStateToProps = ({DATA}) => ({
-  comments: DATA.comments,
+const mapStateToProps = (state) => ({
+  comments: getComments(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

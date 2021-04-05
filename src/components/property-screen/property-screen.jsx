@@ -16,6 +16,9 @@ import OfferMark from "../offer-mark/offer-mark";
 import Map from "../map/map";
 import NearPlacesList from "../near-places-list/near-places-list";
 import {ActionCreator} from "../../store/action";
+import {getComments, getNearPlaces, getOffer} from "../../store/load-data/selectors";
+import {getAuthorizationStatus} from "../../store/user/selectors";
+import {getActiveOfferId} from "../../store/change-data/selectors";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
@@ -174,12 +177,12 @@ PropertyScreen.propTypes = {
   handleChangeCity: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, CHANGE, USER}) => ({
-  offer: DATA.offer,
-  comments: DATA.comments,
-  nearPlaces: DATA.comments,
-  authorizationStatus: USER.authorizationStatus,
-  activeOfferId: CHANGE.activeOfferId,
+const mapStateToProps = (state) => ({
+  offer: getOffer(state),
+  comments: getComments(state),
+  nearPlaces: getNearPlaces(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  activeOfferId: getActiveOfferId(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
