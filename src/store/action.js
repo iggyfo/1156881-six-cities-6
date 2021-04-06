@@ -2,17 +2,17 @@ import {adaptToClient, adaptCommentsToClient} from "../utils";
 import {createAction} from '@reduxjs/toolkit';
 
 export const ActionType = {
-  CHANGE_CITY: `CHANGE_CITY`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
-  LOAD_OFFER: `LOAD_OFFER`,
-  LOAD_COMMENTS: `LOAD_COMMENTS`,
-  UPLOAD_COMMENTS: `UPLOAD_COMMENTS`,
-  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
-  CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION:`,
-  SET_AUTHORIZATION_INFO: `SET_AUTHORIZATION_INFO`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  CHANGE_CITY: `city/changeCity`,
+  LOAD_OFFERS: `data/loadOffers`,
+  LOAD_OFFER: `data/loadOffer`,
+  LOAD_COMMENTS: `data/loadComments`,
+  UPLOAD_COMMENTS: `data/uploadComments`,
+  LOAD_NEAR_OFFERS: `data/loadNearbyOffers`,
+  CHANGE_SORT_TYPE: `sort/changeSortType`,
+  CHANGE_ACTIVE_OFFER_ID: `offer/changeActiveOfferId`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuth:`,
+  SET_AUTHORIZATION_INFO: `user/setAuth`,
+  REDIRECT_TO_ROUTE: `nav/redirectToRoute`,
 };
 
 const changeCity = createAction(ActionType.CHANGE_CITY, (city) => {
