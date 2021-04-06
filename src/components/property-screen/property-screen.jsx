@@ -15,6 +15,7 @@ import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} fr
 import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import {changeActiveOfferId, changeCity} from "../../store/action";
 import Rating from "../rating/rating";
+import {nanoid} from "@reduxjs/toolkit";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
@@ -64,9 +65,9 @@ const PropertyScreen = () => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.slice(0, MAX_OFFER_PHOTO_IN_GALLERY).map((image, index) =>
+              {images.slice(0, MAX_OFFER_PHOTO_IN_GALLERY).map((image) =>
                 <PropertyImage
-                  key={index}
+                  key={nanoid()}
                   image={image}
                 />)}
             </div>
@@ -116,9 +117,9 @@ const PropertyScreen = () => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((item, index) =>
+                  {goods.map((item) =>
                     <PropertyGoods
-                      key={index}
+                      key={nanoid()}
                       item={item}
                     />)}
                 </ul>

@@ -19,9 +19,9 @@ const PropertyReviewsList = () => {
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
       <ul className="reviews__list">
-        {sortedComments.map((userComment, index) =>
+        {sortedComments.map((userComment) =>
           <PropertyReviewItem
-            key={index}
+            key={userComment.id}
             userComment={userComment}
           />
         )}
