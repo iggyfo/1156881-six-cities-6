@@ -40,11 +40,12 @@ const AuthScreen = () => {
       getErrorNotify(ERROR_PASSWORD_MESSAGE);
       return;
     }
-
-    dispatch(login({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    }));
+    if (validEmail) {
+      dispatch(login({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      }));
+    }
   };
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
