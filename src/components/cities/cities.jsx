@@ -1,9 +1,11 @@
 import React from "react";
 import propTypes from "prop-types";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
 
-const Cities = ({city, changeCity, currentCity}) => {
+const Cities = ({city, changeCity}) => {
+
+  const {currentCity} = useSelector((state) => state.CHANGE);
 
   return (
     <li className="locations__item" onClick={(evt) => {
@@ -22,13 +24,7 @@ const Cities = ({city, changeCity, currentCity}) => {
 Cities.propTypes = {
   city: propTypes.string.isRequired,
   changeCity: propTypes.func.isRequired,
-  currentCity: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({currentCity}) => ({
-  currentCity,
-});
-
-export {Cities};
-export default connect(mapStateToProps)(Cities);
+export default Cities;
 

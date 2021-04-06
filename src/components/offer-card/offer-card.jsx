@@ -5,16 +5,18 @@ import {offerPropsTypes} from "../../props-types";
 import {classNameTypes, OfferType} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
 import {setFavorite, fetchOffers} from "../../store/api-actions";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 
 
-const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId, onOfferFavorite}) => {
+const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
 
+  const dispatch = useDispatch();
   const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
 
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`place-card__bookmark-button--active`);
-    onOfferFavorite(id, Number(!isFavorite));
+    dispatch(setFavorite(id, Number(!isFavorite)));
+    dispatch(fetchOffers());
   };
 
   return (
@@ -68,15 +70,6 @@ OfferCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
   handleInActiveOfferId: propTypes.func.isRequired,
   handleOutActiveOfferId: propTypes.func.isRequired,
-  onOfferFavorite: propTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onOfferFavorite(id, favoriteStatus) {
-    dispatch(setFavorite(id, favoriteStatus));
-    dispatch(fetchOffers());
-  }
-});
-
-export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default OfferCard;

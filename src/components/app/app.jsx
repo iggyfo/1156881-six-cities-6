@@ -1,7 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
 import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
-import {offerPropsTypes} from "../../props-types";
 import {AppRoute} from "../../const";
 import MainScreen from "../main-screen/main-screen";
 import AuthScreen from "../auth-screen/auth-screen";
@@ -43,11 +41,6 @@ const App = () => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes)),
-  cities: propTypes.arrayOf(propTypes.string),
 };
 
 export default App;

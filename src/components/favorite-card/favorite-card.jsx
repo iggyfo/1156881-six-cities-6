@@ -4,17 +4,20 @@ import propTypes from "prop-types";
 import {classNameTypes} from "../../const";
 import Rating from "../rating/rating";
 import {fetchOffers, setFavorite} from "../../store/api-actions";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
 
-const FavoriteCard = ({offer, onOfferFavorite}) => {
+const FavoriteCard = ({offer}) => {
 
+  const dispatch = useDispatch();
   const {previewImage, title, type, price, rating, id, isFavorite} = offer;
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`place-card__bookmark-button--active`);
-    onOfferFavorite(id, Number(!isFavorite));
+    dispatch(setFavorite(id, Number(!isFavorite)));
+    dispatch(fetchOffers());
   };
+
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -50,15 +53,6 @@ const FavoriteCard = ({offer, onOfferFavorite}) => {
 
 FavoriteCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
-  onOfferFavorite: propTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onOfferFavorite(id, favoriteStatus) {
-    dispatch(setFavorite(id, favoriteStatus));
-    dispatch(fetchOffers());
-  }
-});
-
-export {FavoriteCard};
-export default connect(null, mapDispatchToProps)(FavoriteCard);
+export default FavoriteCard;

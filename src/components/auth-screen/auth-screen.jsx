@@ -1,17 +1,19 @@
 import React, {useRef, useState, useEffect} from "react";
 import {Redirect} from 'react-router-dom';
 import Header from "../header/header";
-import propTypes from "prop-types";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../store/api-actions";
 import {AppRoute, AuthorizationStatus} from "../../const";
-import {toast} from "react-toastify";
+import {getErrorNotify} from "../../utils";
 
 
-const AuthScreen = ({onSubmit, authorizationStatus}) => {
+const AuthScreen = () => {
+
+  const {authorizationStatus} = useSelector((state) => state.USER);
+  const dispatch = useDispatch();
   const [validEmail, setValidEmail] = useState(true);
-  const notify = () => toast(`Incorrect Email`);
-  const notifyPassword = () => toast(`Password can't be empty`);
+  const ERROR_EMAIL_MESSAGE = `Incorrect Email`;
+  const ERROR_PASSWORD_MESSAGE = `Password can't be empty`;
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -23,34 +25,26 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
     setValidEmail(RE.test(loginRef.current.value));
   };
 
-  const handleFocus = () => {
-    setValidEmail(true);
-  };
-
   useEffect(() => {
     if (!validEmail) {
-      notify();
+      getErrorNotify(ERROR_EMAIL_MESSAGE);
     }
   }, [validEmail]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (loginRef.current.value === `` || passwordRef.current.value === ``) {
-      if (loginRef.current.value === ``) {
-        setValidEmail(false);
-      }
-
-      if (passwordRef.current.value === ``) {
-        notifyPassword();
-      }
-
-      return false;
+    if (loginRef.current.value === ``) {
+      setValidEmail(false);
     }
-    onSubmit({
+    if (passwordRef.current.value.trim() === ``) {
+      getErrorNotify(ERROR_PASSWORD_MESSAGE);
+      return;
+    }
+
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
-    return true;
+    }));
   };
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
@@ -70,7 +64,7 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
                 <input
                   ref={loginRef}
                   onBlur={handleBlur}
-                  onFocus={handleFocus}
+                  onFocus={() => setValidEmail(true)}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -109,20 +103,4 @@ const AuthScreen = ({onSubmit, authorizationStatus}) => {
   );
 };
 
-AuthScreen.propTypes = {
-  onSubmit: propTypes.func.isRequired,
-  authorizationStatus: propTypes.string.isRequired,
-};
-
-const mapStateToProps = ({authorizationStatus}) => ({
-  authorizationStatus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  }
-});
-
-export {AuthScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);
+export default AuthScreen;

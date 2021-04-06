@@ -1,16 +1,18 @@
 import React from "react";
-import propTypes from "prop-types";
-import {offerPropsTypes} from "../../props-types";
 import Header from "../header/header";
 import FavoriteList from "../favorite-list/favorite-list";
 import FavoritesEmptyScreen from "../favorites-empty-screen/favorites-empty-screen";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {getFavoritesOffers} from "../../utils";
 
 
-const FavoritesScreen = ({offers, citiesList}) => {
+const FavoritesScreen = () => {
+
+  const {offers} = useSelector((state) => state.DATA);
+  const {citiesList} = useSelector((state) => state.CHANGE);
 
   const favoritesOffers = getFavoritesOffers(offers);
+
   return (
     <div className="page">
       <Header />
@@ -40,17 +42,4 @@ const FavoritesScreen = ({offers, citiesList}) => {
   );
 };
 
-FavoritesScreen.propTypes = {
-  offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes).isRequired),
-  currentCity: propTypes.string.isRequired,
-  citiesList: propTypes.arrayOf(propTypes.string).isRequired
-};
-
-const mapStateToProps = ({offers, currentCity, citiesList}) => ({
-  offers,
-  currentCity,
-  citiesList,
-});
-
-export {FavoritesScreen};
-export default connect(mapStateToProps, null)(FavoritesScreen);
+export default FavoritesScreen;

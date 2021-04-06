@@ -1,11 +1,17 @@
 import React from "react";
-import propTypes from "prop-types";
 import Cities from "../cities/cities";
-import {ActionCreator} from "../../store/action";
-import {connect} from "react-redux";
+import {changeCity} from "../../store/action";
+import {useDispatch, useSelector} from "react-redux";
 
 
-const CitiesList = ({citiesList, handleChangeCity}) => {
+const CitiesList = () => {
+
+  const {citiesList} = useSelector((state) => state.CHANGE);
+  const dispatch = useDispatch();
+
+  const handleChangeCity = (city) => {
+    dispatch(changeCity(city));
+  };
 
   return (
     <ul className="locations__list tabs__list">
@@ -19,20 +25,4 @@ const CitiesList = ({citiesList, handleChangeCity}) => {
   );
 };
 
-CitiesList.propTypes = {
-  citiesList: propTypes.arrayOf(propTypes.string),
-  handleChangeCity: propTypes.func.isRequired,
-};
-
-const mapStateToProps = ({citiesList}) => ({
-  citiesList,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleChangeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
-  },
-});
-
-export {CitiesList};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+export default CitiesList;

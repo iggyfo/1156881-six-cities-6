@@ -1,4 +1,5 @@
 import {adaptToClient, adaptCommentsToClient} from "../utils";
+import {createAction} from '@reduxjs/toolkit';
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -14,54 +15,75 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
+const changeCity = createAction(ActionType.CHANGE_CITY, (city) => {
+  return {
     payload: city,
-  }),
+  };
+});
 
-  changeSortType: (sortType) => ({
-    type: ActionType.CHANGE_SORT_TYPE,
+const changeSortType = createAction(ActionType.CHANGE_SORT_TYPE, (sortType) => {
+  return {
     payload: sortType,
-  }),
+  };
+});
 
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
+const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => {
+  return {
     payload: offers.map((offer) => adaptToClient(offer)),
-  }),
+  };
+});
 
-  loadOffer: (offer) => ({
-    type: ActionType.LOAD_OFFER,
+const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => {
+  return {
     payload: adaptToClient(offer),
-  }),
+  };
+});
 
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
+const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => {
+  return {
     payload: comments.map((comment) => adaptCommentsToClient(comment)),
-  }),
+  };
+});
 
-  loadNearOffers: (offers) => ({
-    type: ActionType.LOAD_NEAR_OFFERS,
+const loadNearOffers = createAction(ActionType.LOAD_NEAR_OFFERS, (offers) => {
+  return {
     payload: offers.map((offer) => adaptToClient(offer)),
-  }),
+  };
+});
 
-  changeActiveOfferId: (offerId) => ({
-    type: ActionType.CHANGE_ACTIVE_OFFER_ID,
+const changeActiveOfferId = createAction(ActionType.CHANGE_ACTIVE_OFFER_ID, (offerId) => {
+  return {
     payload: offerId,
-  }),
+  };
+});
 
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
+const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => {
+  return {
     payload: status,
-  }),
+  };
+});
 
-  setAuthInfo: (data) => ({
-    type: ActionType.SET_AUTHORIZATION_INFO,
+const setAuthInfo = createAction(ActionType.SET_AUTHORIZATION_INFO, (data) => {
+  return {
     payload: data,
-  }),
+  };
+});
 
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
+const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => {
+  return {
     payload: url,
-  }),
+  };
+});
+
+export {
+  changeCity,
+  changeSortType,
+  loadOffer,
+  loadOffers,
+  loadComments,
+  loadNearOffers,
+  changeActiveOfferId,
+  redirectToRoute,
+  requireAuthorization,
+  setAuthInfo
 };

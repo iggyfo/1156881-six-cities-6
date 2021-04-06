@@ -1,19 +1,22 @@
 import React, {useRef} from "react";
 import {SortType} from "../../const";
-import {ActionCreator} from "../../store/action";
-import {connect} from "react-redux";
-import propTypes from "prop-types";
+import {changeSortType} from "../../store/action";
+import {useDispatch, useSelector} from "react-redux";
 
 
-const Sorting = ({handleSortingClick, currentSort}) => {
+const Sorting = () => {
 
+  const {currentSort} = useSelector((state) => state.CHANGE);
+  const dispatch = useDispatch();
   const sortPopupRef = useRef();
+  const handleSortingClick = (evt) => dispatch(changeSortType(evt.target.dataset.sortType));
   const sortingPopupToggle = () => {
     sortPopupRef
       .current
       .classList
       .toggle(`places__options--opened`);
   };
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
@@ -23,7 +26,7 @@ const Sorting = ({handleSortingClick, currentSort}) => {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className="places__options places__options--custom" ref={sortPopupRef}>
+      <ul className="places__options places__options--custom" onMouseOut={sortingPopupToggle} ref={sortPopupRef}>
         <li className="places__option places__option--active" tabIndex={0} data-sort-type={`${SortType.DEFAULT}`} onClick={handleSortingClick}>Popular</li>
         <li className="places__option" tabIndex={0} data-sort-type={`${SortType.LOW_TO_HIGH}`} onClick={handleSortingClick}>Price: low to high</li>
         <li className="places__option" tabIndex={0} data-sort-type={`${SortType.HIGH_TO_LOW}`} onClick={handleSortingClick}>Price: high to low</li>
@@ -33,20 +36,5 @@ const Sorting = ({handleSortingClick, currentSort}) => {
   );
 };
 
-Sorting.propTypes = {
-  currentSort: propTypes.string.isRequired,
-  handleSortingClick: propTypes.func.isRequired,
-};
 
-const mapStateToProps = ({currentSort}) => ({
-  currentSort,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleSortingClick(evt) {
-    dispatch(ActionCreator.changeSortType(evt.target.dataset.sortType));
-  },
-});
-
-export {Sorting};
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default Sorting;

@@ -2,16 +2,17 @@ import React from "react";
 import PropertyReviewItem from "../property-review-item/property-review-item";
 import propTypes from "prop-types";
 import {commentPropsTypes} from "../../props-types";
-import {fetchComments} from "../../store/api-actions";
 import {getSortedComments} from "../../utils";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
 const CommentsNum = {
   MIN: 0,
   MAX: 10
 };
 
-const PropertyReviewsList = ({comments}) => {
+const PropertyReviewsList = () => {
+
+  const {comments} = useSelector((state) => state.DATA);
 
   const sortedComments = comments.slice(0, CommentsNum.MAX).sort(getSortedComments);
   return (
@@ -33,16 +34,5 @@ PropertyReviewsList.propTypes = {
   comments: propTypes.arrayOf(propTypes.shape(commentPropsTypes)),
 };
 
-const mapStateToProps = ({comments}) => ({
-  comments,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData(id) {
-    dispatch(fetchComments(id));
-  },
-});
-
-export {PropertyReviewsList};
-export default connect(mapStateToProps, mapDispatchToProps)(PropertyReviewsList);
+export default PropertyReviewsList;
 

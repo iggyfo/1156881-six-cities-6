@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 import RatingStars from "../rating-stars/rating-stars";
 import {Rating} from "../../const";
 import propTypes from "prop-types";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {uploadComments, fetchComments} from "../../store/api-actions";
 
 
@@ -11,25 +11,20 @@ const CommentLength = {
   MAX: 300,
 };
 
-const PropertyNewComment = ({id, onUploadComment}) => {
+const PropertyNewComment = ({id}) => {
 
+  const dispatch = useDispatch();
   const formRef = useRef();
 
   const [comment, setComment] = useState(``);
   const [rating, setRating] = useState(null);
 
-
-  const handleCommentInput = (evt) => {
-    setComment(evt.target.value);
-  };
-
-  const handleCommentRating = (evt) => {
-    setRating(evt.target.value);
-  };
-
+  const handleCommentInput = (evt) => setComment(evt.target.value);
+  const handleCommentRating = (evt) => setRating(evt.target.value);
   const handleCommentSubmit = (evt) => {
     evt.preventDefault();
-    onUploadComment(id, {comment, rating});
+    dispatch(uploadComments(id, {comment, rating}));
+    dispatch(fetchComments(id));
     formRef.current.reset();
     setComment(``);
     setRating(null);
@@ -64,20 +59,7 @@ const PropertyNewComment = ({id, onUploadComment}) => {
 };
 
 PropertyNewComment.propTypes = {
-  onUploadComment: propTypes.func.isRequired,
   id: propTypes.string.isRequired,
 };
 
-const mapStateToProps = ({onUploadComment}) => ({
-  onUploadComment,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onUploadComment(id, comment) {
-    dispatch(uploadComments(id, comment));
-    dispatch(fetchComments(id));
-  }
-});
-
-export {PropertyNewComment};
-export default connect(mapStateToProps, mapDispatchToProps)(PropertyNewComment);
+export default PropertyNewComment;
