@@ -1,4 +1,4 @@
-const citiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`,`Hamburg`,`Dusseldorf`];
+const citiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const citiesNames = {
   paris: `Paris`,
