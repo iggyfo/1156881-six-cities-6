@@ -4,14 +4,6 @@ import {citiesNames, SortType} from "../../const";
 
 
 const initialState = {
-  citiesList: [
-    citiesNames.paris,
-    citiesNames.cologne,
-    citiesNames.brussels,
-    citiesNames.amsterdam,
-    citiesNames.hamburg,
-    citiesNames.dusseldorf
-  ],
   currentCity: citiesNames.paris,
   currentSort: SortType.LOW_TO_HIGH,
   activeOfferId: null,

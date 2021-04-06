@@ -3,7 +3,7 @@ import OfferCard from "../offer-card/offer-card";
 import Sorting from "../sorting/sorting";
 import Map from "../map/map";
 import propTypes from "prop-types";
-import {SORT_TYPES} from "../../const";
+import {sortTypes} from "../../const";
 import {changeActiveOfferId} from "../../store/action";
 import {useDispatch} from "react-redux";
 import {offerPropsTypes} from "../../props-types";
@@ -19,7 +19,7 @@ const OfferList = ({offers, currentCity}) => {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offers.length} places to stay in {currentCity}</b>
-        <Sorting sortTypes={SORT_TYPES}/>
+        <Sorting sortTypes={sortTypes}/>
         <div className="cities__places-list places__list tabs__content">
           {offers.map((offer) =>
             <OfferCard

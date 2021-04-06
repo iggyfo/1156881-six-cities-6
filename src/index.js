@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import {createApi} from "./services/api";
 import {requireAuthorization} from './store/action';
 import App from './components/app/app';
-import {offers} from "./mock/offers";
-import {nearPlaces} from "./mock/nerby";
-import {reviews} from "./mock/reviews";
 import {Provider} from 'react-redux';
 import rootReducer from './store/root-reducer';
 import {configureStore} from '@reduxjs/toolkit';
@@ -33,11 +30,7 @@ store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        offers={offers}
-        nearPlaces={nearPlaces}
-        reviews={reviews}
-      />
+      <App />
       <ToastContainer
         position="top-center"
         autoClose={5000}

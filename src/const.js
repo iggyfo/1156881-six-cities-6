@@ -1,4 +1,15 @@
-const Rating = [
+const citiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`,`Hamburg`,`Dusseldorf`];
+
+const citiesNames = {
+  paris: `Paris`,
+  cologne: `Cologne`,
+  brussels: `Brussels`,
+  amsterdam: `Amsterdam`,
+  hamburg: `Hamburg`,
+  dusseldorf: `Dusseldorf`,
+};
+
+const ratingStars = [
   {
     id: `5-star`,
     defaultValue: 5,
@@ -66,16 +77,7 @@ const SortType = {
   TOP_RATED: `Top rated first`,
 };
 
-const SORT_TYPES = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
-
-const citiesNames = {
-  paris: `Paris`,
-  cologne: `Cologne`,
-  brussels: `Brussels`,
-  amsterdam: `Amsterdam`,
-  hamburg: `Hamburg`,
-  dusseldorf: `Dusseldorf`,
-};
+const sortTypes = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -106,4 +108,4 @@ const ApiRoute = {
   FAVORITES: `/favorite`
 };
 
-export {classNameTypes, Rating, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute, SORT_TYPES};
+export {classNameTypes, ratingStars, SortType, citiesList, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute, sortTypes};

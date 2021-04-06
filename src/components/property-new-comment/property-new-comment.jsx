@@ -1,6 +1,6 @@
 import React, {useState, useRef} from "react";
 import RatingStars from "../rating-stars/rating-stars";
-import {Rating} from "../../const";
+import {ratingStars} from "../../const";
 import propTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {uploadComments, fetchComments} from "../../store/api-actions";
@@ -34,7 +34,7 @@ const PropertyNewComment = ({id}) => {
     <form className="reviews__form form" action="#" method="post" onSubmit={handleCommentSubmit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {Rating.map((element) =>
+        {ratingStars.map((element) =>
           <RatingStars key={element.defaultValue} ratingScale={element} handleCommentRating={handleCommentRating}/>
         )}
       </div>
