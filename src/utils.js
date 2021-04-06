@@ -34,7 +34,7 @@ const getFavoritesOffers = (offers) => {
 };
 
 const getSortedOffers = (currentSort, offers) => {
-  let sortedOffers = [];
+  let sortedOffers;
   switch (currentSort) {
     case SortType.LOW_TO_HIGH:
       sortedOffers = offers.sort((a, b) => a.price - b.price);
@@ -87,34 +87,6 @@ const adaptToClient = (offer) => {
   return adaptedOffer;
 };
 
-const adaptToServer = (offer) => {
-  const adaptedOffer = Object.assign(
-      {},
-      offer,
-      {
-        "is_favorite": offer.isFavorite,
-        "is_premium": offer.isPremium,
-        "host": {
-          "id": offer.host.id,
-          "name": offer.host.name,
-          "is_pro": offer.host.isPro,
-          "avatar_url": offer.host.avatarUrl,
-        },
-        "max_adults": offer.maxAdults,
-        "preview_image": offer.previewImage,
-      },
-  );
-
-  delete adaptedOffer[`is_favorite`];
-  delete adaptedOffer[`is_premium`];
-  delete adaptedOffer[`max_adults`];
-  delete adaptedOffer[`preview_image`];
-  delete adaptedOffer.host[`is_pro`];
-  delete adaptedOffer.host[`avatar_url`];
-
-  return adaptedOffer;
-};
-
 const adaptCommentsToClient = (comment) => {
   const adaptedComment = Object.assign(
       {},
@@ -135,20 +107,4 @@ const adaptCommentsToClient = (comment) => {
   return adaptedComment;
 };
 
-const adaptAuthDataToClient = (data) => {
-  const adaptedAuthInfo = Object.assign(
-      {},
-      data,
-      {
-        isPro: data[`is_pro`],
-        avatarUrl: data[`avatar_url`]
-      },
-  );
-
-  delete adaptedAuthInfo[`is_pro`];
-  delete adaptedAuthInfo[`avatar_url`];
-
-  return adaptedAuthInfo;
-};
-
-export {getErrorNotify, getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptToServer, adaptCommentsToClient, adaptAuthDataToClient, getFavoritesOffers, getSortedComments};
+export {getErrorNotify, getCitiesWithFavoriteOffers, getCurrentCityOffers, getSortedOffers, getCitiesCoords, adaptToClient, adaptCommentsToClient, getFavoritesOffers, getSortedComments};

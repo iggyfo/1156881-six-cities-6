@@ -32,17 +32,6 @@ const classNameTypes = {
   property: `property`,
 };
 
-const offerMarkTypes = {
-  property: `property`,
-  placeCard: `place-card`
-};
-
-const cityLocation = {
-  latitude: 48.85661,
-  longitude: 2.351499,
-  zoom: 12
-};
-
 const citiesLocation = {
   paris: {
     latitude: 48.85661,
@@ -115,4 +104,4 @@ const ApiRoute = {
   FAVORITES: `/favorite`
 };
 
-export {classNameTypes, cityLocation, Rating, offerMarkTypes, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
+export {classNameTypes, Rating, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
