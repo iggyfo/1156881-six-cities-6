@@ -66,6 +66,8 @@ const SortType = {
   TOP_RATED: `Top rated first`,
 };
 
+const SORT_TYPES = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+
 const citiesNames = {
   paris: `Paris`,
   cologne: `Cologne`,
@@ -104,4 +106,4 @@ const ApiRoute = {
   FAVORITES: `/favorite`
 };
 
-export {classNameTypes, Rating, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute};
+export {classNameTypes, Rating, SortType, citiesNames, citiesLocation, AuthorizationStatus, AppRoute, ApiRoute, SORT_TYPES};

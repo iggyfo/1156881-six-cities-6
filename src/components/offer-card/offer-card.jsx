@@ -6,12 +6,13 @@ import {classNameTypes, OfferType} from "../../const";
 import OfferMark from "../offer-mark/offer-mark";
 import {setFavorite, fetchOffers} from "../../store/api-actions";
 import {useDispatch} from "react-redux";
+import Rating from "../rating/rating";
 
 
-const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
+const OfferCard = ({offer, handleInActiveOfferId}) => {
 
   const dispatch = useDispatch();
-  const {previewImage, title, type, price, isFavorite, isPremium, id} = offer;
+  const {previewImage, title, type, price, isFavorite, isPremium, id, rating} = offer;
 
   const handleFavoriteClick = (evt) => {
     evt.currentTarget.classList.toggle(`place-card__bookmark-button--active`);
@@ -21,11 +22,8 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
 
   return (
     <article className="cities__place-card place-card"
-      onMouseEnter={() => {
+      onMouseOver={() => {
         handleInActiveOfferId(offer.id);
-      }}
-      onMouseOut={() => {
-        handleOutActiveOfferId();
       }}>
       {isPremium
         ? <OfferMark className={classNameTypes.placeCard} />
@@ -50,12 +48,10 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          className={classNameTypes.placeCard}
+        />
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
@@ -69,7 +65,6 @@ const OfferCard = ({offer, handleInActiveOfferId, handleOutActiveOfferId}) => {
 OfferCard.propTypes = {
   offer: propTypes.shape(offerPropsTypes).isRequired,
   handleInActiveOfferId: propTypes.func.isRequired,
-  handleOutActiveOfferId: propTypes.func.isRequired,
 };
 
 export default OfferCard;

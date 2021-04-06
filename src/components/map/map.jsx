@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from "react";
+import React, {useRef, useEffect, memo} from "react";
 import propTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -14,18 +14,8 @@ const Map = ({offers}) => {
 
   const {currentCity, activeOfferId} = useSelector((state) => state.CHANGE);
   const cityCoords = getCitiesCoords(currentCity);
-
-  const icon = leaflet.icon({
-    iconUrl: `./img/pin.svg`,
-    iconSize: ICON_SIZE,
-  });
-
-  const activeIcon = leaflet.icon({
-    iconUrl: `./img/pin-active.svg`,
-    iconSize: ICON_SIZE,
-  });
-
   const mapRef = useRef();
+
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: cityCoords,
@@ -41,21 +31,36 @@ const Map = ({offers}) => {
       })
       .addTo(mapRef.current);
 
-    offers.map(({id, location}) => {
-      const addOfferToMap = (iconType) => {
-        leaflet
-          .marker([location.latitude, location.longitude], {icon: iconType})
-          .addTo(mapRef.current);
-      };
-      return activeOfferId === id
-        ? addOfferToMap(activeIcon)
-        : addOfferToMap(icon);
-    });
-
     return () => {
       mapRef.current.remove();
     };
-  }, [offers, activeOfferId]);
+  }, [currentCity]);
+
+
+  useEffect(() => {
+    let markers = [];
+    offers.forEach((offer) => {
+      const icon = leaflet.icon({
+        iconUrl: offer.id === activeOfferId ? `./img/pin-active.svg` : `./img/pin.svg`,
+        iconSize: ICON_SIZE,
+      });
+      const marker = leaflet.marker({
+        lat: offer.location.latitude,
+        lng: offer.location.longitude
+      }, {
+        icon
+      })
+        .addTo(mapRef.current)
+        .bindPopup(offer.title);
+
+      markers.push(marker);
+    });
+    return () => {
+      markers.forEach((marker) => {
+        mapRef.current.removeLayer(marker);
+      });
+    };
+  });
 
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}></div>
@@ -66,5 +71,8 @@ Map.propTypes = {
   offers: propTypes.arrayOf(propTypes.shape(offerPropsTypes))
 };
 
-export default Map;
+export default memo(Map, (prevProps, nextProps) =>
+  prevProps.offers === nextProps.offers
+);
+
 

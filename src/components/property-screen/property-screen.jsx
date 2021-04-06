@@ -14,6 +14,7 @@ import {useParams} from "react-router-dom";
 import {fetchOffer, fetchNearOffers, fetchComments, setFavorite, fetchOffers} from "../../store/api-actions";
 import {AuthorizationStatus, classNameTypes, OfferType} from "../../const";
 import {changeActiveOfferId, changeCity} from "../../store/action";
+import Rating from "../rating/rating";
 
 
 const MAX_OFFER_PHOTO_IN_GALLERY = 6;
@@ -91,10 +92,10 @@ const PropertyScreen = () => {
                 </button>
               </div>
               <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  <span style={{width: `80%`}} />
-                  <span className="visually-hidden">Rating</span>
-                </div>
+                <Rating
+                  rating={rating}
+                  className={classNameTypes.property}
+                />
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">

@@ -1,13 +1,11 @@
 import React from "react";
 import propTypes from "prop-types";
 
-const MAX_INTEGER_RATING = 5;
-const MAX_PERCENT_RATING = 100;
-
-const getIntegerRatingInPercent = (integerRating) =>
-  `${((integerRating * MAX_PERCENT_RATING) / MAX_INTEGER_RATING)}%`;
+const RATING_STEP = 20;
 
 const Rating = ({rating, className}) => {
+
+  const getIntegerRatingInPercent = (integerRating) =>`${Math.round(integerRating) * RATING_STEP}%`;
 
   return (
     <div className={`${className}__rating rating`}>
@@ -25,8 +23,3 @@ Rating.propTypes = {
 };
 
 export default Rating;
-/*
-5-100
-4-x
-x= 5*80/100
- */
