@@ -17,7 +17,6 @@ const Sorting = ({sortTypes}) => {
   }, [currentSort]);
   const active = (option) => option === currentSort ? `places__option--active` : ``;
 
-
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
